@@ -1,64 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PickUpScript : MonoBehaviour
+public class Pickup : MonoBehaviour
 {
-    public GameObject crosshair1, crosshair2;
-    public Transform objTransform, cameraTrans;
-    public bool interactable, pickedup;
-    public Rigidbody objRigidbody;
-    public float throwAmount;
+    public float pickupRange = 3f;   // jarak bisa ambil
+    public LayerMask pickupLayer;    // layer objek yang bisa diambil
+    public Transform holdParent;     // tempat objek ditaruh (misal depan kamera)
 
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("MainCamera"))
-        {
-            crosshair1.SetActive(false);
-            crosshair2.SetActive(true);
-            interactable = true;
-        }
-    }
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("MainCamera"))
-        {
-            if(pickedup == false)
-            {
-                crosshair1.SetActive(true);
-                crosshair2.SetActive(false);
-                interactable = false;
-            }
-        }
-    }
+    private GameObject heldObject;
+
     void Update()
     {
-      if (interactable == true)
+        if (Input.GetMouseButtonDown(0)) // klik kiri
         {
-            if (Input.GetMouseButtonDown(0))
+            if (heldObject == null)
             {
-                objTransform.parent = cameraTrans;
-                objRigidbody.useGravity = false;
-                pickedup = true;
+                // coba ambil objek
+                TryPickup();
             }
-            if (Input.GetMouseButtonDown(0))
+            else
             {
-                objTransform.parent = null;
-                objRigidbody.useGravity = true;
-                pickedup = false;
-            }
-            if (pickedup == true)
-            {
-                if (Input.GetMouseButtonDown (1))
-                {
-                    objTransform.parent = null;
-                    objRigidbody.useGravity = true;
-                    objRigidbody.velocity = cameraTrans.forward * throwAmount * Time.deltaTime;
-                    pickedup = false;
-                }
+                // kalau sudah pegang → lepas
+                Drop();
             }
         }
     }
 
+    void TryPickup()
+    {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        RaycastHit hit;
 
+        if (Physics.Raycast(ray, out hit, pickupRange, pickupLayer))
+        {
+            heldObject = hit.collider.gameObject;
+            heldObject.GetComponent<Rigidbody>().isKinematic = true;
+            heldObject.transform.position = holdParent.position;
+            heldObject.transform.parent = holdParent;
+        }
+    }
+
+    void Drop()
+    {
+        heldObject.GetComponent<Rigidbody>().isKinematic = false;
+        heldObject.transform.parent = null;
+        heldObject = null;
+    }
 }
