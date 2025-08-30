@@ -2,39 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MouseMovement : MonoBehaviour
-{
+using UnityEngine;
 
-    public float mouseSensitivity = 500f;
+using UnityEngine;
+
+public class MouseLook : MonoBehaviour
+{
+    public float mouseSensitivity = 100f;
+    public Transform playerBody;
 
     float xRotation = 0f;
-    float yRotation = 0f;
 
-    public float topClamp = -90f;
-    public float bottomClamp = 90f;
-
-    // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked; // kunci cursor di tengah
     }
 
-    // Update is called once per frame
     void Update()
     {
-
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        //lihat atas bawah
+        // rotasi vertikal kamera (atas-bawah)
         xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        xRotation = Mathf.Clamp(xRotation, topClamp, bottomClamp);
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
-        //lihat kiri dan kanan
-        yRotation += mouseX;
-
-
-        transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        // rotasi horizontal player (kanan-kiri)
+        playerBody.Rotate(Vector3.up * mouseX);
     }
 }
