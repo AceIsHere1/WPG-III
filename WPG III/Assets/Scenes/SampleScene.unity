@@ -1124,9 +1124,9 @@ Transform:
   m_GameObject: {fileID: 1988584688}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.82, y: 0.52, z: 2.81}
+  m_LocalPosition: {x: 0.82, y: 0.506, z: 2.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 330585546}
   - {fileID: 1154766406}
@@ -1157,7 +1157,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &1988584694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,7 +1174,7 @@ MonoBehaviour:
   mouseSensitivity: 3.5
   speed: 5
   moveDirection: {x: 0, y: 0, z: 0}
-  controller: {fileID: 0}
+  controller: {fileID: 1988584693}
   lockCursor: 1
 --- !u!95 &1988584695
 Animator:
