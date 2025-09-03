@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectGrababble : MonoBehaviour
+public class ObjectGrabbable : MonoBehaviour
 {
 
     private Rigidbody objectRigidbody;
@@ -15,13 +15,26 @@ public class ObjectGrababble : MonoBehaviour
     public void Grab(Transform objectGrabPointTransform)
     {
         this.objectGrabPointTransform = objectGrabPointTransform;
+        objectRigidbody.useGravity = false;
     }
 
+    
+    public void Drop()
+    {
+        this.objectGrabPointTransform = null;
+        objectRigidbody.useGravity = true;
+    }
+    
+    
+    
+    
     private void FixedUpdate()
     {
         if (objectGrabPointTransform != null)
         {
-            objectRigidbody.MovePosition(objectGrabPointTransform.position);
+            float lerpSpeed = 10f;
+            Vector3 newPosition = Vector3.Lerp(transform.position, objectGrabPointTransform.position, Time.deltaTime * lerpSpeed);
+            objectRigidbody.MovePosition(newPosition);
                     
         }
     }

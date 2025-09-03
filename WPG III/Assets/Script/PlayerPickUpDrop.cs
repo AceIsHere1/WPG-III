@@ -1,24 +1,36 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerPickUpDrop : MonoBehaviour
 {
-
     [SerializeField] private Transform playerCameraTransform;
     [SerializeField] private Transform objectGrabPointTransform;
     [SerializeField] private LayerMask pickUpLayerMask;
+
+    private ObjectGrabbable objectGrabbable;
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            float pickupDistance = 2f;
-            if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out RaycastHit raycastHit, pickupDistance, pickUpLayerMask))
+            if (objectGrabbable == null)
             {
-                if (raycastHit.transform.TryGetComponent(out ObjectGrababble objectGrababble ))
+                // Belum pegang apa2 → coba ambil
+                float pickupDistance = 2f;
+                if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out RaycastHit raycastHit, pickupDistance, pickUpLayerMask))
                 {
-                    objectGrababble.Grab(objectGrabPointTransform);
+                    if (raycastHit.transform.TryGetComponent(out objectGrabbable))
+                    {
+                        objectGrabbable.Grab(objectGrabPointTransform);
+                    }
                 }
+            }
+            else
+            {
+                // Sudah pegang → lepas
+                objectGrabbable.Drop();
+                objectGrabbable = null;
             }
         }
     }
