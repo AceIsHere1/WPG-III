@@ -17,11 +17,11 @@ public class PlayerController : MonoBehaviour
 
     float cameraPitch = 0.0f;
 
-    private Animator animator;
+    //private Animator animator;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         controller = GetComponent<CharacterController>();
         if (lockCursor) 
         {
@@ -52,36 +52,36 @@ public class PlayerController : MonoBehaviour
 
     void UpdateMovement()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        //float horizontal = Input.GetAxis("Horizontal");
+        //float vertical = Input.GetAxis("Vertical");
 
         //Ambil arah kamera
-        Vector3 camForward = playerCamera.transform.forward;
-        Vector3 camRight = playerCamera.transform.right;
+        //Vector3 camForward = playerCamera.transform.forward;
+        //Vector3 camRight = playerCamera.transform.right;
 
         // Buat flat (hilangkan komponen Y biar tidak miring)
-        camForward.y = 0f;
-        camRight.y = 0f;
+        //camForward.y = 0f;
+        //camRight.y = 0f;
 
-        camForward.Normalize();
-        camRight.Normalize();
+        //camForward.Normalize();
+        //camRight.Normalize();
 
         // Hitung arah gerakan berdasarkan kamera
-        Vector3 moveDirection = (camForward * vertical + camRight * horizontal).normalized;
+        //Vector3 moveDirection = (camForward * vertical + camRight * horizontal).normalized;
 
         // Kalau ada input (bukan idle)
-        if (moveDirection.magnitude > 0.1f)
-        {
+        //if (moveDirection.magnitude > 0.1f)
+        //{
             // Rotasi player ke arah gerakan
-            transform.rotation = Quaternion.Slerp(
-                transform.rotation,
-                Quaternion.LookRotation(moveDirection),
-                Time.deltaTime * 10f
-            );
-        }
+            //transform.rotation = Quaternion.Slerp(
+                //transform.rotation,
+                //Quaternion.LookRotation(moveDirection),
+                //Time.deltaTime * 10f
+            //);
+        //}
 
         // Gerakkan player
-        controller.Move(moveDirection * speed * Time.deltaTime);
+        //controller.Move(moveDirection * speed * Time.deltaTime);
 
         //moveDirection = new Vector3(horizontal, 0, vertical);
 
@@ -94,20 +94,20 @@ public class PlayerController : MonoBehaviour
 
         //controller.Move(moveDirection * Time.deltaTime);
 
-        //Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        //inputDir.Normalize();
+        Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        inputDir.Normalize();
 
-        //Vector3 velocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * speed;
+        Vector3 velocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * speed;
 
-        //controller.Move(velocity * Time.deltaTime);
+        controller.Move(velocity * Time.deltaTime);
 
-        if (moveDirection == Vector3.zero)
-        {
-            animator.SetFloat("Speed", 0);
-        }
-        else
-        {
-            animator.SetFloat("Speed", 0.5f);
-        }
+        //if (moveDirection == Vector3.zero)
+        //{
+            //animator.SetFloat("Speed", 0);
+        //}
+        //else
+        //{
+            //animator.SetFloat("Speed", 0.5f);
+        //}
     }
 }
