@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityTutorial.Manager;
 
@@ -8,14 +9,24 @@ namespace UnityTutorial.PlayerControl
 {
     public class NewPlayerController : MonoBehaviour
     {
+        [SerializeField] private float AnimBlendSpeed = 8.9f;
+        [SerializeField] private Transform CameraRoot;
+        [SerializeField] private Transform Camera;
+        [SerializeField] private float UpperLimit = -40f;
+        [SerializeField] private float BottomLimit = 70f;
+        [SerializeField] private float MouseSensitivity = 21.9f;
+        [SerializeField] bool LockCursor = true;
         private Rigidbody _playerRigidbody;
         private InputManager _inputManager;
         private Animator _animator;
         private bool _hasAnimator;
         private int _xVelHash;
         private int _yVelHash;
+        private float _xRotation;
         private const float _walkSpeed = 2f;
         private Vector2 _currentVelocity;
+
+        
 
         private void Start()
         {
@@ -32,6 +43,11 @@ namespace UnityTutorial.PlayerControl
             Move();
         }
 
+        private void LateUpdate()
+        {
+            CamMovements();
+        }
+
         private void Move()
         {
             if (!_hasAnimator) return;
@@ -39,8 +55,8 @@ namespace UnityTutorial.PlayerControl
             float targetSpeed = _walkSpeed;
             if (_inputManager.Move == Vector2.zero) targetSpeed = 0.1f;
 
-            _currentVelocity.x = targetSpeed * _inputManager.Move.x;
-            _currentVelocity.y = targetSpeed * _inputManager.Move.y;
+            _currentVelocity.x = Mathf.Lerp(_currentVelocity.x, _inputManager.Move.x * targetSpeed, AnimBlendSpeed * Time.fixedDeltaTime);
+            _currentVelocity.y = Mathf.Lerp(_currentVelocity.y, _inputManager.Move.y * targetSpeed, AnimBlendSpeed * Time.fixedDeltaTime);
 
             var xVelDifference = _currentVelocity.x - _playerRigidbody.velocity.x;
             var zVelDifference = _currentVelocity.y - _playerRigidbody.velocity.z;
@@ -49,6 +65,21 @@ namespace UnityTutorial.PlayerControl
 
             _animator.SetFloat(_xVelHash, _currentVelocity.x);
             _animator.SetFloat(_yVelHash, _currentVelocity.y);
+        }
+
+        private void CamMovements()
+        {
+            if (!_hasAnimator) return;
+
+            var Mouse_X = _inputManager.Look.x;
+            var Mouse_Y = _inputManager.Look.y;
+            Camera.position = CameraRoot.position;
+
+            _xRotation -= Mouse_Y * MouseSensitivity * Time.deltaTime;
+            _xRotation = Mathf.Clamp(_xRotation, UpperLimit, BottomLimit);
+
+            Camera.localRotation = Quaternion.Euler(_xRotation, 0, 0);
+            transform.Rotate(Vector3.up, Mouse_X * MouseSensitivity * Time.deltaTime);
         }
     }
 }
