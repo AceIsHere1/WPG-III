@@ -412,7 +412,6 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
-  - component: {fileID: 330585549}
   - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
@@ -562,23 +561,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &330585549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5c98b5d78167e488923dce8069e9ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCameraTransform: {fileID: 330585546}
-  objectGrabPointTransform: {fileID: 559429224}
-  pickUpLayerMask:
-    serializedVersion: 2
-    m_Bits: 127
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +731,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupPoint: {fileID: 559429224}
+  pickupSound: {fileID: 0}
+  dropSound: {fileID: 0}
 --- !u!65 &493310918
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1206,6 +1190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupPoint: {fileID: 559429224}
+  pickupSound: {fileID: 0}
+  dropSound: {fileID: 0}
 --- !u!54 &1164254407
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1809,6 +1795,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupPoint: {fileID: 559429224}
+  pickupSound: {fileID: 8300000, guid: d421f4e97f3d8c246ab67e09d1379dc5, type: 3}
+  dropSound: {fileID: 0}
 --- !u!65 &1765117757
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1882,6 +1870,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupPoint: {fileID: 559429224}
+  pickupSound: {fileID: 0}
+  dropSound: {fileID: 0}
 --- !u!65 &1899960966
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -3,58 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour
-
 {
     public Transform pickupPoint;
     private Transform originalPoint;
-    private bool positionSet;
     private bool pickedUp;
+
+    [Header("Sound Settings")]
+    public AudioClip pickupSound;
+    public AudioClip dropSound;
+    private AudioSource audioSource;
+
+    private Rigidbody rb;
+
     void Start()
     {
         originalPoint = pickupPoint;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        rb = GetComponent<Rigidbody>();
+
+        // setup audio
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
     }
 
     void Update()
     {
-        if(pickedUp)
+        // kalau lagi dipegang, object selalu ikut pickupPoint
+        if (pickedUp)
         {
-            pickupPoint.transform.Translate(Camera.main.transform.forward * Time.deltaTime * 300 * Input.GetAxis("Mouse ScrollWheel"), Space.World);
+            rb.MovePosition(pickupPoint.position);
+            rb.MoveRotation(pickupPoint.rotation);
         }
     }
-
 
     void OnMouseDown()
     {
         pickedUp = true;
-        if(!positionSet)
-        {
-            positionSet = true;
-            pickupPoint.position = transform.position;
-        }
-        transform.parent = pickupPoint.transform;
-        GetComponent<Rigidbody>().useGravity = false;
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
-        GetComponent<Rigidbody>().freezeRotation = true;
-        GetComponent<BoxCollider>().enabled = false;
-    }
 
+        // disable physics biar ga jatuh
+        rb.useGravity = false;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.freezeRotation = true;
+
+        GetComponent<BoxCollider>().enabled = false;
+
+        // mainkan suara pickup
+        if (pickupSound != null)
+            audioSource.PlayOneShot(pickupSound);
+    }
 
     void OnMouseUp()
     {
         pickedUp = false;
-        positionSet = false;
-        pickupPoint.position = originalPoint.position;
-        transform.parent = null;
-        GetComponent<Rigidbody>().useGravity = true;
-        GetComponent <Rigidbody>().freezeRotation = false;
-        GetComponent <BoxCollider>().enabled = true;
+
+        // aktifkan physics lagi
+        rb.useGravity = true;
+        rb.freezeRotation = false;
+
+        GetComponent<BoxCollider>().enabled = true;
+
+        // mainkan suara drop
+        if (dropSound != null)
+            audioSource.PlayOneShot(dropSound);
     }
-
-
-
-
-
 }
-
