@@ -730,7 +730,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupPoint: {fileID: 559429224}
+  playerCamera: {fileID: 330585546}
+  holdDistance: 2
+  smoothSpeed: 10
   pickupSound: {fileID: 0}
   dropSound: {fileID: 0}
 --- !u!65 &493310918
@@ -1189,7 +1191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupPoint: {fileID: 559429224}
+  playerCamera: {fileID: 330585546}
+  holdDistance: 2
+  smoothSpeed: 10
   pickupSound: {fileID: 0}
   dropSound: {fileID: 0}
 --- !u!54 &1164254407
@@ -1794,7 +1798,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupPoint: {fileID: 559429224}
+  playerCamera: {fileID: 330585546}
+  holdDistance: 2
+  smoothSpeed: 10
   pickupSound: {fileID: 8300000, guid: d421f4e97f3d8c246ab67e09d1379dc5, type: 3}
   dropSound: {fileID: 0}
 --- !u!65 &1765117757
@@ -1869,7 +1875,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupPoint: {fileID: 559429224}
+  playerCamera: {fileID: 330585546}
+  holdDistance: 2
+  smoothSpeed: 10
   pickupSound: {fileID: 0}
   dropSound: {fileID: 0}
 --- !u!65 &1899960966

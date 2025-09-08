@@ -4,23 +4,21 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    public Transform pickupPoint;
-    private Transform originalPoint;
+    [Header("Pickup Settings")]
+    public Transform playerCamera;      // Kamera player
+    public float holdDistance = 2f;     // Jarak object dari kamera
+    public float smoothSpeed = 10f;     // Kecepatan smoothing biar gak getar
+
     private bool pickedUp;
+    private Rigidbody rb;
 
     [Header("Sound Settings")]
     public AudioClip pickupSound;
     public AudioClip dropSound;
     private AudioSource audioSource;
 
-    private Rigidbody rb;
-
     void Start()
     {
-        originalPoint = pickupPoint;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         rb = GetComponent<Rigidbody>();
 
         // setup audio
@@ -30,11 +28,16 @@ public class Pickup : MonoBehaviour
 
     void Update()
     {
-        // kalau lagi dipegang, object selalu ikut pickupPoint
         if (pickedUp)
         {
-            rb.MovePosition(pickupPoint.position);
-            rb.MoveRotation(pickupPoint.rotation);
+            // hitung posisi depan kamera (pas crosshair)
+            Vector3 targetPos = playerCamera.position + playerCamera.forward * holdDistance;
+
+            // gerakkan object smooth ke targetPos
+            rb.MovePosition(Vector3.Lerp(rb.position, targetPos, Time.deltaTime * smoothSpeed));
+
+            // rotasi ikut kamera biar lebih natural
+            rb.MoveRotation(Quaternion.Lerp(rb.rotation, playerCamera.rotation, Time.deltaTime * smoothSpeed));
         }
     }
 
@@ -42,15 +45,11 @@ public class Pickup : MonoBehaviour
     {
         pickedUp = true;
 
-        // disable physics biar ga jatuh
+        // disable physics
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        rb.freezeRotation = true;
 
-        GetComponent<BoxCollider>().enabled = false;
-
-        // mainkan suara pickup
         if (pickupSound != null)
             audioSource.PlayOneShot(pickupSound);
     }
@@ -61,11 +60,7 @@ public class Pickup : MonoBehaviour
 
         // aktifkan physics lagi
         rb.useGravity = true;
-        rb.freezeRotation = false;
 
-        GetComponent<BoxCollider>().enabled = true;
-
-        // mainkan suara drop
         if (dropSound != null)
             audioSource.PlayOneShot(dropSound);
     }
