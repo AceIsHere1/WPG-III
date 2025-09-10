@@ -1276,7 +1276,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: fac205e1711129b46bebeea7a298b8d9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.25145
+      value: -2.085
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fac205e1711129b46bebeea7a298b8d9,
         type: 3}
@@ -1286,7 +1286,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: fac205e1711129b46bebeea7a298b8d9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.8586025
+      value: -2.877
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fac205e1711129b46bebeea7a298b8d9,
         type: 3}
@@ -1878,7 +1878,7 @@ MonoBehaviour:
   playerCamera: {fileID: 330585546}
   holdDistance: 2
   smoothSpeed: 10
-  pickupSound: {fileID: 8300000, guid: d421f4e97f3d8c246ab67e09d1379dc5, type: 3}
+  pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
 --- !u!65 &1765117757
 BoxCollider:

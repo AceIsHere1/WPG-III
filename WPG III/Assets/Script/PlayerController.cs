@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
         cameraPitch -= mouseDelta.y * mouseSensitivity;
 
-        cameraPitch = Mathf.Clamp(cameraPitch, -45.0f, 45.0f);
+        cameraPitch = Mathf.Clamp(cameraPitch, -60.0f, 60.0f);
 
         playerCamera.localEulerAngles = Vector3.right * cameraPitch;
 
