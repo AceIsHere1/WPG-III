@@ -9,8 +9,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float mouseSensitivity = 3.5f;
 
     //character movement
-    [SerializeField] private int speed = 5;
-    [SerializeField] private Vector3 moveDirection;
+    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float runSpeed = 10f;
+
     [SerializeField] private CharacterController controller;
 
     [SerializeField] bool lockCursor = true;
@@ -97,7 +98,9 @@ public class PlayerController : MonoBehaviour
         Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputDir.Normalize();
 
-        Vector3 velocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * speed;
+        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
+
+        Vector3 velocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * currentSpeed;
 
         controller.Move(velocity * Time.deltaTime);
 

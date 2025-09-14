@@ -5,9 +5,11 @@ using UnityEngine.AI;
 
 public class MoveNPC : MonoBehaviour
 {
-    [SerializeField] Transform destination;
+    [SerializeField] Transform[] destinations;  // banyak tujuan
 
     NavMeshAgent navMeshAgent;
+    int currentIndex = 0;
+
     void Start()
     {
         navMeshAgent = this.GetComponent<NavMeshAgent>();
@@ -16,26 +18,36 @@ public class MoveNPC : MonoBehaviour
         {
             Debug.Log("Nav Mesh Agent component not attached");
         }
-
         else
         {
             SetDestination();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (destinations.Length == 0) return;
+
+        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
+        {
+            if (currentIndex < destinations.Length - 1)
+            {
+                currentIndex++;
+                SetDestination();
+            }
+            else
+            {
+                // berhenti di tujuan terakhir
+                navMeshAgent.isStopped = true;
+            }
+        }
     }
 
     private void SetDestination()
     {
-        if (destination != null)
-        {
-            Vector3 targetVector = destination.transform.position;
+        if (destinations.Length == 0) return;
 
-            navMeshAgent.SetDestination(targetVector);
-        }
+        Vector3 targetVector = destinations[currentIndex].position;
+        navMeshAgent.SetDestination(targetVector);
     }
 }
