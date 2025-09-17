@@ -877,7 +877,7 @@ MonoBehaviour:
   holdDistance: 2
   smoothSpeed: 10
   pickupRange: 3
-  pickupSound: {fileID: 0}
+  pickupSound: {fileID: 8300000, guid: cd904eff92a928a40a37a9eb0a99f2a4, type: 3}
   dropSound: {fileID: 0}
 --- !u!65 &346939267
 BoxCollider:
@@ -3841,6 +3841,10 @@ MonoBehaviour:
   runSpeed: 10
   controller: {fileID: 1988584694}
   lockCursor: 1
+  walkSound: {fileID: 8300000, guid: 01bd0f660ca6eef4d90364c49f22c60f, type: 3}
+  runSound: {fileID: 0}
+  stepInterval: 0
+  runStepInterval: 0
 --- !u!143 &1988584694
 CharacterController:
   m_ObjectHideFlags: 0
