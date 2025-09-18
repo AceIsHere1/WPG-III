@@ -783,7 +783,7 @@ MonoBehaviour:
   holdDistance: 2
   smoothSpeed: 10
   pickupRange: 3
-  pickupSound: {fileID: 8300000, guid: cd904eff92a928a40a37a9eb0a99f2a4, type: 3}
+  pickupSound: {fileID: 0}
   dropSound: {fileID: 0}
 --- !u!65 &346939267
 BoxCollider:
