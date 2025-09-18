@@ -14,22 +14,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController controller;
     [SerializeField] bool lockCursor = true;
 
-    [Header("Footstep Settings")]
-    public AudioClip walkSound;
-    public AudioClip runSound;
-    public float stepInterval = 0.5f;       // waktu antar langkah saat jalan
-    public float runStepInterval = 0.3f;    // waktu antar langkah saat lari
-
-    private AudioSource audioSource;
-    private float stepTimer;
+    public AudioSource footstepsSound, sprintSound;
 
     float cameraPitch = 0.0f;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        audioSource = gameObject.AddComponent<AudioSource>();
-        audioSource.playOnAwake = false;   // biar ga auto bunyi
 
         if (lockCursor)
         {
@@ -64,30 +55,23 @@ public class PlayerController : MonoBehaviour
 
         controller.Move(velocity * Time.deltaTime);
 
-        // 🎵 Cek footstep
-        if (controller.isGrounded && velocity.magnitude > 0.1f)
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
-            stepTimer -= Time.deltaTime;
-            if (stepTimer <= 0f)
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                PlayFootstep();
-                stepTimer = Input.GetKey(KeyCode.LeftShift) ? runStepInterval : stepInterval;
+                footstepsSound.enabled = false;
+                sprintSound.enabled = true;
             }
-        }
-    }
-
-    void PlayFootstep()
-    {
-        AudioClip clip = Input.GetKey(KeyCode.LeftShift) ? runSound : walkSound;
-
-        if (clip != null)
-        {
-            audioSource.PlayOneShot(clip);
-            Debug.Log("🔊 Footstep played: " + clip.name);
+            else
+            {
+                footstepsSound.enabled = true;
+                sprintSound.enabled = false;
+            }
         }
         else
         {
-            Debug.LogWarning("⚠️ Footstep sound belum di-assign di Inspector!");
+            footstepsSound.enabled = false;
+            sprintSound.enabled = false;
         }
     }
 }
