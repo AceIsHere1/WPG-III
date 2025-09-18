@@ -3035,7 +3035,7 @@ MonoBehaviour:
   playerCamera: {fileID: 330585546}
   holdDistance: 2
   smoothSpeed: 10
-  pickupRange: 3
+  pickupRange: 10
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
 --- !u!65 &1742014514
