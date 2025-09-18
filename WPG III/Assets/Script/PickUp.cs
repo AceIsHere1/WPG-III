@@ -1,13 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
     [Header("Pickup Settings")]
-    public Transform playerCamera;
-    public float holdDistance = 2f;
-    public float smoothSpeed = 10f;
-    public float pickupRange = 3f;      // Jarak maksimum bisa ambil
+    public Transform playerCamera;       // Kamera player
+    public float holdDistance = 2f;      // Jarak object dari kamera
+    public float smoothSpeed = 10f;      // Kecepatan smoothing biar gak getar
+    public float pickupRange = 3f;       // Jarak maksimum bisa ambil
 
+    private bool pickedUp;
     private Rigidbody rb;
 
     [Header("Sound Settings")]
@@ -21,18 +24,27 @@ public class Pickup : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        // kalau lupa assign kamera, otomatis ambil Main Camera
+        if (playerCamera == null)
+            playerCamera = Camera.main.transform;
+
+        // setup audio
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
     }
 
     void Update()
     {
-        // Kalau object ini yang sedang dipegang
-        if (currentlyHeld == this)
+        if (pickedUp && currentlyHeld == this)
         {
-            // posisi di depan kamera
+            // hitung posisi di depan kamera (crosshair)
             Vector3 targetPos = playerCamera.position + playerCamera.forward * holdDistance;
+
+            // gerakkan object smooth ke targetPos
             rb.MovePosition(Vector3.Lerp(rb.position, targetPos, Time.deltaTime * smoothSpeed));
+
+            // rotasi ikut kamera
             rb.MoveRotation(Quaternion.Lerp(rb.rotation, playerCamera.rotation, Time.deltaTime * smoothSpeed));
 
             // klik kanan = drop
@@ -43,8 +55,8 @@ public class Pickup : MonoBehaviour
         }
         else
         {
-            // cek pickup input
-            if (Input.GetMouseButtonDown(0)) // klik kiri ambil
+            // cek input klik kiri untuk pickup
+            if (Input.GetMouseButtonDown(0))
             {
                 TryPickup();
             }
@@ -61,7 +73,9 @@ public class Pickup : MonoBehaviour
         {
             if (hit.transform == transform) // pastikan ray kena object ini
             {
+                pickedUp = true;
                 currentlyHeld = this;
+
                 rb.useGravity = false;
                 rb.velocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
@@ -76,7 +90,9 @@ public class Pickup : MonoBehaviour
     {
         if (currentlyHeld != this) return;
 
+        pickedUp = false;
         currentlyHeld = null;
+
         rb.useGravity = true;
 
         if (dropSound != null)
