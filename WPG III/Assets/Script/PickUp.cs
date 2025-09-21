@@ -8,7 +8,7 @@ public class Pickup : MonoBehaviour
     public Transform playerCamera;       // Kamera player
     public float holdDistance = 2f;      // Jarak object dari kamera
     public float smoothSpeed = 10f;      // Kecepatan smoothing biar gak getar
-    public float pickupRange = 3f;       // Jarak maksimum bisa ambil
+    public float pickupRange = 1f;       // Jarak maksimum bisa ambil
 
     private bool pickedUp;
     private Rigidbody rb;
