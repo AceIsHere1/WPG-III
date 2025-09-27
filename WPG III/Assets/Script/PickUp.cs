@@ -18,6 +18,10 @@ public class Pickup : MonoBehaviour
     public AudioClip dropSound;
     private AudioSource audioSource;
 
+    [Header("Noodle Cooking Settings")]
+    public GameObject rawNoodlePrefab; // prefab mie kotak kuning
+    public bool isNoodlePack = false;  // true kalau ini bungkus mie
+
     // hanya 1 object boleh dipegang
     private static Pickup currentlyHeld;
 
@@ -51,6 +55,11 @@ public class Pickup : MonoBehaviour
             if (Input.GetMouseButtonDown(1))
             {
                 Drop();
+            }
+            // tekan E = buka bungkus mie
+            if (isNoodlePack && Input.GetKeyDown(KeyCode.E))
+            {
+                UnwrapNoodle();
             }
         }
         else
@@ -98,4 +107,26 @@ public class Pickup : MonoBehaviour
         if (dropSound != null)
             audioSource.PlayOneShot(dropSound);
     }
+
+    private void UnwrapNoodle()
+    {
+        if (rawNoodlePrefab != null)
+        {
+            // spawn mie kotak kuning di posisi bungkus
+            GameObject noodle = Instantiate(rawNoodlePrefab, transform.position, transform.rotation);
+
+            // otomatis pickup mie kotak kuning
+            Pickup noodlePickup = noodle.GetComponent<Pickup>();
+            if (noodlePickup = null)
+            {
+                noodlePickup.pickedUp = true;
+                currentlyHeld = noodlePickup;
+                noodlePickup.rb.useGravity = false;
+            }
+
+            // hancurkan bungkus
+            Destroy(gameObject);
+        }
+    }
+
 }
