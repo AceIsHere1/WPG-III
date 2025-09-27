@@ -1,0 +1,5 @@
+RENCANA PROGRESS BAGAS
+
+- Membuat mekanik masak mie
+- Membuat mekanik NPC memesan dan menerima mie
+- Menambahkan backsound
