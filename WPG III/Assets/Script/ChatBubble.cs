@@ -1,45 +1,48 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class ChatBubble : MonoBehaviour
 {
-    [SerializeField] private Canvas bubbleCanvas;       // Canvas bubble
-    [SerializeField] private TextMeshProUGUI chatText;  // Teks di dalam bubble
-    [SerializeField] private float displayTime = 3f;    // Durasi tampil
+    [SerializeField] private GameObject bubble;        // root panel image (child)
+    [SerializeField] private TextMeshProUGUI chatText; // TMP text inside
+    [SerializeField] private float displayTime = 3f;
 
     private float timer;
+    private Camera mainCam;
 
-    private void Start()
+    private void Awake()
     {
+        mainCam = Camera.main;
+        if (bubble == null) Debug.LogError("ChatBubble: bubble GameObject belum di-assign!", this);
+        if (chatText == null) Debug.LogError("ChatBubble: chatText (TMP) belum di-assign!", this);
         Hide();
     }
 
     private void Update()
     {
-        // Hitung mundur buat auto hide
-        if (bubbleCanvas.enabled)
+        // billboard: selalu menghadap kamera
+        if (mainCam != null)
+        {
+            transform.rotation = Quaternion.LookRotation(transform.position - mainCam.transform.position);
+        }
+
+        if (bubble != null && bubble.activeSelf)
         {
             timer -= Time.deltaTime;
-            if (timer <= 0)
-            {
-                Hide();
-            }
+            if (timer <= 0f) Hide();
         }
     }
 
-    // Munculkan teks
     public void Show(string message, float duration = -1f)
     {
+        if (chatText == null || bubble == null) return;
         chatText.text = message;
-        bubbleCanvas.enabled = true;
-
-        // Kalau ada custom duration dipakai, kalau nggak default
-        timer = duration > 0 ? duration : displayTime;
+        bubble.SetActive(true);
+        timer = (duration > 0f) ? duration : displayTime;
     }
 
-    // Sembunyikan bubble
     public void Hide()
     {
-        bubbleCanvas.enabled = false;
+        if (bubble != null) bubble.SetActive(false);
     }
 }
