@@ -1347,6 +1347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c6007a55cce1a469c8295f2f8735a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 1014562478}
   dialogueScript: {fileID: 1014562482}
 --- !u!4 &1368466965
 Transform:

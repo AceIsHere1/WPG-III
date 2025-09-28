@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -9,63 +9,63 @@ public class Dialogue : MonoBehaviour
     public float textSpeed = 0.05f;
 
     private int index;
-    private bool isDialogueActive = false;
-
-    void OnEnable()
-    {
-        textComponent.text = string.Empty;
-    }
-
-    void Update()
-    {
-        if (isDialogueActive && Input.GetMouseButtonDown(0))
-        {
-            if (textComponent.text == lines[index])
-            {
-                NextLine();
-            }
-            else
-            {
-                StopAllCoroutines();
-                textComponent.text = lines[index];
-            }
-        }
-    }
+    private Coroutine typingCoroutine;
+    private bool isTyping = false;
 
     public void StartDialogue()
     {
         index = 0;
         textComponent.text = string.Empty;
-        StartCoroutine(TypeLine());
-        isDialogueActive = true;
+        gameObject.SetActive(true);
+        StartTyping();
+    }
+
+    void StartTyping()
+    {
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(TypeLine());
     }
 
     IEnumerator TypeLine()
     {
+        isTyping = true;
+        textComponent.text = "";
+
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        isTyping = false;
     }
 
-    void NextLine()
+    public bool HandleInput()
     {
-        if (index < lines.Length - 1)
+        if (isTyping)
         {
-            index++;
-            textComponent.text = string.Empty;
-            StartCoroutine(TypeLine());
+            // Skip → langsung tampil semua teks
+            StopCoroutine(typingCoroutine);
+            textComponent.text = lines[index];
+            isTyping = false;
+            return true; // masih di baris yang sama
         }
         else
         {
-            gameObject.SetActive(false);
-            isDialogueActive = false;
+            // Sudah full → cek apakah masih ada line berikutnya
+            if (index < lines.Length - 1)
+            {
+                index++;
+                StartTyping();
+                return true; // masih ada lanjut
+            }
+            else
+            {
+                gameObject.SetActive(false); // habis → sembunyikan
+                return false; // sudah selesai
+            }
         }
-    }
-
-    public bool IsActive()
-    {
-        return isDialogueActive;
     }
 }

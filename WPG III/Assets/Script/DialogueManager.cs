@@ -2,8 +2,16 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    [SerializeField] private Dialogue dialogueScript;
+    public GameObject dialoguePanel;
+    public Dialogue dialogueScript;
+
     private bool isDialogueActive = false;
+
+    void Start()
+    {
+        if (dialoguePanel != null)
+            dialoguePanel.SetActive(false);
+    }
 
     void Update()
     {
@@ -11,16 +19,15 @@ public class DialogueManager : MonoBehaviour
         {
             if (!isDialogueActive)
             {
-                // Aktifkan UI dialogue box
-                dialogueScript.gameObject.SetActive(true);
+                dialoguePanel.SetActive(true);
                 dialogueScript.StartDialogue();
                 isDialogueActive = true;
             }
             else
             {
-                // Tutup dialogue box kalau sudah aktif
-                dialogueScript.gameObject.SetActive(false);
-                isDialogueActive = false;
+                bool stillGoing = dialogueScript.HandleInput();
+                if (!stillGoing)
+                    isDialogueActive = false;
             }
         }
     }
