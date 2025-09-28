@@ -199,7 +199,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -295,7 +295,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1063,8 +1063,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -200}
-  m_SizeDelta: {x: -200, y: -600}
+  m_AnchoredPosition: {x: -23.590702, y: -102.74946}
+  m_SizeDelta: {x: -193.6729, y: -298.8075}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1014562480
 MonoBehaviour:
@@ -1118,8 +1118,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1180191840}
   lines:
-  - 'Bu inah : Le ayo Tak keloni kene'
-  - 'Minto : Aduh malas mending dukung Manchester City'
+  - 'Minto(monolog) : Haduh gini amat baru lulus kuliah, mana yang ada lowonganya
+    ngaco terus lagi.mana 19 juta lapangan pekerjaanya? kerja apa saja dah yang penting
+    halal dan gak di kamboja.'
+  - 'Bu inah(sms) : minto kamu masih nganggur toh le? kamu mau nggak kerja malem
+    di warung ibu buat sementara aja, soalnya penjaga lamanya hilang ntah kemana.
+    bayaranya gak gede sih,tapi kerjaane yo gak ribet kok. '
+  - 'Minto(monolog) : Ah lumayan sih ini, daripada gak dapat kerja sama sekali kan?
+    mending ambil aja selagi tunggu lamaran lain yang diterima'
   textSpeed: 0.3
 --- !u!1001 &1047524568
 PrefabInstance:
