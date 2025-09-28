@@ -775,6 +775,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'dispenser '
       objectReference: {fileID: 0}
+    - target: {fileID: 7202271454713460447, guid: 61ca37d78680bcd4e86ed7a7c5995aab,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fa515dcce991d33499c9ad6d689d2c1a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

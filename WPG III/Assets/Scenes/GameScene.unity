@@ -146,14 +146,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &35768402
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -820,14 +823,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &259815082
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1123,14 +1129,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &283053058
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1641,11 +1650,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 2
   smoothSpeed: 10
-  pickupRange: 3
+  pickupRange: 1
+  pickedUp: 0
   pickupSound: {fileID: 0}
+  unwrapSound: {fileID: 0}
   dropSound: {fileID: 0}
   rawNoodlePrefab: {fileID: 0}
   isNoodlePack: 0
@@ -1905,7 +1916,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fac205e1711129b46bebeea7a298b8d9,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 640297548}
+      addedObject: {fileID: 640297553}
   m_SourcePrefab: {fileID: 100100000, guid: fac205e1711129b46bebeea7a298b8d9, type: 3}
 --- !u!1 &388174361
 GameObject:
@@ -2096,10 +2107,13 @@ MonoBehaviour:
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &390730188
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2290,14 +2304,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &412684241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2466,14 +2483,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &491169502
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2546,14 +2566,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &519360449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2705,7 +2728,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fac205e1711129b46bebeea7a298b8d9,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1452902886}
+      addedObject: {fileID: 1452902889}
   m_SourcePrefab: {fileID: 100100000, guid: fac205e1711129b46bebeea7a298b8d9, type: 3}
 --- !u!1 &555302573 stripped
 GameObject:
@@ -2735,10 +2758,13 @@ MonoBehaviour:
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &555302576
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2947,14 +2973,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &590075093
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3027,14 +3056,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &622486846
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3223,27 +3255,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 383372787}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &640297548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640297546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
-  holdDistance: 1
-  smoothSpeed: 10
-  pickupRange: 5
-  pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
-  dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
-    type: 3}
-  isNoodlePack: 1
 --- !u!65 &640297549
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3292,6 +3303,29 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &640297553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640297546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 330585546}
+  holdDistance: 1
+  smoothSpeed: 10
+  pickupRange: 5
+  pickedUp: 0
+  pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  dropSound: {fileID: 0}
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!1 &661011770 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fac205e1711129b46bebeea7a298b8d9,
@@ -3316,14 +3350,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &661011773
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3396,14 +3433,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &771160303
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3476,14 +3516,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &786045912
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3888,14 +3931,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &986809996
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5163,14 +5209,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &1321424084
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5243,14 +5292,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &1326336733
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5538,6 +5590,7 @@ GameObject:
   - component: {fileID: 1425534309}
   - component: {fileID: 1425534308}
   - component: {fileID: 1425534307}
+  - component: {fileID: 1425534311}
   m_Layer: 3
   m_Name: Ground
   m_TagString: Untagged
@@ -5633,6 +5686,27 @@ Transform:
   - {fileID: 1541414597}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1425534311
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425534306}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 772c09774bd250d4ba56ca580acfb9a6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1452347929 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: fac205e1711129b46bebeea7a298b8d9,
@@ -5657,14 +5731,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &1452347932
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5773,7 +5850,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1452902886
+--- !u!114 &1452902889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5789,7 +5866,9 @@ MonoBehaviour:
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
@@ -6103,14 +6182,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &1611556060
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6512,14 +6594,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &1721451439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6697,14 +6782,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &1758800105
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7140,6 +7228,74 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 283053057}
   m_SourcePrefab: {fileID: 100100000, guid: fac205e1711129b46bebeea7a298b8d9, type: 3}
+--- !u!1001 &1900955773
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 87302f153308eba4088023fd8ed2777f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.73
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87302f153308eba4088023fd8ed2777f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.078
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87302f153308eba4088023fd8ed2777f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.96
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87302f153308eba4088023fd8ed2777f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87302f153308eba4088023fd8ed2777f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87302f153308eba4088023fd8ed2777f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87302f153308eba4088023fd8ed2777f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87302f153308eba4088023fd8ed2777f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87302f153308eba4088023fd8ed2777f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 87302f153308eba4088023fd8ed2777f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 87302f153308eba4088023fd8ed2777f,
+        type: 3}
+      propertyPath: m_Name
+      value: Banana Man
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 87302f153308eba4088023fd8ed2777f, type: 3}
 --- !u!1 &1911496126 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: c1ba0a3006fd64e4980623b2865e1482,
@@ -7488,14 +7644,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &1965087501
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8065,14 +8224,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d3740b94c0640b42983fbbc192f1513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 330585546}
+  playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
-  rawNoodlePrefab: {fileID: 0}
-  isNoodlePack: 0
+  rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
+    type: 3}
+  isNoodlePack: 1
 --- !u!65 &2042231249
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8509,6 +8671,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9b0421f41a8e104a8dfc598c7444c98, type: 3}
+--- !u!1001 &7249671711095500213
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4004858608232524366, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_Name
+      value: NPC 1 RIGGED
+      objectReference: {fileID: 0}
+    - target: {fileID: 8594723722728676364, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923314995272914815, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 9.984
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923314995272914815, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923314995272914815, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923314995272914815, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923314995272914815, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923314995272914815, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923314995272914815, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923314995272914815, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923314995272914815, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8923314995272914815, guid: 453ffeb2e9891b249820f5927238b7d7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 453ffeb2e9891b249820f5927238b7d7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -8535,3 +8770,5 @@ SceneRoots:
   - {fileID: 388174364}
   - {fileID: 637419558}
   - {fileID: 390207255}
+  - {fileID: 7249671711095500213}
+  - {fileID: 1900955773}

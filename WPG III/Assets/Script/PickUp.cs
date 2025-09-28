@@ -1,40 +1,38 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
     [Header("Pickup Settings")]
-    public Transform playerCamera;       // Kamera player
-    public float holdDistance = 2f;      // Jarak object dari kamera
-    public float smoothSpeed = 10f;      // Kecepatan smoothing biar gak getar
-    public float pickupRange = 1f;       // Jarak maksimum bisa ambil
+    public Transform playerCamera;
+    public float holdDistance = 2f;
+    public float smoothSpeed = 10f;
+    public float pickupRange = 1f;
 
-    private bool pickedUp;
+    [Header("Internal")]
+    [SerializeField] private bool pickedUp;
     private Rigidbody rb;
 
     [Header("Sound Settings")]
     public AudioClip pickupSound;
+    public AudioClip unwrapSound;
     public AudioClip dropSound;
     private AudioSource audioSource;
 
     [Header("Noodle Cooking Settings")]
-    public GameObject rawNoodlePrefab; // prefab mie kotak kuning
-    public bool isNoodlePack = false;  // true kalau ini bungkus mie
+    public GameObject rawNoodlePrefab;
+    public bool isNoodlePack = false;
 
-    // hanya 1 object boleh dipegang
     private static Pickup currentlyHeld;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if (playerCamera == null && Camera.main != null) playerCamera = Camera.main.transform;
 
-        // kalau lupa assign kamera, otomatis ambil Main Camera
-        if (playerCamera == null)
-            playerCamera = Camera.main.transform;
-
-        // setup audio
-        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
     }
 
@@ -42,55 +40,50 @@ public class Pickup : MonoBehaviour
     {
         if (pickedUp && currentlyHeld == this)
         {
-            // hitung posisi di depan kamera (crosshair)
-            Vector3 targetPos = playerCamera.position + playerCamera.forward * holdDistance;
-
-            // gerakkan object smooth ke targetPos
-            rb.MovePosition(Vector3.Lerp(rb.position, targetPos, Time.deltaTime * smoothSpeed));
-
-            // rotasi ikut kamera
-            rb.MoveRotation(Quaternion.Lerp(rb.rotation, playerCamera.rotation, Time.deltaTime * smoothSpeed));
-
-            // klik kanan = drop
-            if (Input.GetMouseButtonDown(1))
+            if (playerCamera != null)
             {
-                Drop();
+                Vector3 targetPos = playerCamera.position + playerCamera.forward * holdDistance;
+                if (rb != null)
+                {
+                    rb.MovePosition(Vector3.Lerp(rb.position, targetPos, Time.deltaTime * smoothSpeed));
+                    rb.MoveRotation(Quaternion.Lerp(rb.rotation, playerCamera.rotation, Time.deltaTime * smoothSpeed));
+                }
+                else
+                {
+                    transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothSpeed);
+                    transform.rotation = Quaternion.Lerp(transform.rotation, playerCamera.rotation, Time.deltaTime * smoothSpeed);
+                }
             }
-            // tekan E = buka bungkus mie
-            if (isNoodlePack && Input.GetKeyDown(KeyCode.E))
-            {
-                UnwrapNoodle();
-            }
+
+            if (Input.GetMouseButtonDown(1)) Drop();
+            if (isNoodlePack && Input.GetKeyDown(KeyCode.E)) UnwrapNoodle();
         }
         else
         {
-            // cek input klik kiri untuk pickup
-            if (Input.GetMouseButtonDown(0))
-            {
-                TryPickup();
-            }
+            if (Input.GetMouseButtonDown(0)) TryPickup();
         }
     }
 
     private void TryPickup()
     {
-        if (currentlyHeld != null) return; // sudah ada object di tangan
+        if (currentlyHeld != null) return;
+        if (playerCamera == null) playerCamera = Camera.main != null ? Camera.main.transform : null;
+        if (playerCamera == null) return;
 
-        // raycast dari kamera
         Ray ray = new Ray(playerCamera.position, playerCamera.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
         {
-            if (hit.transform == transform) // pastikan ray kena object ini
+            if (hit.transform == transform)
             {
                 pickedUp = true;
                 currentlyHeld = this;
-
-                rb.useGravity = false;
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-
-                if (pickupSound != null)
-                    audioSource.PlayOneShot(pickupSound);
+                if (rb != null)
+                {
+                    rb.useGravity = false;
+                    rb.velocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                }
+                if (pickupSound != null && audioSource != null) audioSource.PlayOneShot(pickupSound);
             }
         }
     }
@@ -98,35 +91,60 @@ public class Pickup : MonoBehaviour
     private void Drop()
     {
         if (currentlyHeld != this) return;
-
         pickedUp = false;
         currentlyHeld = null;
-
-        rb.useGravity = true;
-
-        if (dropSound != null)
-            audioSource.PlayOneShot(dropSound);
+        if (rb != null) rb.useGravity = true;
+        if (dropSound != null && audioSource != null) audioSource.PlayOneShot(dropSound);
     }
 
     private void UnwrapNoodle()
     {
-        if (rawNoodlePrefab != null)
-        {
-            // spawn mie kotak kuning di posisi bungkus
-            GameObject noodle = Instantiate(rawNoodlePrefab, transform.position, transform.rotation);
+        if (rawNoodlePrefab == null) return;
 
-            // otomatis pickup mie kotak kuning
-            Pickup noodlePickup = noodle.GetComponent<Pickup>();
-            if (noodlePickup = null)
-            {
-                noodlePickup.pickedUp = true;
-                currentlyHeld = noodlePickup;
-                noodlePickup.rb.useGravity = false;
-            }
+        // Spawn mie kotak kuning di posisi bungkus
+        GameObject noodle = Instantiate(rawNoodlePrefab, transform.position, transform.rotation);
 
-            // hancurkan bungkus
-            Destroy(gameObject);
-        }
+        // Otomatis pickup mie kotak kuning
+        Pickup noodlePickup = noodle.GetComponent<Pickup>();
+        if (noodlePickup != null) noodlePickup.ForcePickup();
+
+        // Mainkan sound juga saat buka bungkus
+        if (unwrapSound != null && audioSource != null)
+            audioSource.PlayOneShot(unwrapSound);
+
+        // Hancurkan bungkus mie
+        Destroy(gameObject, unwrapSound.length);
     }
 
+    // PUBLIC API untuk skrip lain
+    public void ForcePickup()
+    {
+        if (currentlyHeld != null) currentlyHeld.ForceDrop();
+        pickedUp = true;
+        currentlyHeld = this;
+        if (rb != null)
+        {
+            rb.useGravity = false;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        if (pickupSound != null && audioSource != null) audioSource.PlayOneShot(pickupSound);
+    }
+
+    public void ForceDrop()
+    {
+        if (currentlyHeld == this) { pickedUp = false; currentlyHeld = null; }
+        if (rb != null) rb.useGravity = true;
+        if (dropSound != null && audioSource != null) audioSource.PlayOneShot(dropSound);
+    }
+
+    public static Pickup GetCurrentlyHeld()
+    {
+        return currentlyHeld;
+    }
+
+    public bool IsPickedUp()
+    {
+        return pickedUp;
+    }
 }

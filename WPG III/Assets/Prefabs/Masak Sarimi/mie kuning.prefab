@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4143697050436577610}
   - component: {fileID: 650557350068033381}
   - component: {fileID: 6939740989274366217}
-  - component: {fileID: 8133918662168130766}
+  - component: {fileID: 6316428988756695136}
   m_Layer: 0
   m_Name: mie kuning
   m_TagString: Untagged
@@ -108,7 +108,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -134,7 +134,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.02, y: 0.019999994, z: 0.020000005}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8133918662168130766
+--- !u!114 &6316428988756695136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +150,9 @@ MonoBehaviour:
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 5
+  pickedUp: 0
   pickupSound: {fileID: 0}
+  unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   dropSound: {fileID: 0}
   rawNoodlePrefab: {fileID: 0}
   isNoodlePack: 0
