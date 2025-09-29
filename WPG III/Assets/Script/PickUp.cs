@@ -25,6 +25,8 @@ public class Pickup : MonoBehaviour
     public bool isNoodlePack = false;
 
     private static Pickup currentlyHeld;
+    // Offset rotasi agar tidak kebalik saat dipickup
+    private Quaternion rotationOffset;
 
     void Start()
     {
@@ -46,7 +48,7 @@ public class Pickup : MonoBehaviour
                 if (rb != null)
                 {
                     rb.MovePosition(Vector3.Lerp(rb.position, targetPos, Time.deltaTime * smoothSpeed));
-                    rb.MoveRotation(Quaternion.Lerp(rb.rotation, playerCamera.rotation, Time.deltaTime * smoothSpeed));
+                    rb.MoveRotation(Quaternion.Lerp(rb.rotation, playerCamera.rotation * rotationOffset, Time.deltaTime * smoothSpeed));
                 }
                 else
                 {
@@ -83,6 +85,10 @@ public class Pickup : MonoBehaviour
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
                 }
+
+                // simpan offset rotasi (rotasi objek relatif terhadap kamera)
+                rotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
+
                 if (pickupSound != null && audioSource != null) audioSource.PlayOneShot(pickupSound);
             }
         }
@@ -128,6 +134,11 @@ public class Pickup : MonoBehaviour
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
         }
+
+        // simpan offset rotasi saat force pickup juga
+        if (playerCamera != null)
+            rotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
+
         if (pickupSound != null && audioSource != null) audioSource.PlayOneShot(pickupSound);
     }
 

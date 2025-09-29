@@ -4,7 +4,8 @@ using UnityEngine;
 public class NoodleCooking : MonoBehaviour
 {
     [Header("Prefab Settings")]
-    public GameObject cookedPotPrefab;   // prefab panci matang
+    public GameObject cookedPotVisual;   // prefab panci matang
+    public GameObject emptyPotVisual;    // prefab panci kosong
     public GameObject bowlPrefab;        // prefab mangkok jadi
     public Transform spawnPoint;         // optional
 
@@ -43,7 +44,16 @@ public class NoodleCooking : MonoBehaviour
         if (isCooking) yield break;
         isCooking = true;
         yield return new WaitForSeconds(cookingTime);
-        if (cookedPotPrefab != null) Instantiate(cookedPotPrefab, transform.position, transform.rotation);
+        // Ganti visual panci jadi matang
+        if (cookedPotVisual != null && emptyPotVisual != null)
+        {
+            emptyPotVisual.SetActive(false);
+            cookedPotVisual.SetActive(true);
+        }
+
+        isEmptyPot = false;
+        isCooking = false;
+        //if (cookedPotPrefab != null) Instantiate(cookedPotPrefab, transform.position, transform.rotation);
         //Destroy(gameObject);
     }
 
@@ -61,6 +71,15 @@ public class NoodleCooking : MonoBehaviour
         GameObject bowl = Instantiate(bowlPrefab, spawnPos, spawnRot);
         Pickup bowlPickup = bowl.GetComponent<Pickup>();
         if (bowlPickup != null) bowlPickup.ForcePickup();
-        Destroy(gameObject);
+
+        // Reset kembali ke panci kosong
+        if (cookedPotVisual != null && emptyPotVisual != null)
+        {
+            cookedPotVisual.SetActive(false);
+            emptyPotVisual.SetActive(true);
+        }
+
+        isEmptyPot = true;
+        //Destroy(gameObject);
     }
 }
