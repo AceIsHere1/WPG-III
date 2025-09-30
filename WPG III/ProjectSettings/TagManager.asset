@@ -9,6 +9,7 @@ TagManager:
   - Clone
   - RawNoodle
   - NoodlePack
+  - CookedNoodle
   layers:
   - Default
   - TransparentFX

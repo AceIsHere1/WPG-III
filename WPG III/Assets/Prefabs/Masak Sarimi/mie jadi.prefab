@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 5259911136888637638}
   m_Layer: 0
   m_Name: mie jadi
-  m_TagString: Untagged
+  m_TagString: CookedNoodle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

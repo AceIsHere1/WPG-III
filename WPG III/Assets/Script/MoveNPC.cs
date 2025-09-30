@@ -1,27 +1,24 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class MoveNPC : MonoBehaviour
 {
-    [SerializeField] Transform[] destinations;  // banyak tujuan
-
-    NavMeshAgent navMeshAgent;
-    int currentIndex = 0;
+    [SerializeField] Transform[] destinations;  // daftar tujuan
+    private NavMeshAgent navMeshAgent;
+    private int currentIndex = 0;
+    private bool isReturning = false;           // apakah NPC sedang balik?
 
     void Start()
     {
-        navMeshAgent = this.GetComponent<NavMeshAgent>();
-
+        navMeshAgent = GetComponent<NavMeshAgent>();
         if (navMeshAgent == null)
         {
-            Debug.Log("Nav Mesh Agent component not attached");
+            Debug.LogError("NavMeshAgent tidak ada di NPC!");
+            return;
         }
-        else
-        {
-            SetDestination();
-        }
+
+        SetDestination();
     }
 
     void Update()
@@ -30,15 +27,33 @@ public class MoveNPC : MonoBehaviour
 
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
         {
-            if (currentIndex < destinations.Length - 1)
+            if (!isReturning)
             {
-                currentIndex++;
-                SetDestination();
+                // maju ke depan
+                if (currentIndex < destinations.Length - 1)
+                {
+                    currentIndex++;
+                    SetDestination();
+                }
+                else
+                {
+                    // sampai tujuan terakhir - berhenti (nunggu mie)
+                    navMeshAgent.isStopped = true;
+                }
             }
             else
             {
-                // berhenti di tujuan terakhir
-                navMeshAgent.isStopped = true;
+                // balik ke belakang
+                if (currentIndex > 0)
+                {
+                    currentIndex--;
+                    SetDestination();
+                }
+                else
+                {
+                    // sampai tujuan awal - berhenti
+                    navMeshAgent.isStopped = true;
+                }
             }
         }
     }
@@ -46,8 +61,18 @@ public class MoveNPC : MonoBehaviour
     private void SetDestination()
     {
         if (destinations.Length == 0) return;
-
         Vector3 targetVector = destinations[currentIndex].position;
         navMeshAgent.SetDestination(targetVector);
+    }
+
+    // dipanggil dari NpcOrder setelah menerima mie
+    public void StartReturning()
+    {
+        if (destinations.Length == 0) return;
+
+        isReturning = true;
+        navMeshAgent.isStopped = false;
+        currentIndex = destinations.Length - 1; // mulai dari posisi terakhir (warung)
+        SetDestination();
     }
 }
