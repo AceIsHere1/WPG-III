@@ -13,7 +13,18 @@ public class NoodleCooking : MonoBehaviour
     public float cookingTime = 5f;
     public bool isEmptyPot = true;
 
+    [Header("Sound Settings")]
+    public AudioClip noodleReadySound;
+    private AudioSource audioSource;
+
     private bool isCooking = false;
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -49,6 +60,11 @@ public class NoodleCooking : MonoBehaviour
         {
             emptyPotVisual.SetActive(false);
             cookedPotVisual.SetActive(true);
+        }
+
+        if (noodleReadySound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(noodleReadySound);
         }
 
         isEmptyPot = false;

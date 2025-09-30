@@ -907,6 +907,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 525644750}
   cookingTime: 5
   isEmptyPot: 1
+  noodleReadySound: {fileID: 8300000, guid: cc4c04c8db5b38b4c939d96e3bd85895, type: 3}
 --- !u!54 &265864622
 Rigidbody:
   m_ObjectHideFlags: 0
