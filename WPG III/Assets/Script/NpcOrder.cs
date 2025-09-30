@@ -17,6 +17,12 @@ public class NpcOrder : MonoBehaviour
     {
         moveNPC = GetComponent<MoveNPC>();
         if (moveNPC == null) Debug.LogError("MoveNPC tidak ditemukan di NPC!");
+
+        // Ambil order point dari manager di scene
+        if (DestinationManager.Instance != null)
+        {
+            orderPoint = DestinationManager.Instance.orderPoint;
+        }
     }
 
     void Update()

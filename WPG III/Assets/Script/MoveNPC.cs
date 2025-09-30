@@ -18,6 +18,15 @@ public class MoveNPC : MonoBehaviour
             return;
         }
 
+        // ambil destinasi dari DestinationManager
+        destinations = DestinationManager.Instance.destinations;
+
+        if (destinations == null || destinations.Length == 0)
+        {
+            Debug.LogError("Destinations belum di-assign di DestinationManager!");
+            return;
+        }
+
         SetDestination();
     }
 
@@ -51,8 +60,10 @@ public class MoveNPC : MonoBehaviour
                 }
                 else
                 {
-                    // sampai tujuan awal - berhenti
-                    navMeshAgent.isStopped = true;
+                    // sampai tujuan awal - destroy NPC
+                    Debug.Log("NPC sampai tujuan, destroy...");
+                    NPCEvents.RaiseNpcDestroyed();
+                    Destroy(gameObject);
                 }
             }
         }
