@@ -46,17 +46,32 @@ public class NpcOrder : MonoBehaviour
 
     private void ReceiveFood(GameObject bowl)
     {
-        // hancurkan mangkok mie dari player
-        Pickup held = bowl.GetComponent<Pickup>();
-        if (held != null) held.ForceDrop();
+        if (bowl == null)
+        {
+            Debug.LogWarning("ReceiveFood dipanggil dengan bowl == null");
+            return;
+        }
 
-        Destroy(bowl);
+        // Drop dari tangan player jika masih dipegang
+        Pickup held = bowl.GetComponent<Pickup>();
+        if (held != null)
+            held.ForceDrop();
+
+        // Safety: hanya Destroy jika object ini adalah instance di scene.
+        // Ini mencegah kita tidak sengaja mencoba menghancurkan prefab asset yang salah assign di inspector.
+        if (bowl.scene.IsValid())
+        {
+            Destroy(bowl);
+        }
+        else
+        {
+            Debug.LogWarning($"NpcOrder: coba Destroy object yang bukan bagian scene (mungkin prefab asset). Lewati Destroy untuk: {bowl.name}");
+        }
 
         Debug.Log("NPC menerima mie jadi!");
 
         // lanjutkan perjalanan NPC
         hasReceived = true;
-        // aktifkan balik NPC untuk jalan pulang
         moveNPC.StartReturning();
     }
 }
