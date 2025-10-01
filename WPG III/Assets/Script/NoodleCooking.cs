@@ -11,6 +11,7 @@ public class NoodleCooking : MonoBehaviour
 
     [Header("Cooking Settings")]
     public float cookingTime = 5f;
+    public float interactDistance = 2f;
     public bool isEmptyPot = true;
 
     [Header("Sound Settings")]
@@ -37,6 +38,14 @@ public class NoodleCooking : MonoBehaviour
 
     private void TryInteract()
     {
+        // cek jarak interact player dengan panci
+        Transform cam = Camera.main != null ? Camera.main.transform : null;
+        if (cam != null)
+        {
+            float dist = Vector3.Distance(cam.position, transform.position);
+            if (dist > interactDistance) return;
+        }
+
         Pickup held = Pickup.GetCurrentlyHeld();
 
         if (isEmptyPot)

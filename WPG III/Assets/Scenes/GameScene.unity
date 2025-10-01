@@ -906,6 +906,7 @@ MonoBehaviour:
     type: 3}
   spawnPoint: {fileID: 525644750}
   cookingTime: 5
+  interactDistance: 2
   isEmptyPot: 1
   boilingSound: {fileID: 8300000, guid: c03fb44d7fae6284d8683bbc795f1503, type: 3}
   noodleReadySound: {fileID: 8300000, guid: cc4c04c8db5b38b4c939d96e3bd85895, type: 3}
