@@ -14,6 +14,7 @@ public class NoodleCooking : MonoBehaviour
     public bool isEmptyPot = true;
 
     [Header("Sound Settings")]
+    public AudioClip boilingSound;
     public AudioClip noodleReadySound;
     private AudioSource audioSource;
 
@@ -24,6 +25,9 @@ public class NoodleCooking : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
             audioSource = gameObject.AddComponent<AudioSource>();
+
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
     }
 
     void Update()
@@ -54,7 +58,15 @@ public class NoodleCooking : MonoBehaviour
     {
         if (isCooking) yield break;
         isCooking = true;
+
+        // Mainkan suara rebus sekali
+        if (boilingSound != null)
+        {
+            audioSource.PlayOneShot(boilingSound);
+        }
+
         yield return new WaitForSeconds(cookingTime);
+
         // Ganti visual panci jadi matang
         if (cookedPotVisual != null && emptyPotVisual != null)
         {
@@ -69,8 +81,6 @@ public class NoodleCooking : MonoBehaviour
 
         isEmptyPot = false;
         isCooking = false;
-        //if (cookedPotPrefab != null) Instantiate(cookedPotPrefab, transform.position, transform.rotation);
-        //Destroy(gameObject);
     }
 
     private void ServeToPlayer()
