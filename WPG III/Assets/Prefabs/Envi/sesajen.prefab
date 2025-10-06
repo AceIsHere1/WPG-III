@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  pickupRange: 6
+  pickupRange: 9
   holdDistance: 2
   smoothSpeed: 10
   trashTag: Trash
