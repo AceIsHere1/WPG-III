@@ -30,7 +30,7 @@ public class PickupSesajen : MonoBehaviour
         {
             HoldPosition();
             if (Input.GetMouseButtonDown(1)) Drop(); // klik kanan lepas
-            if (Input.GetKeyDown(KeyCode.R)) TryThrowToTrash(); // tekan R buang ke sampah
+            if (Input.GetKeyDown(KeyCode.E)) TryThrowToTrash(); // tekan E buang ke sampah
         }
         else
         {
@@ -81,6 +81,9 @@ public class PickupSesajen : MonoBehaviour
             if (col.CompareTag(trashTag))
             {
                 Debug.Log("Sesajen dibuang ke sampah!");
+
+                GameEvents.RaiseSesajenDisposed();
+
                 Destroy(gameObject);
                 currentlyHeld = null;
                 return;
