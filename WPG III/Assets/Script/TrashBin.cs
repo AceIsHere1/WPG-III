@@ -2,18 +2,27 @@ using UnityEngine;
 
 public class TrashBin : MonoBehaviour
 {
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        // Kalau yang masuk area punya komponen Rigidbody dan tag "Sesajen"
+        // Kalau objek yang masuk punya tag "Sesajen"
         if (other.CompareTag("Sesajen"))
         {
-            // Cek kalau player menekan tombol R
-            if (Input.GetKeyDown(KeyCode.R))
+            // Langsung buang sesajen begitu tombol R ditekan (tanpa nunggu frame berikut)
+            if (Input.GetKey(KeyCode.R))
             {
-                // Buang (hapus) sesajen
                 Destroy(other.gameObject);
-                Debug.Log("Sesajen dibuang ke tempat sampah!");
+                Debug.Log("Sesajen langsung dibuang ke tempat sampah!");
             }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        // Tambahan biar tetap bisa dibuang kalau belum sempat ditekan pas baru masuk
+        if (other.CompareTag("Sesajen") && Input.GetKeyDown(KeyCode.R))
+        {
+            Destroy(other.gameObject);
+            Debug.Log("Sesajen dibuang ke tempat sampah!");
         }
     }
 }
