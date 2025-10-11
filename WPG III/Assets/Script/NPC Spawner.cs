@@ -3,18 +3,17 @@ using UnityEngine;
 public class NPCSpawner : MonoBehaviour
 {
     [Header("NPC Spawn Settings")]
-    [SerializeField] private GameObject[] npcPrefabs; // daftar prefab NPC berbeda
-    [SerializeField] private Transform spawnPoint;    // posisi spawn
-    [SerializeField] private float spawnDelay = 2f;   // delay sebelum spawn NPC baru
+    [SerializeField] private GameObject[] npcPrefabs;    // daftar prefab NPC
+    [SerializeField] private Transform[] spawnPoints;    // beberapa titik spawn
+    [SerializeField] private float spawnDelay = 2f;      // jeda sebelum NPC baru muncul
 
+    private GameObject currentNPC;                       // referensi NPC yang sedang aktif
     private bool hasSpawnedInitial = false;
 
     private void OnEnable()
     {
-        // Langganan ke event ketika NPC dihancurkan
         NPCEvents.OnNpcDestroyed += HandleNpcDestroyed;
 
-        // Spawn NPC pertama kali saat scene dimulai (setelah delay)
         if (!hasSpawnedInitial)
         {
             hasSpawnedInitial = true;
@@ -25,24 +24,38 @@ public class NPCSpawner : MonoBehaviour
     private void OnDisable()
     {
         NPCEvents.OnNpcDestroyed -= HandleNpcDestroyed;
+        CancelInvoke();
     }
 
     private void HandleNpcDestroyed()
     {
-        // Tunggu beberapa detik sebelum spawn NPC baru
+        // Spawn NPC baru hanya setelah NPC sebelumnya benar-benar hancur
+        currentNPC = null;
         Invoke(nameof(SpawnNPC), spawnDelay);
     }
 
     public void SpawnNPC()
     {
-        if (npcPrefabs.Length == 0 || spawnPoint == null)
+        // Jangan spawn kalau masih ada NPC aktif
+        if (currentNPC != null)
+        {
+            Debug.Log("Masih ada NPC aktif, skip spawn baru.");
+            return;
+        }
+
+        if (npcPrefabs.Length == 0 || spawnPoints.Length == 0)
         {
             Debug.LogWarning("NPCSpawner belum diset dengan benar (prefab atau spawn point kosong).");
             return;
         }
 
-        int index = Random.Range(0, npcPrefabs.Length); // pilih NPC random
-        Instantiate(npcPrefabs[index], spawnPoint.position, spawnPoint.rotation);
-        Debug.Log($"NPC ke-{index} muncul di {spawnPoint.position}");
+        // Pilih NPC dan titik spawn acak
+        int npcIndex = Random.Range(0, npcPrefabs.Length);
+        int pointIndex = Random.Range(0, spawnPoints.Length);
+        Transform chosenPoint = spawnPoints[pointIndex];
+
+        // Spawn NPC baru dan simpan referensinya
+        currentNPC = Instantiate(npcPrefabs[npcIndex], chosenPoint.position, chosenPoint.rotation);
+        Debug.Log($"Spawn NPC {npcIndex} di titik {pointIndex} ({chosenPoint.name})");
     }
 }

@@ -158,11 +158,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  patrolSpeed: 6
+  patrolSpeed: 9
   player: {fileID: 0}
   chaseSpeed: 11
-  detectionRadius: 7
-  catchDistance: 1.5
+  detectionRadius: 10
+  catchDistance: 2
 --- !u!1 &5704777075321137858
 GameObject:
   m_ObjectHideFlags: 0

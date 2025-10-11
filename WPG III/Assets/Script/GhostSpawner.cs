@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class GhostSpawner : MonoBehaviour
 {
-    [SerializeField] GameObject ghostPrefab;
-    [SerializeField] Transform spawnPoint;
-    [SerializeField] NPCSpawner npcSpawner;
-    [SerializeField] Transform[] patrolPoints;  
-    [SerializeField] Transform player;           
-    [SerializeField] float spawnDelay = 2f;
+    [Header("Ghost Settings")]
+    [SerializeField] private GameObject ghostPrefab;
+    [SerializeField] private Transform[] spawnPoints;
+
+    [Header("References")]
+    [SerializeField] private SesajenSpawner sesajenSpawner;
+    [SerializeField] private NPCSpawner npcSpawner;
+    [SerializeField] private Transform[] patrolPoints;
+    [SerializeField] private Transform player;
+
+    [Header("Timing")]
+    [SerializeField] private float spawnDelay = 2f;
 
     private GameObject currentGhost;
     private bool ghostSpawned = false;
+    private bool spawnPending = false; // mencegah Invoke ganda
 
     private void OnEnable()
     {
@@ -22,15 +29,34 @@ public class GhostSpawner : MonoBehaviour
     {
         NPCEvents.OnNpcDestroyed -= HandleNpcDestroyed;
         GameEvents.OnSesajenDisposed -= HandleSesajenDisposed;
+        CancelInvoke(); // hentikan semua Invoke yang masih jalan
     }
 
     private void HandleNpcDestroyed()
     {
+        if (ghostSpawned || spawnPending) return; // sudah ada hantu atau sedang dijadwalkan
+        spawnPending = true;
+
         Invoke(nameof(SpawnGhost), spawnDelay);
     }
 
     private void SpawnGhost()
     {
+        spawnPending = false; // reset flag
+        if (ghostSpawned) return; // pastikan tidak double spawn
+        ghostSpawned = true;
+
+        if (spawnPoints == null || spawnPoints.Length == 0)
+        {
+            Debug.LogWarning("Tidak ada spawn point untuk hantu!");
+            return;
+        }
+
+        // Pilih spawn point acak
+        int randomIndex = Random.Range(0, spawnPoints.Length);
+        Transform randomSpawn = spawnPoints[randomIndex];
+
+        // Nonaktifkan NPCSpawner
         if (npcSpawner != null)
         {
             npcSpawner.CancelInvoke();
@@ -38,17 +64,24 @@ public class GhostSpawner : MonoBehaviour
             Debug.Log("NPCSpawner dinonaktifkan karena hantu muncul");
         }
 
-        currentGhost = Instantiate(ghostPrefab, spawnPoint.position, spawnPoint.rotation);
+        // Spawn hantu
+        currentGhost = Instantiate(ghostPrefab, randomSpawn.position, randomSpawn.rotation);
         var ghostAI = currentGhost.GetComponent<GhostAI>();
 
-        // otomatis isi patrol point dan player
         if (ghostAI != null)
         {
             ghostAI.patrolPoints = patrolPoints;
             ghostAI.player = player;
         }
 
-        Debug.Log("Hantu muncul!");
+        Debug.Log($"Hantu muncul di titik {randomSpawn.name}");
+
+        // Spawn sesajen
+        if (sesajenSpawner != null)
+        {
+            sesajenSpawner.SpawnNewSesajen();
+            Debug.Log("Sesajen muncul");
+        }
     }
 
     private void HandleSesajenDisposed()
@@ -59,21 +92,22 @@ public class GhostSpawner : MonoBehaviour
             Debug.Log("Hantu menghilang setelah sesajen dibuang!");
         }
 
-        GameObject[] allGhosts = GameObject.FindGameObjectsWithTag("Ghost");
-        foreach (var g in allGhosts)
+        // Bersihkan semua sisa hantu di scene
+        foreach (var g in GameObject.FindGameObjectsWithTag("Ghost"))
         {
             Destroy(g);
-            Debug.Log("Hantu di scene dihancurkan: " + g.name);
         }
 
+        // Aktifkan kembali NPCSpawner
         if (npcSpawner != null)
         {
-            npcSpawner.enabled = true;
             npcSpawner.CancelInvoke();
+            npcSpawner.enabled = true;
             npcSpawner.Invoke(nameof(npcSpawner.SpawnNPC), 2f);
-            Debug.Log("NPCSpawner diaktifkan kembali.");
+            Debug.Log("NPCSpawner diaktifkan kembali setelah sesajen dibuang");
         }
 
         ghostSpawned = false;
+        spawnPending = false;
     }
 }
