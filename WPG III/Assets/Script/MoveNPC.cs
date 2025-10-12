@@ -62,8 +62,11 @@ public class MoveNPC : MonoBehaviour
                 {
                     // sampai tujuan awal - destroy NPC
                     Debug.Log("NPC sampai tujuan, destroy...");
+
                     NPCEvents.RaiseNpcDestroyed();
+
                     Destroy(gameObject);
+                    GameEvents.RaiseNpcServed();
                 }
             }
         }
