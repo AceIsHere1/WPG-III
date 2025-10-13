@@ -3359,6 +3359,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: aspal
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 36883b1ebe8fdaa49984c91bc4e915e0,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10009,8 +10014,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcPrefabs:
-  - {fileID: 7425083162285210516, guid: 0bfb88d80d260654984db5cbe5a4805a, type: 3}
-  - {fileID: 7240262912224895937, guid: db88e17bbda660b4997e08c75d6956cd, type: 3}
+  - {fileID: 3890041412698087918, guid: e33a5384565f6364cb948a5009e8c06d, type: 3}
+  - {fileID: 3013988915979898425, guid: cf9d9f1a78cb6a547ac7738465d22ce6, type: 3}
   - {fileID: 1233081258651952655, guid: 87cbcb4909d6d0644bb0d14a654edd9a, type: 3}
   spawnPoints:
   - {fileID: 2010662526}
@@ -10923,7 +10928,7 @@ Transform:
   m_GameObject: {fileID: 1988584688}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.46, y: 0.786, z: 10.44}
+  m_LocalPosition: {x: 1.2, y: 0.786, z: 10.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
