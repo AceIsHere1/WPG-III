@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class GameProgressManager : MonoBehaviour
 {
@@ -23,7 +23,7 @@ public class GameProgressManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.OnNpcServed += HandleNpcServed; // dengarkan event “NPC sudah dilayani”
+        GameEvents.OnNpcServed += HandleNpcServed; // dengarkan event â€œNPC sudah dilayaniâ€
     }
 
     private void OnDisable()
