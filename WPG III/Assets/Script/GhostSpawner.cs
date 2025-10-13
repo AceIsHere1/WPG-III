@@ -88,6 +88,15 @@ public class GhostSpawner : MonoBehaviour
     {
         if (currentGhost != null)
         {
+            var ghostAI = currentGhost.GetComponent<GhostAI>();
+            if (ghostAI != null)
+            {
+                // Pastikan musik kejar dimatikan sebelum hantu dihancurkan
+                var audio = ghostAI.GetComponent<AudioSource>();
+                if (audio != null && audio.isPlaying)
+                    audio.Stop();
+            }
+
             Destroy(currentGhost);
             Debug.Log("Hantu menghilang setelah sesajen dibuang!");
         }

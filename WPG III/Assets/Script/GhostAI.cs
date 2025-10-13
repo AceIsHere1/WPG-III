@@ -15,6 +15,9 @@ public class GhostAI : MonoBehaviour
     public float detectionRadius = 10f;
     public float catchDistance = 1.5f;
 
+    [Header("Audio Settings")]
+    public AudioSource chaseMusic; // drag AudioSource di inspector (berisi chase music)
+
     private NavMeshAgent agent;
     private bool isChasing = false;
 
@@ -27,6 +30,10 @@ public class GhostAI : MonoBehaviour
             agent.speed = patrolSpeed;
             agent.SetDestination(patrolPoints[currentPoint].position);
         }
+
+        // pastikan musik dalam keadaan off di awal
+        if (chaseMusic != null)
+            chaseMusic.Stop();
     }
 
     void Update()
@@ -36,11 +43,19 @@ public class GhostAI : MonoBehaviour
         // deteksi player
         if (distanceToPlayer <= detectionRadius)
         {
-            isChasing = true;
+            if (!isChasing)
+            {
+                isChasing = true;
+                StartChaseMusic(); // mulai musik kejar
+            }
         }
         else if (distanceToPlayer > detectionRadius * 1.5f)
         {
-            isChasing = false;
+            if (isChasing)
+            {
+                isChasing = false;
+                StopChaseMusic(); // berhenti musik kejar
+            }
         }
 
         // kejar player
@@ -79,6 +94,24 @@ public class GhostAI : MonoBehaviour
     {
         Debug.Log("Player tertangkap! Game Over!");
         SceneManager.LoadScene("GameOverScene");
+    }
+
+    void StartChaseMusic()
+    {
+        if (chaseMusic != null && !chaseMusic.isPlaying)
+            chaseMusic.Play();
+    }
+
+    void StopChaseMusic()
+    {
+        if (chaseMusic != null && chaseMusic.isPlaying)
+            chaseMusic.Stop();
+    }
+
+    void OnDestroy()
+    {
+        // pastikan musik berhenti kalau hantu dihapus
+        StopChaseMusic();
     }
 
     void OnDrawGizmosSelected()
