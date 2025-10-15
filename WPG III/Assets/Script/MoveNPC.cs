@@ -6,12 +6,15 @@ public class MoveNPC : MonoBehaviour
 {
     [SerializeField] Transform[] destinations;  // daftar tujuan
     private NavMeshAgent navMeshAgent;
+    private Animator animator;
     private int currentIndex = 0;
     private bool isReturning = false;           // apakah NPC sedang balik?
 
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+
         if (navMeshAgent == null)
         {
             Debug.LogError("NavMeshAgent tidak ada di NPC!");
@@ -33,6 +36,9 @@ public class MoveNPC : MonoBehaviour
     void Update()
     {
         if (destinations.Length == 0) return;
+
+        float speed = navMeshAgent.velocity.magnitude;
+        animator.SetFloat("Speed", speed);
 
         if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
         {
