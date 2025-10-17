@@ -1371,14 +1371,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7945ed22864d59468fb668fc774028c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cookedPotVisual: {fileID: 946397106}
   emptyPotVisual: {fileID: 932398707}
+  boilingPotVisual: {fileID: 946397106}
+  cookedPotVisual: {fileID: 1400295794}
   bowlPrefab: {fileID: 7843922312471172628, guid: 458488d0a92ede843aa729e680307fc3,
     type: 3}
   spawnPoint: {fileID: 525644750}
   cookingTime: 5
   interactDistance: 2
-  isEmptyPot: 1
   boilingSound: {fileID: 8300000, guid: c03fb44d7fae6284d8683bbc795f1503, type: 3}
   noodleReadySound: {fileID: 8300000, guid: cc4c04c8db5b38b4c939d96e3bd85895, type: 3}
 --- !u!54 &265864622
@@ -5856,7 +5856,7 @@ GameObject:
   - component: {fileID: 946397108}
   - component: {fileID: 946397107}
   m_Layer: 0
-  m_Name: CookedPotVisual
+  m_Name: BoilingPotVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5960,7 +5960,7 @@ PrefabInstance:
     - target: {fileID: 2984073614988081222, guid: 102d5d7ffb058bb458706a297bbea6e4,
         type: 3}
       propertyPath: m_Name
-      value: PanciMasak (1)
+      value: PanciMasak1
       objectReference: {fileID: 0}
     - target: {fileID: 4475293860743421797, guid: 102d5d7ffb058bb458706a297bbea6e4,
         type: 3}
@@ -6038,6 +6038,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 946397110}
+    - targetCorrespondingSourceObject: {fileID: 4475293860743421797, guid: 102d5d7ffb058bb458706a297bbea6e4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1400295795}
     - targetCorrespondingSourceObject: {fileID: 4475293860743421797, guid: 102d5d7ffb058bb458706a297bbea6e4,
         type: 3}
       insertIndex: -1
@@ -7982,6 +7986,112 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1758800104}
   m_SourcePrefab: {fileID: 100100000, guid: abfbd876618d20045b24a80c36a9b016, type: 3}
+--- !u!1 &1400295794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1400295795}
+  - component: {fileID: 1400295798}
+  - component: {fileID: 1400295797}
+  - component: {fileID: 1400295796}
+  m_Layer: 0
+  m_Name: CookedPotVisual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1400295795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400295794}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0107}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 265864629}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &1400295796
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400295794}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -462981019419857548, guid: ef1fb8b544cd93c4786472917ec18162, type: 3}
+--- !u!23 &1400295797
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400295794}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 6699446615349125189, guid: 1cc98194d00d83b4db49b285c95700d2, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &1400295798
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400295794}
+  m_Mesh: {fileID: -462981019419857548, guid: 1cc98194d00d83b4db49b285c95700d2, type: 3}
 --- !u!1 &1425534306
 GameObject:
   m_ObjectHideFlags: 0
@@ -12369,7 +12479,7 @@ PrefabInstance:
     - target: {fileID: 2984073614988081222, guid: 102d5d7ffb058bb458706a297bbea6e4,
         type: 3}
       propertyPath: m_Name
-      value: PanciMasak
+      value: PanciMasak2
       objectReference: {fileID: 0}
     - target: {fileID: 4475293860743421797, guid: 102d5d7ffb058bb458706a297bbea6e4,
         type: 3}

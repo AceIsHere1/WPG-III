@@ -4,22 +4,24 @@ using UnityEngine;
 public class NoodleCooking : MonoBehaviour
 {
     [Header("Prefab Settings")]
-    public GameObject cookedPotVisual;   // prefab panci matang
-    public GameObject emptyPotVisual;    // prefab panci kosong
-    public GameObject bowlPrefab;        // prefab mangkok jadi
-    public Transform spawnPoint;         // optional
+    public GameObject emptyPotVisual;     // prefab panci kosong
+    public GameObject boilingPotVisual;   // prefab panci berisi mi saat direbus
+    public GameObject cookedPotVisual;    // prefab panci berisi mi matang
+    public GameObject bowlPrefab;         // prefab mangkok jadi
+    public Transform spawnPoint;          // titik spawn mangkok opsional
 
     [Header("Cooking Settings")]
     public float cookingTime = 5f;
     public float interactDistance = 2f;
-    public bool isEmptyPot = true;
+
+    private bool isEmptyPot = true;
+    private bool isCooking = false;
+    private bool isCooked = false;
 
     [Header("Sound Settings")]
     public AudioClip boilingSound;
     public AudioClip noodleReadySound;
     private AudioSource audioSource;
-
-    private bool isCooking = false;
 
     void Awake()
     {
@@ -29,16 +31,19 @@ public class NoodleCooking : MonoBehaviour
 
         audioSource.playOnAwake = false;
         audioSource.loop = false;
+
+        // Set kondisi awal visual
+        SetVisualState(empty: true, boiling: false, cooked: false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) TryInteract();
+        if (Input.GetKeyDown(KeyCode.E))
+            TryInteract();
     }
 
     private void TryInteract()
     {
-        // cek jarak interact player dengan panci
         Transform cam = Camera.main != null ? Camera.main.transform : null;
         if (cam != null)
         {
@@ -48,17 +53,19 @@ public class NoodleCooking : MonoBehaviour
 
         Pickup held = Pickup.GetCurrentlyHeld();
 
-        if (isEmptyPot)
+        if (isEmptyPot && !isCooking && !isCooked)
         {
-            if (held != null && (held.gameObject.CompareTag("RawNoodle") || held.gameObject.name.ToLower().Contains("mie kuning")))
+            // Mulai merebus
+            if (held != null && (held.CompareTag("RawNoodle") || held.gameObject.name.ToLower().Contains("mie kuning")))
             {
                 held.ForceDrop();
                 Destroy(held.gameObject);
                 StartCoroutine(CookNoodles());
             }
         }
-        else
+        else if (isCooked && !isCooking)
         {
+            // Sajikan hasil rebusan
             ServeToPlayer();
         }
     }
@@ -67,54 +74,69 @@ public class NoodleCooking : MonoBehaviour
     {
         if (isCooking) yield break;
         isCooking = true;
+        isEmptyPot = false;
+        isCooked = false;
 
-        // Mainkan suara rebus sekali
+        // Ubah visual jadi panci berisi mi saat direbus
+        SetVisualState(empty: false, boiling: true, cooked: false);
+
+        // Mainkan suara rebusan
         if (boilingSound != null)
-        {
             audioSource.PlayOneShot(boilingSound);
-        }
 
+        // Tunggu sampai matang
         yield return new WaitForSeconds(cookingTime);
 
-        // Ganti visual panci jadi matang
-        if (cookedPotVisual != null && emptyPotVisual != null)
-        {
-            emptyPotVisual.SetActive(false);
-            cookedPotVisual.SetActive(true);
-        }
+        // Ganti ke visual panci matang
+        SetVisualState(empty: false, boiling: false, cooked: true);
 
-        if (noodleReadySound != null && audioSource != null)
-        {
+        // Mainkan suara mi matang
+        if (noodleReadySound != null)
             audioSource.PlayOneShot(noodleReadySound);
-        }
 
-        isEmptyPot = false;
+        isCooked = true;
         isCooking = false;
     }
 
     private void ServeToPlayer()
     {
         if (bowlPrefab == null) return;
+
         Transform cam = Camera.main != null ? Camera.main.transform : null;
         Vector3 spawnPos;
         Quaternion spawnRot = Quaternion.identity;
 
-        if (spawnPoint != null) { spawnPos = spawnPoint.position; spawnRot = spawnPoint.rotation; }
-        else if (cam != null) { spawnPos = cam.position + cam.forward * 1f; spawnRot = cam.rotation; }
-        else spawnPos = transform.position + Vector3.up * 1f;
+        if (spawnPoint != null)
+        {
+            spawnPos = spawnPoint.position;
+            spawnRot = spawnPoint.rotation;
+        }
+        else if (cam != null)
+        {
+            spawnPos = cam.position + cam.forward * 1f;
+            spawnRot = cam.rotation;
+        }
+        else
+        {
+            spawnPos = transform.position + Vector3.up * 1f;
+        }
 
         GameObject bowl = Instantiate(bowlPrefab, spawnPos, spawnRot);
         Pickup bowlPickup = bowl.GetComponent<Pickup>();
         if (bowlPickup != null) bowlPickup.ForcePickup();
 
         // Reset kembali ke panci kosong
-        if (cookedPotVisual != null && emptyPotVisual != null)
-        {
-            cookedPotVisual.SetActive(false);
-            emptyPotVisual.SetActive(true);
-        }
+        SetVisualState(empty: true, boiling: false, cooked: false);
 
         isEmptyPot = true;
-        //Destroy(gameObject);
+        isCooked = false;
+        isCooking = false;
+    }
+
+    private void SetVisualState(bool empty, bool boiling, bool cooked)
+    {
+        if (emptyPotVisual != null) emptyPotVisual.SetActive(empty);
+        if (boilingPotVisual != null) boilingPotVisual.SetActive(boiling);
+        if (cookedPotVisual != null) cookedPotVisual.SetActive(cooked);
     }
 }
