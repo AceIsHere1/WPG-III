@@ -10,6 +10,9 @@ public class NPCSpawner : MonoBehaviour
     private GameObject currentNPC;                       // referensi NPC yang sedang aktif
     private bool hasSpawnedInitial = false;
 
+    private int currentNpcIndex = 0;                     // urutan prefab NPC
+    private int currentSpawnPointIndex = 0;              // urutan titik spawn
+
     private void OnEnable()
     {
         NPCEvents.OnNpcDestroyed += HandleNpcDestroyed;
@@ -29,14 +32,12 @@ public class NPCSpawner : MonoBehaviour
 
     private void HandleNpcDestroyed()
     {
-        // Spawn NPC baru hanya setelah NPC sebelumnya benar-benar hancur
         currentNPC = null;
         Invoke(nameof(SpawnNPC), spawnDelay);
     }
 
     public void SpawnNPC()
     {
-        // Jangan spawn kalau masih ada NPC aktif
         if (currentNPC != null)
         {
             Debug.Log("Masih ada NPC aktif, skip spawn baru.");
@@ -49,13 +50,18 @@ public class NPCSpawner : MonoBehaviour
             return;
         }
 
-        // Pilih NPC dan titik spawn acak
-        int npcIndex = Random.Range(0, npcPrefabs.Length);
-        int pointIndex = Random.Range(0, spawnPoints.Length);
+        // Pilih NPC berdasarkan urutan
+        int npcIndex = currentNpcIndex;
+        currentNpcIndex = (currentNpcIndex + 1) % npcPrefabs.Length; // berputar ke awal lagi
+
+        // Pilih spawn point berdasarkan urutan juga
+        int pointIndex = currentSpawnPointIndex;
+        currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnPoints.Length;
+
         Transform chosenPoint = spawnPoints[pointIndex];
 
         // Spawn NPC baru dan simpan referensinya
         currentNPC = Instantiate(npcPrefabs[npcIndex], chosenPoint.position, chosenPoint.rotation);
-        Debug.Log($"Spawn NPC {npcIndex} di titik {pointIndex} ({chosenPoint.name})");
+        Debug.Log($"Spawn NPC {npcIndex + 1} di titik {pointIndex + 1} ({chosenPoint.name})");
     }
 }
