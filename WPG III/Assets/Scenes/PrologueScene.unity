@@ -1271,14 +1271,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1180191840}
   lines:
-  - 'Minto(monolog) : Haduh gini amat baru lulus kuliah, mana yang ada lowonganya
-    ngaco terus lagi.mana 19 juta lapangan pekerjaanya? kerja apa saja dah yang penting
-    halal dan gak di kamboja.'
-  - 'Bu inah(sms) : minto kamu masih nganggur toh le? kamu mau nggak kerja malem
-    di warung ibu buat sementara aja, soalnya penjaga lamanya hilang ntah kemana.
-    bayaranya gak gede sih,tapi kerjaane yo gak ribet kok. '
-  - 'Minto(monolog) : Ah lumayan sih ini, daripada gak dapat kerja sama sekali kan?
-    mending ambil aja selagi tunggu lamaran lain yang diterima'
+  - "Minto (monolog): \u201CHaduh gini amat baru lulus kuliah.\u201D  "
+  - "Minto(Monolog):\u201CBelum dapet kerjaan apa-apa, mana lowongan yang ada ngaco
+    terus lagi. Mana 19 juta lapangan pekerjaannya?\u201D "
+  - "Minto(Monolog):\u201CKerja apa saja dah yang penting halal dan gak di Kamboja.\u201D "
   textSpeed: 0.3
 --- !u!1001 &1047524568
 PrefabInstance:
