@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement; // buat pindah scene
-
 public class DialogueManager : MonoBehaviour
 {
+    [SerializeField] private Dialogue dialogueScript;
     public GameObject dialoguePanel;
-    public Dialogue dialogueScript;
 
     private bool isDialogueActive = false;
 
     void Start()
     {
         if (dialoguePanel != null)
-            dialoguePanel.SetActive(false); // dialog hidden saat awal
+            dialoguePanel.SetActive(false);
     }
 
     void Update()
@@ -20,26 +18,27 @@ public class DialogueManager : MonoBehaviour
         {
             if (!isDialogueActive)
             {
-                // Mulai dialog
+                // Aktifkan UI dialogue box
+                dialogueScript.gameObject.SetActive(true);
                 dialoguePanel.SetActive(true);
                 dialogueScript.StartDialogue();
                 isDialogueActive = true;
             }
             else
             {
-                // Handle input dari Dialogue.cs (lanjut atau skip text)
+                // Cek dulu apakah lanjut/minta next line
                 bool stillGoing = dialogueScript.HandleInput();
 
+                // Kalau sudah selesai, matikan UI
                 if (!stillGoing)
                 {
-                    // Dialog selesai → sembunyikan panel
+                    dialogueScript.gameObject.SetActive(false);
                     dialoguePanel.SetActive(false);
                     isDialogueActive = false;
-
-                    // Pindah ke GameScene
-                    SceneManager.LoadScene("GameScene");
                 }
             }
         }
     }
 }
+
+

@@ -1,94 +1,46 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerPrologue : MonoBehaviour
+public class PrologueCutsceneController : MonoBehaviour
 {
-    
     [Header("Camera Settings")]
-    [SerializeField] Transform playerCamera = null;
-    [SerializeField] float mouseSensitivity = 3.5f;
+    public Transform playerCamera;     // Kamera utama (yang nempel di player)
+    public Transform buInah;           // Posisi Bu Inah
+    public float lookSpeed = 2f;       // Kecepatan rotasi kamera
+    public float lookDuration = 3f;    // Durasi rotasi menghadap Bu Inah
+    public float delayBeforeLook = 2f; // Waktu setelah Minto merenung
 
-    [Header("Movement Settings")]
-    [SerializeField] private float walkSpeed = 5f;
-    [SerializeField] private float runSpeed = 10f;
-    [SerializeField] private CharacterController controller;
-    [SerializeField] bool lockCursor = true;
+    [Header("Dialogue")]
+    public Dialogue buInahDialogue;    // Script dialogue Bu Inah
 
-    [Header("Audio Settings")]
-    public AudioSource footstepsSound; // langkah kaki
-    public AudioSource sprintSound;    // lari
+    private bool isLookingAtBuInah = false;
+    private float timer = 0f;
 
-    float cameraPitch = 0.0f;
-
-    void Start()
+    public void StartCameraLook()
     {
-        controller = GetComponent<CharacterController>();
+        StartCoroutine(LookAtBuInahRoutine());
+    }
 
-        if (lockCursor)
+    private IEnumerator LookAtBuInahRoutine()
+    {
+        yield return new WaitForSeconds(delayBeforeLook); // waktu merenung
+
+        isLookingAtBuInah = true;
+        timer = 0f;
+
+        while (timer < lookDuration)
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            timer += Time.deltaTime;
+            Vector3 direction = (buInah.position - playerCamera.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            playerCamera.rotation = Quaternion.Slerp(playerCamera.rotation, targetRotation, Time.deltaTime * lookSpeed);
+            yield return null;
         }
 
-        // pastikan audio tidak langsung nyala
-        footstepsSound.Stop();
-        sprintSound.Stop();
+        isLookingAtBuInah = false;
+
+        // Setelah kamera selesai menghadap, mulai dialog Bu Inah
+        if (buInahDialogue != null)
+            buInahDialogue.StartDialogue();
     }
-
-    void Update()
-    {
-        UpdateMouseLook();
-        UpdateMovement();
-    }
-
-    void UpdateMouseLook()
-    {
-        Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-        cameraPitch -= mouseDelta.y * mouseSensitivity;
-        cameraPitch = Mathf.Clamp(cameraPitch, -60.0f, 60.0f);
-
-        playerCamera.localEulerAngles = Vector3.right * cameraPitch;
-        transform.Rotate(Vector3.up * mouseDelta.x * mouseSensitivity);
-    }
-
-    void UpdateMovement()
-    {
-        Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        inputDir.Normalize();
-
-        float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
-        Vector3 velocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * currentSpeed;
-
-        controller.Move(velocity * Time.deltaTime);
-
-        bool isMoving = inputDir.magnitude > 0.1f;
-
-        if (isMoving)
-        {
-            if (Input.GetKey(KeyCode.LeftShift)) // lari
-            {
-                if (!sprintSound.isPlaying)
-                {
-                    footstepsSound.Stop();
-                    sprintSound.Play();
-                }
-            }
-            else // jalan
-            {
-                if (!footstepsSound.isPlaying)
-                {
-                    sprintSound.Stop();
-                    footstepsSound.Play();
-                }
-            }
-        }
-        else
-        {
-            // berhenti -> matikan semua suara
-            footstepsSound.Stop();
-            sprintSound.Stop();
-        }
-    }
-
 }

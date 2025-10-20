@@ -7,9 +7,9 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textComponent;
     public string[] lines;
     public float textSpeed = 0.05f;
-    public CutsceneController cutsceneController; // 🔹 referensi ke cutscene
 
     private int index;
+    private bool isDialogueActive = false;
     private Coroutine typingCoroutine;
     private bool isTyping = false;
 
@@ -19,6 +19,15 @@ public class Dialogue : MonoBehaviour
         textComponent.text = string.Empty;
         gameObject.SetActive(true);
         StartTyping();
+        isDialogueActive = true;
+    }
+
+    void Update()
+    {
+        if (isDialogueActive && Input.GetMouseButtonDown(0))
+        {
+            HandleInput();
+        }
     }
 
     void StartTyping()
@@ -63,13 +72,14 @@ public class Dialogue : MonoBehaviour
             else
             {
                 gameObject.SetActive(false);
-
-                // 🔹 Panggil cutscene setelah dialog terakhir selesai
-                if (cutsceneController != null)
-                    cutsceneController.TriggerCutscene();
-
+                isDialogueActive = false;
                 return false;
             }
         }
+    }
+
+    public bool IsActive()
+    {
+        return isDialogueActive;
     }
 }
