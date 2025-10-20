@@ -1,33 +1,30 @@
 ﻿using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
-    public string[] lines;
+    public string[] stage1Lines;
+    public string[] stage2Lines;
     public float textSpeed = 0.05f;
 
     private int index;
-    private bool isDialogueActive = false;
-    private Coroutine typingCoroutine;
     private bool isTyping = false;
+    private Coroutine typingCoroutine;
+    private bool inStage2 = false;
+    private bool justSkipped = false; // Anti dobel skip
+
+    public UnityEvent OnStage1Finished; // Event kamera pindah ke Bu Inah
 
     public void StartDialogue()
     {
         index = 0;
+        inStage2 = false;
         textComponent.text = string.Empty;
         gameObject.SetActive(true);
         StartTyping();
-        isDialogueActive = true;
-    }
-
-    void Update()
-    {
-        if (isDialogueActive && Input.GetMouseButtonDown(0))
-        {
-            HandleInput();
-        }
     }
 
     void StartTyping()
@@ -43,7 +40,9 @@ public class Dialogue : MonoBehaviour
         isTyping = true;
         textComponent.text = "";
 
-        foreach (char c in lines[index].ToCharArray())
+        string[] currentLines = inStage2 ? stage2Lines : stage1Lines;
+
+        foreach (char c in currentLines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
@@ -54,16 +53,23 @@ public class Dialogue : MonoBehaviour
 
     public bool HandleInput()
     {
-        if (isTyping)
+        string[] currentLines = inStage2 ? stage2Lines : stage1Lines;
+
+        if (isTyping) // Masih ngetik → langsung tampilkan full baris
         {
             StopCoroutine(typingCoroutine);
-            textComponent.text = lines[index];
+            textComponent.text = currentLines[index];
             isTyping = false;
+
+            justSkipped = true;
+            StartCoroutine(ResetSkipFlag());
             return true;
         }
-        else
+        else // Sudah selesai → baru lanjut baris berikutnya
         {
-            if (index < lines.Length - 1)
+            if (justSkipped) return true; // Jangan langsung loncat 2x
+
+            if (index < currentLines.Length - 1)
             {
                 index++;
                 StartTyping();
@@ -71,15 +77,26 @@ public class Dialogue : MonoBehaviour
             }
             else
             {
-                gameObject.SetActive(false);
-                isDialogueActive = false;
-                return false;
+                if (!inStage2) // Pindah ke stage 2
+                {
+                    inStage2 = true;
+                    index = 0;
+                    OnStage1Finished?.Invoke(); // Trigger kamera
+                    StartTyping();
+                    return true;
+                }
+                else // Stage 2 selesai
+                {
+                    gameObject.SetActive(false);
+                    return false;
+                }
             }
         }
     }
 
-    public bool IsActive()
+    IEnumerator ResetSkipFlag()
     {
-        return isDialogueActive;
+        yield return new WaitForSeconds(0.1f);
+        justSkipped = false;
     }
 }

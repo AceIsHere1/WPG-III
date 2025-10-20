@@ -1080,17 +1080,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1180191840}
-  lines:
+  stage1Lines:
   - "Minto (monolog): \u201CHaduh gini amat baru lulus kuliah.\u201D  "
   - "Minto(Monolog):\u201CBelum dapet kerjaan apa-apa, mana lowongan yang ada ngaco
     terus lagi. Mana 19 juta lapangan pekerjaannya?\u201D "
   - "Minto(Monolog):\u201CKerja apa saja dah yang penting halal dan gak di Kamboja.\u201D "
-  - "Minto: \u201CLho bu Inah?! Baik bu alhamdulillah, bu Inah sendiri gimana?\u201D\r\n"
-  - "Minto: \u201CMinta tolong apa bu?\u201D\r\n"
+  stage2Lines:
+  - "Bu Inah: \u201CHalo Minto, piye kabare le?\u201D "
+  - "Minto: \u201CLho bu Inah?! Baik bu alhamdulillah, bu Inah sendiri gimana?\u201D "
+  - "Bu Inah: \u201CAlhamdulillah ibu apik le.\u201D "
+  - "Bu Inah: \u201CNgomong-ngomong le, ibu boleh minta tolong kamu gak?\u201D "
+  - "Minto: \u201CMinta tolong apa bu?\u201D "
+  - "Bu Inah: \u201CIbu kan ada warung, kamu bisa bantu jagain gak?\u201D "
+  - "Bu Inah: \u201CToh kamu lagi nganggur, lumayan buat penghasilan sementara.\u201D "
   - "Minto (dalam hati): \u201CAh lumayan sih ini, sekalian nunggu kalau ada loker
-    yang pas.\u201D\r\n"
-  - "Minto: \u201CBoleh sih bu.\u201D\r\n"
+    yang pas.\u201D "
+  - "Minto: \u201CBoleh sih bu.\u201D "
+  - "Bu Inah: \u201CSip kalau begitu, besok malem dateng ke warung ya.\u201D "
   textSpeed: 0.3
+  OnStage1Finished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1047524568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1617,8 +1627,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8c6007a55cce1a469c8295f2f8735a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueScript: {fileID: 0}
-  dialoguePanel: {fileID: 0}
+  dialogueScript: {fileID: 1014562482}
+  dialoguePanel: {fileID: 1014562478}
 --- !u!4 &1368466965
 Transform:
   m_ObjectHideFlags: 0
