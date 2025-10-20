@@ -7,6 +7,7 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textComponent;
     public string[] lines;
     public float textSpeed = 0.05f;
+    public CutsceneController cutsceneController; // 🔹 referensi ke cutscene
 
     private int index;
     private Coroutine typingCoroutine;
@@ -46,25 +47,28 @@ public class Dialogue : MonoBehaviour
     {
         if (isTyping)
         {
-            // Skip → langsung tampil semua teks
             StopCoroutine(typingCoroutine);
             textComponent.text = lines[index];
             isTyping = false;
-            return true; // masih di baris yang sama
+            return true;
         }
         else
         {
-            // Sudah full → cek apakah masih ada line berikutnya
             if (index < lines.Length - 1)
             {
                 index++;
                 StartTyping();
-                return true; // masih ada lanjut
+                return true;
             }
             else
             {
-                gameObject.SetActive(false); // habis → sembunyikan
-                return false; // sudah selesai
+                gameObject.SetActive(false);
+
+                // 🔹 Panggil cutscene setelah dialog terakhir selesai
+                if (cutsceneController != null)
+                    cutsceneController.TriggerCutscene();
+
+                return false;
             }
         }
     }
