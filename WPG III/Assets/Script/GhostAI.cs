@@ -20,15 +20,24 @@ public class GhostAI : MonoBehaviour
 
     private NavMeshAgent agent;
     private bool isChasing = false;
+    private Animator animator;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
 
         if (patrolPoints.Length > 0)
         {
             agent.speed = patrolSpeed;
             agent.SetDestination(patrolPoints[currentPoint].position);
+        }
+
+        // set animasi awal ke patrol
+        if (animator != null)
+        {
+            animator.SetBool("isChasing", false);
+            animator.SetBool("isPatrolling", true);
         }
 
         // pastikan musik dalam keadaan off di awal
@@ -47,6 +56,7 @@ public class GhostAI : MonoBehaviour
             {
                 isChasing = true;
                 StartChaseMusic(); // mulai musik kejar
+                UpdateAnimationState(true);
             }
         }
         else if (distanceToPlayer > detectionRadius * 1.5f)
@@ -55,6 +65,7 @@ public class GhostAI : MonoBehaviour
             {
                 isChasing = false;
                 StopChaseMusic(); // berhenti musik kejar
+                UpdateAnimationState(false);
             }
         }
 
@@ -106,6 +117,14 @@ public class GhostAI : MonoBehaviour
     {
         if (chaseMusic != null && chaseMusic.isPlaying)
             chaseMusic.Stop();
+    }
+
+    void UpdateAnimationState(bool chasing)
+    {
+        if (animator == null) return;
+
+        animator.SetBool("isChasing", chasing);
+        animator.SetBool("isPatrolling", !chasing);
     }
 
     void OnDestroy()

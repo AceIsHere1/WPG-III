@@ -6085,7 +6085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9debf8e46a61aff4ea59418b77d9a3d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghostPrefab: {fileID: 1777204675916982337, guid: 89ba4afae664666438af5f5294e4dedc,
+  ghostPrefab: {fileID: 8834100631291033367, guid: 040f4322b81ecac44898a80169ad0b27,
     type: 3}
   spawnPoints:
   - {fileID: 415357310}
