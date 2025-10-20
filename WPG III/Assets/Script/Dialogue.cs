@@ -2,6 +2,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement; // <-- WAJIB buat pindah scene
 
 public class Dialogue : MonoBehaviour
 {
@@ -55,7 +56,7 @@ public class Dialogue : MonoBehaviour
     {
         string[] currentLines = inStage2 ? stage2Lines : stage1Lines;
 
-        if (isTyping) // Masih ngetik → langsung tampilkan full baris
+        if (isTyping)
         {
             StopCoroutine(typingCoroutine);
             textComponent.text = currentLines[index];
@@ -65,9 +66,9 @@ public class Dialogue : MonoBehaviour
             StartCoroutine(ResetSkipFlag());
             return true;
         }
-        else // Sudah selesai → baru lanjut baris berikutnya
+        else
         {
-            if (justSkipped) return true; // Jangan langsung loncat 2x
+            if (justSkipped) return true;
 
             if (index < currentLines.Length - 1)
             {
@@ -87,7 +88,8 @@ public class Dialogue : MonoBehaviour
                 }
                 else // Stage 2 selesai
                 {
-                    gameObject.SetActive(false);
+                    Debug.Log("Dialog selesai, pindah Scene...");
+                    SceneManager.LoadScene("TutorialScene"); // <---- GANTI SCENE DI SINI
                     return false;
                 }
             }
