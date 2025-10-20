@@ -10124,8 +10124,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcPrefabs:
-  - {fileID: 338034657513564553, guid: 4706e631303194c4d969bbd4c0f9c126, type: 3}
+  - {fileID: 4872894673620850338, guid: ae5f1a345d7470842abe2360e6ec8e8e, type: 3}
   - {fileID: 8366866478151336794, guid: a32a44c1ce055314ea32ac7ef3ec1208, type: 3}
+  - {fileID: 338034657513564553, guid: 4706e631303194c4d969bbd4c0f9c126, type: 3}
   spawnPoints:
   - {fileID: 2010662526}
   - {fileID: 214942152}
