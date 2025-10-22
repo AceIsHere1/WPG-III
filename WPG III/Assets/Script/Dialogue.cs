@@ -89,7 +89,7 @@ public class Dialogue : MonoBehaviour
                 else // Stage 2 selesai
                 {
                     Debug.Log("Dialog selesai, pindah Scene...");
-                    SceneManager.LoadScene("GameScene"); // <---- GANTI SCENE DI SINI
+                    SceneManager.LoadScene("TutorialScene"); // <---- GANTI SCENE DI SINI
                     return false;
                 }
             }
