@@ -70,15 +70,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d903c92a47d0f5f4a8b17366f4f59e09,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5113987838007840837}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d903c92a47d0f5f4a8b17366f4f59e09,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8236253846768478074}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d903c92a47d0f5f4a8b17366f4f59e09,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8262108117861163943}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d903c92a47d0f5f4a8b17366f4f59e09,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2710343050362371263}
   m_SourcePrefab: {fileID: 100100000, guid: d903c92a47d0f5f4a8b17366f4f59e09, type: 3}
 --- !u!1 &9125044570310546377 stripped
 GameObject:
@@ -86,24 +86,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8242645466110144152}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5113987838007840837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9125044570310546377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b39e04c7d4b27643b4b4d93cc6e770c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
-  pickupRange: 12
-  holdDistance: 2
-  smoothSpeed: 10
-  trashTag: Trash
-  trashRange: 2
 --- !u!65 &8236253846768478074
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -152,3 +134,21 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2710343050362371263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9125044570310546377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06032826776c94448f194b685dd6d4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
+  pickupRange: 5
+  holdDistance: 2
+  smoothSpeed: 10
+  trashTag: Trash
+  trashRange: 2

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NpcOrder : MonoBehaviour
+public class BuInahOrder : MonoBehaviour
 {
     [Header("Order Settings")]
     public string requiredTag = "CookedNoodle";   // tag mangkok mie jadi
@@ -10,14 +10,10 @@ public class NpcOrder : MonoBehaviour
     public float giveDistance = 2f;               // jarak player bisa kasih mie
 
     [Header("References")]
-    private MoveNPC moveNPC;
     private bool hasReceived = false;
 
     void Start()
     {
-        moveNPC = GetComponent<MoveNPC>();
-        if (moveNPC == null) Debug.LogError("MoveNPC tidak ditemukan di NPC!");
-
         // Ambil order point dari manager di scene
         if (DestinationManager.Instance != null)
         {
@@ -70,9 +66,10 @@ public class NpcOrder : MonoBehaviour
 
         Debug.Log("NPC menerima mie jadi!");
 
+        // Panggil TutorialManager jika masih di tahap tutorial
+        FindObjectOfType<TutorialManager>()?.OnPlayerAction("mie_diserahkan");
 
         // lanjutkan perjalanan NPC
         hasReceived = true;
-        moveNPC.StartReturning();
     }
 }

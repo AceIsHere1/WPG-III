@@ -2237,8 +2237,8 @@ GameObject:
   - component: {fileID: 2926521720954745117}
   - component: {fileID: 5111177647234765944}
   - component: {fileID: 3439224558446045296}
-  - component: {fileID: 3333251370321210450}
   - component: {fileID: 8678997504187441961}
+  - component: {fileID: 8935345623269080424}
   m_Layer: 0
   m_Name: SETAN RIGGED REVISI fix
   m_TagString: Untagged
@@ -2306,29 +2306,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3333251370321210450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8834100631291033367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70a9ea73c1fa4ee4dbc6a95d7a9a20a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  patrolPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  patrolSpeed: 9
-  player: {fileID: 0}
-  chaseSpeed: 11
-  detectionRadius: 10
-  catchDistance: 2
-  chaseMusic: {fileID: 8678997504187441961}
 --- !u!82 &8678997504187441961
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2425,6 +2402,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8935345623269080424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8834100631291033367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91cea07dff60c8f41884f940a6eaa7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  patrolSpeed: 9
+  player: {fileID: 0}
+  chaseSpeed: 11
+  detectionRadius: 10
+  catchDistance: 2
+  chaseMusic: {fileID: 8678997504187441961}
 --- !u!1 &9035340170450759459
 GameObject:
   m_ObjectHideFlags: 0
