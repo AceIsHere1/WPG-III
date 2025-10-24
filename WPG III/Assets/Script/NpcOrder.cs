@@ -73,6 +73,7 @@ public class NpcOrder : MonoBehaviour
 
         // lanjutkan perjalanan NPC
         hasReceived = true;
+        GameEvents.RaiseNpcServed();
         moveNPC.StartReturning();
     }
 }

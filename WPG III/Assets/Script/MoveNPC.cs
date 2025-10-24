@@ -72,7 +72,6 @@ public class MoveNPC : MonoBehaviour
                     NPCEvents.RaiseNpcDestroyed();
 
                     Destroy(gameObject);
-                    GameEvents.RaiseNpcServed();
                 }
             }
         }
