@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: d903c92a47d0f5f4a8b17366f4f59e09,
         type: 3}
       propertyPath: m_Name
-      value: sesajen revisi
+      value: SAJEN TUTOR
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -149,6 +149,6 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   pickupRange: 5
   holdDistance: 2
-  smoothSpeed: 10
+  smoothSpeed: 50
   trashTag: Trash
   trashRange: 2

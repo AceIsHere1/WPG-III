@@ -149,6 +149,6 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   pickupRange: 5
   holdDistance: 2
-  smoothSpeed: 10
+  smoothSpeed: 50
   trashTag: Trash
   trashRange: 2

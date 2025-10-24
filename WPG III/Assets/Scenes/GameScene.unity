@@ -2475,8 +2475,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Trash
       objectReference: {fileID: 0}
+    - target: {fileID: 7071182760956848314, guid: f59eb55fec58ab048803e781c2df0080,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9e9cf5818e77b934db8a15994e753a9c, type: 2}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -7029948723529949830, guid: f59eb55fec58ab048803e781c2df0080, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f59eb55fec58ab048803e781c2df0080,
@@ -5716,7 +5722,7 @@ MonoBehaviour:
   - {fileID: 1091663818}
   - {fileID: 122786337}
   - {fileID: 1139158364}
-  sesajenSpawner: {fileID: 1733966419}
+  sesajenSpawner: {fileID: 1733966421}
   npcSpawner: {fileID: 1787608319}
   patrolPoints:
   - {fileID: 415357310}
@@ -9282,7 +9288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1733966420}
-  - component: {fileID: 1733966419}
+  - component: {fileID: 1733966421}
   m_Layer: 0
   m_Name: SesajenSpawner
   m_TagString: Untagged
@@ -9290,26 +9296,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1733966419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733966418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f053d3b524c88b4fb852a86463a08cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sesajenPrefab: {fileID: 9125044570310546377, guid: 1a5154c631bd12246a1d00fdb5732b81,
-    type: 3}
-  spawnPoints:
-  - {fileID: 813676761}
-  - {fileID: 1162605804}
-  - {fileID: 1937098878}
-  - {fileID: 496066891}
-  - {fileID: 447610272}
 --- !u!4 &1733966420
 Transform:
   m_ObjectHideFlags: 0
@@ -9330,6 +9316,26 @@ Transform:
   - {fileID: 447610272}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1733966421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733966418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8541ce87fa8d6b440bbd151ee9056212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sesajenPrefab: {fileID: 9125044570310546377, guid: 1a5154c631bd12246a1d00fdb5732b81,
+    type: 3}
+  spawnPoints:
+  - {fileID: 813676761}
+  - {fileID: 1162605804}
+  - {fileID: 1937098878}
+  - {fileID: 496066891}
+  - {fileID: 447610272}
 --- !u!1001 &1735943409
 PrefabInstance:
   m_ObjectHideFlags: 0

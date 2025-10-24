@@ -7,7 +7,7 @@ public class GhostSpawner : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
 
     [Header("References")]
-    [SerializeField] private SesajenSpawner sesajenSpawner;
+    [SerializeField] private SajenSpawnerGame sesajenSpawner;
     [SerializeField] private NPCSpawner npcSpawner;
     [SerializeField] private Transform[] patrolPoints;
     [SerializeField] private Transform player;
