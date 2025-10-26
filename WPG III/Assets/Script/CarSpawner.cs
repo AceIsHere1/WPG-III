@@ -3,25 +3,38 @@ using UnityEngine;
 public class CarSpawner : MonoBehaviour
 {
     public GameObject[] carPrefabs; // daftar prefab mobil
-    public Transform leftSpawnPoint;
-    public Transform rightSpawnPoint;
+    public Transform[] spawnPoints; // titik-titik spawn
+    public float spawnInterval = 30f; // jeda antar spawn
+    public float startDelay = 30f; // delay pertama kali sebelum spawn
 
-    public float spawnInterval = 30f;
-
-    private void Start()
+    void Start()
     {
-        InvokeRepeating(nameof(SpawnCar), 0f, spawnInterval);
+        // Jalankan spawn mobil berulang, tapi mulai setelah delay pertama
+        InvokeRepeating(nameof(SpawnCar), startDelay, spawnInterval);
     }
 
     void SpawnCar()
     {
-        bool spawnFromLeft = Random.value > 0.5f; // true = kiri, false = kanan
-        Transform spawnPoint = spawnFromLeft ? leftSpawnPoint : rightSpawnPoint;
+        if (carPrefabs.Length == 0 || spawnPoints.Length == 0)
+            return;
 
-        int randomIndex = Random.Range(0, carPrefabs.Length);
-        GameObject car = Instantiate(carPrefabs[randomIndex], spawnPoint.position, spawnPoint.rotation);
+        // Pilih prefab dan spawn point random
+        GameObject prefab = carPrefabs[Random.Range(0, carPrefabs.Length)];
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        CarMovement move = car.GetComponent<CarMovement>();
-        move.moveRight = spawnFromLeft; // kalau dari kiri, maju ke kanan
+        // Spawn mobil
+        GameObject car = Instantiate(prefab, spawnPoint.position, Quaternion.identity);
+        CarMovement movement = car.GetComponent<CarMovement>();
+
+        // Tentukan arah berdasarkan nama spawn point
+        // Misalnya spawn point kanan diberi nama "RightSpawn" dan kiri "LeftSpawn"
+        if (spawnPoint.name.ToLower().Contains("right"))
+        {
+            movement.moveRight = false; // dari kanan ke kiri
+        }
+        else if (spawnPoint.name.ToLower().Contains("left"))
+        {
+            movement.moveRight = true; // dari kiri ke kanan
+        }
     }
 }

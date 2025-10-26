@@ -6297,9 +6297,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPrefabs:
   - {fileID: 512608243840047602, guid: dafb80c25f664a24baf12afdc63f546d, type: 3}
-  leftSpawnPoint: {fileID: 1026139392}
-  rightSpawnPoint: {fileID: 1861921640}
+  spawnPoints:
+  - {fileID: 1026139392}
+  - {fileID: 1861921640}
   spawnInterval: 30
+  startDelay: 30
 --- !u!4 &1058456620
 Transform:
   m_ObjectHideFlags: 0
