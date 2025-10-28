@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CarMovement : MonoBehaviour
 {
     public float speed = 5f;
     public bool moveRight = true;
-    public float despawnDistance = 60f; // jarak dari posisi awal di mana mobil akan hilang
+    public float despawnDistance = 100f; // jarak dari posisi awal di mana mobil akan hilang
 
     private Vector3 startPos;
 
@@ -29,5 +30,15 @@ public class CarMovement : MonoBehaviour
         // Hapus mobil kalau sudah terlalu jauh
         if (distanceTravelled > despawnDistance)
             Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // Jika mobil menabrak objek dengan tag "Player"
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Player tertabrak mobil! Game Over!");
+            SceneManager.LoadScene("GameOverCrash");
+        }
     }
 }
