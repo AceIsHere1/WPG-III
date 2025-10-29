@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 3219878720651910612}
   m_Layer: 0
   m_Name: NPC 2 RIGGED new
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

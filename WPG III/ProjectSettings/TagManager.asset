@@ -13,6 +13,7 @@ TagManager:
   - Trash
   - Ghost
   - Sesajen
+  - NPC
   layers:
   - Default
   - TransparentFX

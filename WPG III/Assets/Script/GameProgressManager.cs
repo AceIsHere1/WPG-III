@@ -8,6 +8,7 @@ public class GameProgressManager : MonoBehaviour
     [SerializeField] private int npcToWin = 10; // target NPC yang harus dilayani
 
     private int servedNpcCount = 0;
+    private int exitedNpcCount = 0; // hitung NPC yang sudah keluar / destroy
     private bool gameWon = false;
 
     public int ServedNpcCount => servedNpcCount;
@@ -24,11 +25,13 @@ public class GameProgressManager : MonoBehaviour
     private void OnEnable()
     {
         GameEvents.OnNpcServed += HandleNpcServed; // dengarkan event “NPC sudah dilayani”
+        GameEvents.OnNpcExited += HandleNpcExited; // dengarkan event baru
     }
 
     private void OnDisable()
     {
         GameEvents.OnNpcServed -= HandleNpcServed;
+        GameEvents.OnNpcExited -= HandleNpcExited;
     }
 
     private void HandleNpcServed()
@@ -37,8 +40,17 @@ public class GameProgressManager : MonoBehaviour
 
         servedNpcCount++;
         Debug.Log($"NPC ke-{servedNpcCount} sudah dilayani.");
+    }
 
-        if (servedNpcCount >= npcToWin)
+    private void HandleNpcExited()
+    {
+        if (gameWon) return;
+
+        exitedNpcCount++;
+        Debug.Log($"NPC ke-{exitedNpcCount} sudah kembali ke tujuan.");
+
+        // Pastikan semua NPC sudah dilayani dan sudah keluar
+        if (servedNpcCount >= npcToWin && exitedNpcCount >= npcToWin)
         {
             HandleGameWin();
         }

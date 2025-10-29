@@ -7,11 +7,15 @@ public class NPCSpawner : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;    // beberapa titik spawn
     [SerializeField] private float spawnDelay = 2f;      // jeda sebelum NPC baru muncul
 
+    [Header("References")]
+    [SerializeField] private GhostSpawner ghostSpawner;  // referensi ke GhostSpawner
+
     private GameObject currentNPC;                       // referensi NPC yang sedang aktif
     private bool hasSpawnedInitial = false;
 
     private int currentNpcIndex = 0;                     // urutan prefab NPC
     private int currentSpawnPointIndex = 0;              // urutan titik spawn
+    public bool CanSpawn { get; set; } = true;
 
     private void OnEnable()
     {
@@ -33,11 +37,26 @@ public class NPCSpawner : MonoBehaviour
     private void HandleNpcDestroyed()
     {
         currentNPC = null;
+
+        // Cek dulu apakah hantu sedang aktif
+        if (ghostSpawner != null && ghostSpawner.IsGhostActive)
+        {
+            Debug.Log("Hantu sedang aktif — tunda spawn NPC sampai hantu hilang.");
+            return;
+        }
+
         Invoke(nameof(SpawnNPC), spawnDelay);
     }
 
     public void SpawnNPC()
     {
+        // Cegah spawn kalau hantu sedang aktif
+        if (ghostSpawner != null && ghostSpawner.IsGhostActive)
+        {
+            Debug.Log("Hantu masih aktif — tidak bisa spawn NPC baru.");
+            return;
+        }
+
         if (currentNPC != null)
         {
             Debug.Log("Masih ada NPC aktif, skip spawn baru.");
@@ -50,17 +69,16 @@ public class NPCSpawner : MonoBehaviour
             return;
         }
 
-        // Pilih NPC berdasarkan urutan
+        // Pilih NPC dan titik spawn berdasarkan urutan (bisa kamu ubah ke random kalau mau)
         int npcIndex = currentNpcIndex;
-        currentNpcIndex = (currentNpcIndex + 1) % npcPrefabs.Length; // berputar ke awal lagi
+        currentNpcIndex = (currentNpcIndex + 1) % npcPrefabs.Length;
 
-        // Pilih spawn point berdasarkan urutan juga
         int pointIndex = currentSpawnPointIndex;
         currentSpawnPointIndex = (currentSpawnPointIndex + 1) % spawnPoints.Length;
 
         Transform chosenPoint = spawnPoints[pointIndex];
 
-        // Spawn NPC baru dan simpan referensinya
+        // Spawn NPC baru
         currentNPC = Instantiate(npcPrefabs[npcIndex], chosenPoint.position, chosenPoint.rotation);
         Debug.Log($"Spawn NPC {npcIndex + 1} di titik {pointIndex + 1} ({chosenPoint.name})");
     }
