@@ -6623,6 +6623,74 @@ PrefabInstance:
       addedObject: {fileID: 2094011991}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcc6ba484b6857e44b3d921030c1b56f, type: 3}
+--- !u!1 &952013060
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 952013062}
+  - component: {fileID: 952013061}
+  m_Layer: 0
+  m_Name: JumpscareVideo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!328 &952013061
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952013060}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: 2dc9dbecbdb96e543a64644e424e11b3, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 330585545}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 1
+  m_AspectRatio: 2
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
+  m_Url: 
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
+  m_PlayOnAwake: 0
+  m_SkipOnDrop: 1
+  m_Looping: 0
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
+--- !u!4 &952013062
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952013060}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.131672, y: 0.63762033, z: 4.202324}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &965130906
 GameObject:
   m_ObjectHideFlags: 0
@@ -6667,7 +6735,7 @@ MonoBehaviour:
   - {fileID: 122786337}
   - {fileID: 1139158364}
   player: {fileID: 1988584692}
-  ghostSpawnChance: 0.5
+  ghostSpawnChance: 1
 --- !u!4 &965130908
 Transform:
   m_ObjectHideFlags: 0
@@ -15134,3 +15202,4 @@ SceneRoots:
   - {fileID: 1412566700}
   - {fileID: 276294174}
   - {fileID: 912614530}
+  - {fileID: 952013062}

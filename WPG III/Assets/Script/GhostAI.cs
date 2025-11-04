@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class GhostAI : MonoBehaviour
 {
@@ -19,23 +20,22 @@ public class GhostAI : MonoBehaviour
     public AudioSource chaseMusic; // drag AudioSource di inspector (berisi chase music)
 
     [Header("Jumpscare Settings")]
-    public JumpscareManager jumpscareManager; // ✅ langsung tipe komponen, bukan GameObject
+    public VideoPlayer jumpscareVideo; // drag komponen VideoPlayer ke sini
+    public string gameOverSceneName = "GameOverScene";
+    private bool hasPlayedJumpscare = false;
 
     private NavMeshAgent agent;
     private bool isChasing = false;
     private Animator animator;
-    private bool hasCaughtPlayer = false;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
-        // kalau belum diassign manual di inspector, cari otomatis
-        if (jumpscareManager == null)
-        {
-            jumpscareManager = FindObjectOfType<JumpscareManager>();
-        }
+        // cari video jumpscare di scene kalau belum diset dari inspector
+        if (jumpscareVideo == null)
+            jumpscareVideo = GameObject.Find("JumpscareVideo")?.GetComponent<VideoPlayer>();
 
         if (patrolPoints.Length > 0)
         {
@@ -57,8 +57,6 @@ public class GhostAI : MonoBehaviour
 
     void Update()
     {
-        if (hasCaughtPlayer) return; // hentikan logic jika sudah tertangkap
-
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
         // deteksi player
@@ -89,10 +87,10 @@ public class GhostAI : MonoBehaviour
 
             if (distanceToPlayer <= catchDistance)
             {
-                hasCaughtPlayer = true;
-                TriggerJumpscare(); // 🔥 panggil jumpscare
+                GameOver();
             }
         }
+
         // mode patroli
         else
         {
@@ -113,27 +111,42 @@ public class GhostAI : MonoBehaviour
         agent.SetDestination(patrolPoints[currentPoint].position);
     }
 
-    void TriggerJumpscare()
+    void GameOver()
     {
+        if (hasPlayedJumpscare) return; // biar tidak ter-trigger berkali kali
+        hasPlayedJumpscare = true;
+
         Debug.Log("Player tertangkap! Memulai jumpscare...");
 
-        // berhenti gerak & musik
+        // Hentikan pergerakan ghost dan audio chase
         agent.isStopped = true;
         StopChaseMusic();
-        UpdateAnimationState(false);
 
-        if (jumpscareManager != null)
+        // Nonaktifkan kontrol player (kalau punya script kontrol)
+        if (player.GetComponent<CharacterController>() != null)
+            player.GetComponent<CharacterController>().enabled = false;
+        if (player.GetComponent<PlayerController>() != null)
+            player.GetComponent<PlayerController>().enabled = false;
+
+        // Tampilkan video jumpscare
+        if (jumpscareVideo != null)
         {
-            jumpscareManager.PlayJumpscare(() =>
-            {
-                SceneManager.LoadScene("GameOverScene");
-            });
+            jumpscareVideo.gameObject.SetActive(true);
+            jumpscareVideo.Play();
+
+            // Setelah video selesai, panggil fungsi pindah scene
+            jumpscareVideo.loopPointReached += OnJumpscareFinished;
         }
         else
         {
-            // fallback jika tidak ada JumpscareManager
-            SceneManager.LoadScene("GameOverScene");
+            // kalau tidak ada video, langsung ke GameOverScene
+            SceneManager.LoadScene(gameOverSceneName);
         }
+    }
+
+    void OnJumpscareFinished(VideoPlayer vp)
+    {
+        SceneManager.LoadScene(gameOverSceneName);
     }
 
     void StartChaseMusic()

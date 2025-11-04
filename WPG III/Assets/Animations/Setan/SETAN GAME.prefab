@@ -2419,10 +2419,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  patrolSpeed: 9
+  patrolSpeed: 10
   player: {fileID: 0}
   chaseSpeed: 11
-  detectionRadius: 10
+  detectionRadius: 12
   catchDistance: 2
   chaseMusic: {fileID: 8678997504187441961}
 --- !u!1 &9035340170450759459
