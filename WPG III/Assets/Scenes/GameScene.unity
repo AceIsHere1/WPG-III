@@ -6735,7 +6735,7 @@ MonoBehaviour:
   - {fileID: 122786337}
   - {fileID: 1139158364}
   player: {fileID: 1988584692}
-  ghostSpawnChance: 1
+  ghostSpawnChance: 0.5
 --- !u!4 &965130908
 Transform:
   m_ObjectHideFlags: 0
