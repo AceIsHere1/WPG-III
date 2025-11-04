@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
@@ -18,14 +18,24 @@ public class GhostAI : MonoBehaviour
     [Header("Audio Settings")]
     public AudioSource chaseMusic; // drag AudioSource di inspector (berisi chase music)
 
+    [Header("Jumpscare Settings")]
+    public JumpscareManager jumpscareManager; // ✅ langsung tipe komponen, bukan GameObject
+
     private NavMeshAgent agent;
     private bool isChasing = false;
     private Animator animator;
+    private bool hasCaughtPlayer = false;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        // kalau belum diassign manual di inspector, cari otomatis
+        if (jumpscareManager == null)
+        {
+            jumpscareManager = FindObjectOfType<JumpscareManager>();
+        }
 
         if (patrolPoints.Length > 0)
         {
@@ -47,6 +57,8 @@ public class GhostAI : MonoBehaviour
 
     void Update()
     {
+        if (hasCaughtPlayer) return; // hentikan logic jika sudah tertangkap
+
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
         // deteksi player
@@ -77,10 +89,10 @@ public class GhostAI : MonoBehaviour
 
             if (distanceToPlayer <= catchDistance)
             {
-                GameOver();
+                hasCaughtPlayer = true;
+                TriggerJumpscare(); // 🔥 panggil jumpscare
             }
         }
-
         // mode patroli
         else
         {
@@ -101,10 +113,27 @@ public class GhostAI : MonoBehaviour
         agent.SetDestination(patrolPoints[currentPoint].position);
     }
 
-    void GameOver()
+    void TriggerJumpscare()
     {
-        Debug.Log("Player tertangkap! Game Over!");
-        SceneManager.LoadScene("GameOverScene");
+        Debug.Log("Player tertangkap! Memulai jumpscare...");
+
+        // berhenti gerak & musik
+        agent.isStopped = true;
+        StopChaseMusic();
+        UpdateAnimationState(false);
+
+        if (jumpscareManager != null)
+        {
+            jumpscareManager.PlayJumpscare(() =>
+            {
+                SceneManager.LoadScene("GameOverScene");
+            });
+        }
+        else
+        {
+            // fallback jika tidak ada JumpscareManager
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
 
     void StartChaseMusic()
