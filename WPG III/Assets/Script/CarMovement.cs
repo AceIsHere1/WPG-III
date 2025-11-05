@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CarMovement : MonoBehaviour
@@ -8,21 +8,29 @@ public class CarMovement : MonoBehaviour
     public float despawnDistance = 100f; // jarak dari posisi awal di mana mobil akan hilang
 
     private Vector3 startPos;
+    private Vector3 moveDirection;
 
     void Start()
     {
         // Simpan posisi awal untuk acuan despawn
         startPos = transform.position;
 
+        // Jika prefab ini hadapnya kebalik (misal pickup hadap Z-),
+        // kamu bisa ubah arah gerak default di sini
+        // contoh: kalau model hadap ke Z-, ganti moveDirection ke Vector3.back
+        moveDirection = Vector3.forward; // default arah maju Z+
+
         // Balik arah mobil jika moveRight = false
         if (!moveRight)
+        {
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        }
     }
 
     void Update()
     {
-        // Gerak maju berdasarkan arah hadap mobil
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        // Gerak mobil berdasarkan arah hadap model
+        transform.Translate(moveDirection * speed * Time.deltaTime, Space.Self);
 
         // Hitung jarak dari posisi awal
         float distanceTravelled = Vector3.Distance(startPos, transform.position);
