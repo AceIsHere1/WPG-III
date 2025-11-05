@@ -7805,7 +7805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carPrefabs:
-  - {fileID: 512608243840047602, guid: dafb80c25f664a24baf12afdc63f546d, type: 3}
+  - {fileID: 6208559017822884078, guid: 93e5e15952c88044cb7c256d030464dd, type: 3}
   spawnPoints:
   - {fileID: 1026139392}
   - {fileID: 1861921640}
