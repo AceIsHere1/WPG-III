@@ -131,6 +131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c98cc73e4fe6d24c92fb23c1fda0e1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 40
   moveRight: 0
   despawnDistance: 100
