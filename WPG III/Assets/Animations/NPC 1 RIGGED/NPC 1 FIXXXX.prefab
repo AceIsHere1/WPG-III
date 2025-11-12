@@ -1305,6 +1305,7 @@ GameObject:
   - component: {fileID: 3532870384874943659}
   - component: {fileID: 1349823246896576568}
   - component: {fileID: 8029612651609065923}
+  - component: {fileID: -1581946791070364600}
   m_Layer: 0
   m_Name: NPC 1 FIXXXX
   m_TagString: NPC
@@ -1426,6 +1427,21 @@ MonoBehaviour:
   requiredTag: CookedNoodle
   orderPoint: {fileID: 0}
   giveDistance: 2
+--- !u!114 &-1581946791070364600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4872894673620850338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e78b203b32fc34c997792943ae4db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogUI: {fileID: 0}
+  dialogText: {fileID: 0}
+  displayTime: 2
 --- !u!1 &5037687016902837027
 GameObject:
   m_ObjectHideFlags: 0

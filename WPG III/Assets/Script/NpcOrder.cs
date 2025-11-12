@@ -8,6 +8,7 @@ public class NpcOrder : MonoBehaviour
     public string requiredTag = "CookedNoodle";   // tag mangkok mie jadi
     public Transform orderPoint;                  // tempat player kasih mie
     public float giveDistance = 2f;               // jarak player bisa kasih mie
+    private NpcDialog npcDialog;
 
     [Header("References")]
     private MoveNPC moveNPC;
@@ -16,6 +17,8 @@ public class NpcOrder : MonoBehaviour
     void Start()
     {
         moveNPC = GetComponent<MoveNPC>();
+        npcDialog = GetComponent<NpcDialog>();
+
         if (moveNPC == null) Debug.LogError("MoveNPC tidak ditemukan di NPC!");
 
         // Ambil order point dari manager di scene
@@ -70,6 +73,9 @@ public class NpcOrder : MonoBehaviour
 
         Debug.Log("NPC menerima mie jadi!");
 
+        // Tampilkan dialog terima kasih
+        if (npcDialog != null)
+            npcDialog.ShowDialog("Pelanggan: Makasih bang!");
 
         // lanjutkan perjalanan NPC
         hasReceived = true;

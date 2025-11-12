@@ -7,6 +7,7 @@ public class MoveNPC : MonoBehaviour
     [SerializeField] Transform[] destinations;  // daftar tujuan
     private NavMeshAgent navMeshAgent;
     private Animator animator;
+    private NpcDialog npcDialog;
     private int currentIndex = 0;
     private bool isReturning = false;           // apakah NPC sedang balik?
 
@@ -14,6 +15,7 @@ public class MoveNPC : MonoBehaviour
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        npcDialog = GetComponent<NpcDialog>();
 
         if (navMeshAgent == null)
         {
@@ -54,6 +56,10 @@ public class MoveNPC : MonoBehaviour
                 {
                     // sampai tujuan terakhir - berhenti (nunggu mie)
                     navMeshAgent.isStopped = true;
+
+                    // Tampilkan dialog pesanan
+                    if (npcDialog != null)
+                        npcDialog.ShowDialog("Pelanggan: Pesan mie seporsi bang!");
                 }
             }
             else
