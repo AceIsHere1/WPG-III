@@ -17,6 +17,10 @@ public class GhostSpawner : MonoBehaviour
     [SerializeField] private float ghostSpawnChance = 0.3f;
     // peluang 30% hantu muncul setiap kali NPC ter-destroy
 
+    [Header("Audio Settings")]
+    [SerializeField] private AudioClip kuntiDatangSFX;  // suara saat hantu muncul
+    [SerializeField] private AudioSource audioSource;  // tempat mainin suara
+
     private GameObject currentGhost;
     private bool ghostSpawned = false;
     public bool IsGhostActive => ghostSpawned;
@@ -101,6 +105,17 @@ public class GhostSpawner : MonoBehaviour
         }
 
         Debug.Log("Hantu muncul di titik {randomSpawn.name}");
+
+        // Mainkan suara saat hantu muncul
+        if (audioSource != null && kuntiDatangSFX != null)
+        {
+            audioSource.PlayOneShot(kuntiDatangSFX);
+            Debug.Log("Sound 'kunti datang' dimainkan!");
+        }
+        else
+        {
+            Debug.LogWarning("AudioSource atau AudioClip belum diset di GhostSpawner!");
+        }
 
         // Spawn sesajen
         if (sesajenSpawner != null)
