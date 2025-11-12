@@ -21,12 +21,16 @@ public class GameOverCrashUI : MonoBehaviour
         Cursor.visible = false;
 
         // Pindah ke scene gameplay
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(gameSceneName);
     }
 
-    public void QuitGame()
+    public void ReturnToMainMenu()
     {
-        Debug.Log("Keluar dari game...");
-        Application.Quit();
+        // Pastikan kursor terlihat saat di menu
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // Ganti dengan nama persis di Build Settings kamu
+        SceneManager.LoadScene("Main Menu Scene");
     }
 }
