@@ -860,6 +860,7 @@ GameObject:
   - component: {fileID: 4330248063866739384}
   - component: {fileID: 6687723814543370313}
   - component: {fileID: 3219878720651910612}
+  - component: {fileID: 5529032665156222377}
   m_Layer: 0
   m_Name: NPC 2 RIGGED new
   m_TagString: NPC
@@ -981,6 +982,21 @@ MonoBehaviour:
   requiredTag: CookedNoodle
   orderPoint: {fileID: 0}
   giveDistance: 2
+--- !u!114 &5529032665156222377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8366866478151336794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e78b203b32fc34c997792943ae4db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogText: {fileID: 0}
+  dialogCanvas: {fileID: 0}
+  displayTime: 2
 --- !u!1 &8468857860344730246
 GameObject:
   m_ObjectHideFlags: 0
