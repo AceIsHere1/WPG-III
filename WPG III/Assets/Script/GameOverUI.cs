@@ -20,9 +20,13 @@ public class GameOverUI : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
-    public void QuitGame()
+    public void ReturnToMainMenu()
     {
-        Debug.Log("Keluar dari game...");
-        Application.Quit();
+        // Pastikan kursor aktif lagi saat kembali ke menu
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // Pindah ke scene Main Menu (ubah namanya sesuai scene kamu)
+        SceneManager.LoadScene("Main Menu Scene");
     }
 }
