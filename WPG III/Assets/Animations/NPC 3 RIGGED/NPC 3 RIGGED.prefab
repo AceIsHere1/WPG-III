@@ -295,7 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogText: {fileID: 0}
   dialogCanvas: {fileID: 0}
-  displayTime: 2
+  displayTime: 3
 --- !u!1 &393141607895021902
 GameObject:
   m_ObjectHideFlags: 0
