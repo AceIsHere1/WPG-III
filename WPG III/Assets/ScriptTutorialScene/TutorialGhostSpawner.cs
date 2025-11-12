@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TutorialGhostSpawner : MonoBehaviour
 {
@@ -11,6 +11,9 @@ public class TutorialGhostSpawner : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private GameObject sesajen;           // Sesajen yang aktif bersamaan
     [SerializeField] private GameObject trashBin;          // Tong sampah untuk buang sesajen
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource ghostSpawnSound;  // 🔊 Suara efek hantu muncul
 
     private GameObject currentGhost;
     private bool ghostSpawned = false;
@@ -38,6 +41,16 @@ public class TutorialGhostSpawner : MonoBehaviour
         }
 
         Debug.Log("Hantu muncul di PatrolPoint_4!");
+
+        // 🔥 Mainkan suara hantu muncul
+        if (ghostSpawnSound != null)
+        {
+            ghostSpawnSound.Play();
+        }
+        else
+        {
+            Debug.LogWarning("Ghost spawn sound belum di-assign!");
+        }
 
         // Aktifkan sesajen dan tong sampah
         if (sesajen != null) sesajen.SetActive(true);
