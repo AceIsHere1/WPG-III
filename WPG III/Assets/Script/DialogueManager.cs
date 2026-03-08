@@ -15,6 +15,8 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+        if (PauseManager.isGamePaused) return;
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (!isDialogueActive)
