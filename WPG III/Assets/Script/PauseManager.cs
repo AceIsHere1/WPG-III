@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public CanvasGroup dialogueUI;
 
     public static bool isGamePaused = false;
 
@@ -12,19 +13,23 @@ public class PauseManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isGamePaused)
-            {
                 Resume();
-            }
             else
-            {
                 Pause();
-            }
         }
     }
 
     void Pause()
     {
         pauseMenu.SetActive(true);
+
+        if (dialogueUI != null)
+        {
+            dialogueUI.alpha = 0f;            // sembunyikan dialog
+            dialogueUI.interactable = false;
+            dialogueUI.blocksRaycasts = false;
+        }
+
         Time.timeScale = 0f;
         isGamePaused = true;
     }
@@ -32,6 +37,14 @@ public class PauseManager : MonoBehaviour
     public void Resume()
     {
         pauseMenu.SetActive(false);
+
+        if (dialogueUI != null)
+        {
+            dialogueUI.alpha = 1f;            // munculkan lagi dialog
+            dialogueUI.interactable = true;
+            dialogueUI.blocksRaycasts = true;
+        }
+
         Time.timeScale = 1f;
         isGamePaused = false;
     }
@@ -45,7 +58,7 @@ public class PauseManager : MonoBehaviour
     public void MainMenu()
     {
         Resume();
-        SceneManager.LoadScene("Main Menu Scene"); // disesuaikan dengan nama scene di Build Settings
+        SceneManager.LoadScene("Main Menu Scene");
     }
 
     public void QuitGame()
