@@ -7,8 +7,9 @@ public class Pickup : MonoBehaviour
     [Header("Pickup Settings")]
     public Transform playerCamera;
     public float holdDistance = 2f;
-    public float smoothSpeed = 10f;
-    public float pickupRange = 1f;
+    public float smoothSpeed = 20f; 
+    public float pickupRange = 3f; 
+    public bool useDirectMovement = true; 
 
     [Header("Internal")]
     [SerializeField] private bool pickedUp;
@@ -25,8 +26,9 @@ public class Pickup : MonoBehaviour
     public bool isNoodlePack = false;
 
     private static Pickup currentlyHeld;
-    // Offset rotasi agar tidak kebalik saat dipickup
-    private Quaternion rotationOffset;
+    private Quaternion initialRotationOffset;
+    
+    private Quaternion targetRotation;
 
     void Start()
     {
@@ -38,25 +40,58 @@ public class Pickup : MonoBehaviour
         audioSource.playOnAwake = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (pickedUp && currentlyHeld == this)
         {
             if (playerCamera != null)
             {
                 Vector3 targetPos = playerCamera.position + playerCamera.forward * holdDistance;
+                
                 if (rb != null)
                 {
-                    rb.MovePosition(Vector3.Lerp(rb.position, targetPos, Time.deltaTime * smoothSpeed));
-                    rb.MoveRotation(Quaternion.Lerp(rb.rotation, playerCamera.rotation * rotationOffset, Time.deltaTime * smoothSpeed));
+                    rb.isKinematic = true;
+                    
+                    if (useDirectMovement)
+                    {
+                        rb.MovePosition(targetPos);
+                        
+                        targetRotation = playerCamera.rotation * initialRotationOffset;
+                        rb.MoveRotation(targetRotation);
+                    }
+                    else
+                    {
+                        rb.MovePosition(Vector3.Lerp(rb.position, targetPos, Time.fixedDeltaTime * smoothSpeed));
+                        
+                        targetRotation = playerCamera.rotation * initialRotationOffset;
+                        
+                        rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * smoothSpeed));
+                    }
                 }
                 else
                 {
-                    transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime * smoothSpeed);
-                    transform.rotation = Quaternion.Lerp(transform.rotation, playerCamera.rotation, Time.deltaTime * smoothSpeed);
+                    if (useDirectMovement)
+                    {
+                        transform.position = targetPos;
+                        targetRotation = playerCamera.rotation * initialRotationOffset;
+                        transform.rotation = targetRotation;
+                    }
+                    else
+                    {
+                        transform.position = Vector3.Lerp(transform.position, targetPos, Time.fixedDeltaTime * smoothSpeed);
+                        
+                        targetRotation = playerCamera.rotation * initialRotationOffset;
+                        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * smoothSpeed);
+                    }
                 }
             }
+        }
+    }
 
+    void Update()
+    {
+        if (pickedUp && currentlyHeld == this)
+        {
             if (Input.GetMouseButtonDown(1)) Drop();
             if (isNoodlePack && Input.GetKeyDown(KeyCode.E)) UnwrapNoodle();
         }
@@ -79,15 +114,15 @@ public class Pickup : MonoBehaviour
             {
                 pickedUp = true;
                 currentlyHeld = this;
+                
                 if (rb != null)
                 {
-                    rb.useGravity = false;
                     rb.velocity = Vector3.zero;
                     rb.angularVelocity = Vector3.zero;
+                    rb.isKinematic = true;
                 }
 
-                // simpan offset rotasi (rotasi objek relatif terhadap kamera)
-                rotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
+                initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
 
                 if (pickupSound != null && audioSource != null) audioSource.PlayOneShot(pickupSound);
             }
@@ -99,7 +134,15 @@ public class Pickup : MonoBehaviour
         if (currentlyHeld != this) return;
         pickedUp = false;
         currentlyHeld = null;
-        if (rb != null) rb.useGravity = true;
+        
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        
         if (dropSound != null && audioSource != null) audioSource.PlayOneShot(dropSound);
     }
 
@@ -107,45 +150,66 @@ public class Pickup : MonoBehaviour
     {
         if (rawNoodlePrefab == null) return;
 
-        // Spawn mie kotak kuning di posisi bungkus
         GameObject noodle = Instantiate(rawNoodlePrefab, transform.position, transform.rotation);
 
-        // Otomatis pickup mie kotak kuning
         Pickup noodlePickup = noodle.GetComponent<Pickup>();
-        if (noodlePickup != null) noodlePickup.ForcePickup();
+        if (noodlePickup != null)
+        {
+            StartCoroutine(DelayedPickup(noodlePickup));
+        }
 
-        // Mainkan sound juga saat buka bungkus
         if (unwrapSound != null && audioSource != null)
             audioSource.PlayOneShot(unwrapSound);
 
-        // Hancurkan bungkus mie
-        Destroy(gameObject, unwrapSound.length);
+        Destroy(gameObject, unwrapSound != null ? unwrapSound.length : 0.1f);
     }
 
-    // PUBLIC API untuk skrip lain
+    private IEnumerator DelayedPickup(Pickup pickup)
+    {
+        yield return new WaitForFixedUpdate();
+        pickup.ForcePickup();
+    }
+
     public void ForcePickup()
     {
         if (currentlyHeld != null) currentlyHeld.ForceDrop();
+        
+        if (playerCamera == null && Camera.main != null) 
+            playerCamera = Camera.main.transform;
+        
         pickedUp = true;
         currentlyHeld = this;
+        
         if (rb != null)
         {
-            rb.useGravity = false;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+            rb.useGravity = false;
         }
 
-        // simpan offset rotasi saat force pickup juga
         if (playerCamera != null)
-            rotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
+            initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
 
         if (pickupSound != null && audioSource != null) audioSource.PlayOneShot(pickupSound);
     }
 
     public void ForceDrop()
     {
-        if (currentlyHeld == this) { pickedUp = false; currentlyHeld = null; }
-        if (rb != null) rb.useGravity = true;
+        if (currentlyHeld == this) 
+        { 
+            pickedUp = false; 
+            currentlyHeld = null; 
+        }
+        
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+        
         if (dropSound != null && audioSource != null) audioSource.PlayOneShot(dropSound);
     }
 
