@@ -20,21 +20,30 @@ public class NoodleCooking : MonoBehaviour
 
     [Header("Sound Settings")]
     public AudioClip boilingSound;
+    [Range(0f, 1f)] public float boilingSoundVolume = 1f;
+
     public AudioClip noodleReadySound;
+    [Range(0f, 1f)] public float noodleReadySoundVolume = 1f;
+
+    public UnityEngine.Audio.AudioMixerGroup mixerGroup; // ADD THIS LINE
+
     private AudioSource audioSource;
 
     void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-        if (audioSource == null)
-            audioSource = gameObject.AddComponent<AudioSource>();
+{
+    audioSource = GetComponent<AudioSource>();
+    if (audioSource == null)
+        audioSource = gameObject.AddComponent<AudioSource>();
 
-        audioSource.playOnAwake = false;
-        audioSource.loop = false;
+    audioSource.playOnAwake = false;
+    audioSource.loop = false;
+    
+    // ADD THIS LINE:
+    if (mixerGroup != null)
+        audioSource.outputAudioMixerGroup = mixerGroup;
 
-        // Set kondisi awal visual
-        SetVisualState(empty: true, boiling: false, cooked: false);
-    }
+    SetVisualState(empty: true, boiling: false, cooked: false);
+}
 
     void Update()
     {
@@ -71,31 +80,28 @@ public class NoodleCooking : MonoBehaviour
     }
 
     private IEnumerator CookNoodles()
-    {
-        if (isCooking) yield break;
-        isCooking = true;
-        isEmptyPot = false;
-        isCooked = false;
+{
+    if (isCooking) yield break;
+    isCooking = true;
+    isEmptyPot = false;
+    isCooked = false;
 
-        // Ubah visual jadi panci berisi mi saat direbus
-        SetVisualState(empty: false, boiling: true, cooked: false);
+    SetVisualState(empty: false, boiling: true, cooked: false);
 
-        // Mainkan suara rebusan
-        if (boilingSound != null)
-            audioSource.PlayOneShot(boilingSound);
+    // Mainkan suara rebusan dengan volume
+    if (boilingSound != null)
+        audioSource.PlayOneShot(boilingSound, boilingSoundVolume);
 
-        // Tunggu sampai matang
-        yield return new WaitForSeconds(cookingTime);
+    yield return new WaitForSeconds(cookingTime);
 
-        // Ganti ke visual panci matang
-        SetVisualState(empty: false, boiling: false, cooked: true);
+    SetVisualState(empty: false, boiling: false, cooked: true);
 
-        // Mainkan suara mi matang
-        if (noodleReadySound != null)
-            audioSource.PlayOneShot(noodleReadySound);
+    // Mainkan suara mi matang dengan volume
+    if (noodleReadySound != null)
+        audioSource.PlayOneShot(noodleReadySound, noodleReadySoundVolume);
 
-        isCooked = true;
-        isCooking = false;
+    isCooked = true;
+    isCooking = false;
     }
 
     private void ServeToPlayer()

@@ -20,7 +20,13 @@ public class TutorialNoodleCooking : MonoBehaviour
 
     [Header("Sound Settings")]
     public AudioClip boilingSound;
+    [Range(0f, 1f)] public float boilingSoundVolume = 1f;
+
     public AudioClip noodleReadySound;
+    [Range(0f, 1f)] public float noodleReadySoundVolume = 1f;
+
+    public UnityEngine.Audio.AudioMixerGroup mixerGroup;
+    
     private AudioSource audioSource;
 
     void Awake()
@@ -31,6 +37,10 @@ public class TutorialNoodleCooking : MonoBehaviour
 
         audioSource.playOnAwake = false;
         audioSource.loop = false;
+
+        // Assign mixer group if set
+        if (mixerGroup != null)
+            audioSource.outputAudioMixerGroup = mixerGroup;
 
         // Set kondisi awal visual
         SetVisualState(empty: true, boiling: false, cooked: false);
@@ -84,9 +94,9 @@ public class TutorialNoodleCooking : MonoBehaviour
         // Ubah visual jadi panci berisi mi saat direbus
         SetVisualState(empty: false, boiling: true, cooked: false);
 
-        // Mainkan suara rebusan
+        // Mainkan suara rebusan dengan volume
         if (boilingSound != null)
-            audioSource.PlayOneShot(boilingSound);
+            audioSource.PlayOneShot(boilingSound, boilingSoundVolume);
 
         // Tunggu sampai matang
         yield return new WaitForSeconds(cookingTime);
@@ -94,9 +104,9 @@ public class TutorialNoodleCooking : MonoBehaviour
         // Ganti ke visual panci matang
         SetVisualState(empty: false, boiling: false, cooked: true);
 
-        // Mainkan suara mi matang
+        // Mainkan suara mi matang dengan volume
         if (noodleReadySound != null)
-            audioSource.PlayOneShot(noodleReadySound);
+            audioSource.PlayOneShot(noodleReadySound, noodleReadySoundVolume);
 
         // Beri tahu TutorialManager kalau mie sudah matang
         FindObjectOfType<TutorialManager>()?.OnPlayerAction("mie_matang");

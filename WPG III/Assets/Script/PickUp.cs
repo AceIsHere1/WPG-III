@@ -6,9 +6,9 @@ public class Pickup : MonoBehaviour
 {
     [Header("Pickup Settings")]
     public Transform playerCamera;
-    public float holdDistance = 2f;
+    public float holdDistance = 3f;
     public float smoothSpeed = 20f; 
-    public float pickupRange = 3f; 
+    public float pickupRange = 2f; 
     public bool useDirectMovement = true; 
 
     [Header("Internal")]
@@ -17,8 +17,16 @@ public class Pickup : MonoBehaviour
 
     [Header("Sound Settings")]
     public AudioClip pickupSound;
+    [Range(0f, 1f)] public float pickupSoundVolume = 1f;
+    
     public AudioClip unwrapSound;
+    [Range(0f, 1f)] public float unwrapSoundVolume = 1f;
+    
     public AudioClip dropSound;
+    [Range(0f, 1f)] public float dropSoundVolume = 1f;
+    
+    public UnityEngine.Audio.AudioMixerGroup mixerGroup;
+    
     private AudioSource audioSource;
 
     [Header("Noodle Cooking Settings")]
@@ -38,6 +46,10 @@ public class Pickup : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
+        
+        // Assign mixer group if set
+        if (mixerGroup != null)
+            audioSource.outputAudioMixerGroup = mixerGroup;
     }
 
     void FixedUpdate()
@@ -124,7 +136,8 @@ public class Pickup : MonoBehaviour
 
                 initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
 
-                if (pickupSound != null && audioSource != null) audioSource.PlayOneShot(pickupSound);
+                if (pickupSound != null && audioSource != null) 
+                    audioSource.PlayOneShot(pickupSound, pickupSoundVolume);
             }
         }
     }
@@ -143,7 +156,8 @@ public class Pickup : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
         
-        if (dropSound != null && audioSource != null) audioSource.PlayOneShot(dropSound);
+        if (dropSound != null && audioSource != null) 
+            audioSource.PlayOneShot(dropSound, dropSoundVolume);
     }
 
     private void UnwrapNoodle()
@@ -159,7 +173,7 @@ public class Pickup : MonoBehaviour
         }
 
         if (unwrapSound != null && audioSource != null)
-            audioSource.PlayOneShot(unwrapSound);
+            audioSource.PlayOneShot(unwrapSound, unwrapSoundVolume);
 
         Destroy(gameObject, unwrapSound != null ? unwrapSound.length : 0.1f);
     }
@@ -191,7 +205,8 @@ public class Pickup : MonoBehaviour
         if (playerCamera != null)
             initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
 
-        if (pickupSound != null && audioSource != null) audioSource.PlayOneShot(pickupSound);
+        if (pickupSound != null && audioSource != null) 
+            audioSource.PlayOneShot(pickupSound, pickupSoundVolume);
     }
 
     public void ForceDrop()
@@ -210,7 +225,8 @@ public class Pickup : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
         
-        if (dropSound != null && audioSource != null) audioSource.PlayOneShot(dropSound);
+        if (dropSound != null && audioSource != null) 
+            audioSource.PlayOneShot(dropSound, dropSoundVolume);
     }
 
     public static Pickup GetCurrentlyHeld()

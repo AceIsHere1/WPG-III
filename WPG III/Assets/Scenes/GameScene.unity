@@ -272,8 +272,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -2251,8 +2256,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -2690,8 +2700,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -3640,8 +3655,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -3916,8 +3936,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -4671,8 +4696,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -4953,8 +4983,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -5426,8 +5461,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -5730,8 +5770,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -6203,8 +6248,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -6309,10 +6359,11 @@ AudioSource:
   m_GameObject: {fileID: 637419556}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8405978019722791948, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: bdf386641808f8b4bb02aaa490e5228a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.75
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6517,8 +6568,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -6553,8 +6609,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -7103,8 +7164,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -7214,8 +7280,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -9098,7 +9169,8 @@ AudioSource:
   m_GameObject: {fileID: 965130906}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: aa1eee9db6b23b144a5069285f1e0925, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -9371,8 +9443,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -10058,7 +10135,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062543090}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
@@ -12094,8 +12171,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -12280,8 +12362,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -13450,8 +13537,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -13609,8 +13701,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -14873,8 +14970,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -15903,6 +16005,79 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.019999998, y: 0.019999998, z: 0.019999996}
   m_Center: {x: 0.00000011920929, y: 0.000000044703484, z: 9.313226e-10}
+--- !u!1001 &1706422843
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1020497929605744201, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_Name
+      value: PauseSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5461044773283313953, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652413674396931627, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 697.8337
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652413674396931627, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 274.2547
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652413674396931627, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 252.08022
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652413674396931627, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652413674396931627, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652413674396931627, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652413674396931627, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652413674396931627, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652413674396931627, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6652413674396931627, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 45a8aae1e457f2f43b3bb7278bb47842, type: 3}
 --- !u!1 &1708675172 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5738900196150995871, guid: bfc5edb4f1dfe2549a5e356e3ca9b9aa,
@@ -15988,8 +16163,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -16239,8 +16419,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -17459,13 +17644,28 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: c03a90786b075f1469a5a63ed40507c0,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c03a90786b075f1469a5a63ed40507c0,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c03a90786b075f1469a5a63ed40507c0,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: c03a90786b075f1469a5a63ed40507c0,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.271875
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c03a90786b075f1469a5a63ed40507c0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.32999992
+      value: 0.19
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c03a90786b075f1469a5a63ed40507c0,
         type: 3}
@@ -18133,8 +18333,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -18449,10 +18654,11 @@ AudioSource:
   m_GameObject: {fileID: 1988584688}
   m_Enabled: 0
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 01bd0f660ca6eef4d90364c49f22c60f, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.495
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -18545,10 +18751,11 @@ AudioSource:
   m_GameObject: {fileID: 1988584688}
   m_Enabled: 0
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 46fcc2d6d7d55f54aba0e0924aa61b67, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.495
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -18992,8 +19199,13 @@ MonoBehaviour:
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+    type: 2}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -19774,6 +19986,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6705516329241460668, guid: a197d2ccf67edf84ebf3fa3ca6473412,
         type: 3}
+      propertyPath: mixerGroup
+      value: 
+      objectReference: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
+        type: 2}
+    - target: {fileID: 6705516329241460668, guid: a197d2ccf67edf84ebf3fa3ca6473412,
+        type: 3}
       propertyPath: boilingSound
       value: 
       objectReference: {fileID: 8300000, guid: c03fb44d7fae6284d8683bbc795f1503, type: 3}
@@ -19782,6 +20000,16 @@ PrefabInstance:
       propertyPath: noodleReadySound
       value: 
       objectReference: {fileID: 8300000, guid: cc4c04c8db5b38b4c939d96e3bd85895, type: 3}
+    - target: {fileID: 6705516329241460668, guid: a197d2ccf67edf84ebf3fa3ca6473412,
+        type: 3}
+      propertyPath: boilingSoundVolume
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6705516329241460668, guid: a197d2ccf67edf84ebf3fa3ca6473412,
+        type: 3}
+      propertyPath: noodleReadySoundVolume
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20846,6 +21074,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1706422843}
   - {fileID: 1979685921}
   - {fileID: 410087041}
   - {fileID: 282583118}
