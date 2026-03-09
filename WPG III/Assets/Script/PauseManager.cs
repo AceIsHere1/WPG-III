@@ -4,19 +4,21 @@ using UnityEngine.SceneManagement;
 public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject dialogueBox; // TAMBAHAN
+
     public static bool isGamePaused = false;
 
     void Start()
     {
-        // Make sure pause menu starts hidden
+        // Pastikan pause menu tersembunyi
         if (pauseMenu != null)
-        {
             pauseMenu.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("PauseMenu not assigned!");
-        }
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        Time.timeScale = 1f;
+        isGamePaused = false;
     }
 
     void Update()
@@ -35,17 +37,19 @@ public class PauseManager : MonoBehaviour
         if (pauseMenu != null)
             pauseMenu.SetActive(true);
 
+        // SEMBUNYIKAN DIALOG SAAT PAUSE
+        if (dialogueBox != null)
+            dialogueBox.SetActive(false);
+
         Time.timeScale = 0f;
         isGamePaused = true;
-        
-        // Show and unlock cursor for menu interaction
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        
-        // Mute all audio
+
         AudioListener.pause = true;
-        
-        Debug.Log("Game Paused - Cursor unlocked, Audio muted");
+
+        Debug.Log("Game Paused");
     }
 
     public void Resume()
@@ -53,38 +57,38 @@ public class PauseManager : MonoBehaviour
         if (pauseMenu != null)
             pauseMenu.SetActive(false);
 
+        // TAMPILKAN LAGI DIALOG
+        if (dialogueBox != null)
+            dialogueBox.SetActive(true);
+
         Time.timeScale = 1f;
         isGamePaused = false;
-        
-        // Lock and hide cursor for gameplay
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
-        // Unmute audio
+
         AudioListener.pause = false;
-        
-        Debug.Log("Game Resumed - Cursor locked, Audio unmuted");
+
+        Debug.Log("Game Resumed");
     }
 
     public void Restart()
     {
-        Debug.Log("Restart button clicked!");
-        
-        // Important: Unmute audio before restarting
         AudioListener.pause = false;
-        
-        Resume();
+        Time.timeScale = 1f;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void MainMenu()
     {
-        Debug.Log("Main Menu button clicked!");
-        
-        // Important: Unmute audio before changing scenes
         AudioListener.pause = false;
-        
-        Resume();
+        Time.timeScale = 1f;
+        isGamePaused = false;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         SceneManager.LoadScene("Main Menu Scene");
     }
 }

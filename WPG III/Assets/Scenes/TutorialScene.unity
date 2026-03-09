@@ -4354,6 +4354,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 291416287930209408, guid: 45a8aae1e457f2f43b3bb7278bb47842,
+        type: 3}
+      propertyPath: dialogueBox
+      value: 
+      objectReference: {fileID: 2048189500}
     - target: {fileID: 1020497929605744201, guid: 45a8aae1e457f2f43b3bb7278bb47842,
         type: 3}
       propertyPath: m_Name

@@ -31,6 +31,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // Jika game sedang pause, hentikan kontrol player
+        if (PauseManager.isGamePaused)
+        {
+            footstepsSound.enabled = false;
+            sprintSound.enabled = false;
+            return;
+        }
+
         UpdateMouseLook();
         UpdateMovement();
     }
