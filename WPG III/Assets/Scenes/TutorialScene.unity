@@ -239,9 +239,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -250,8 +250,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -1971,9 +1970,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -1982,8 +1981,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -2288,9 +2286,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -2299,8 +2297,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -2521,6 +2518,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2669,6 +2667,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745d468e74bf98641b5bf37a5141c89a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handImage: {fileID: 1766031760}
+  pickupRange: 2
+  sesajenPickupRange: 4
+  raycastLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1001 &334717520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3372,9 +3388,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 330585546}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -3383,8 +3399,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -3856,9 +3871,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -3867,8 +3882,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -4018,8 +4032,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.2138364, y: 0.067127466, z: 1.5903308}
-  m_Center: {x: 9.099249, y: 1.7011453, z: 1.8311045}
+  m_Size: {x: 0.75, y: 0.067127466, z: 1.6076977}
+  m_Center: {x: 9.95, y: 1.7011453, z: 1.8408387}
 --- !u!65 &429966212
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4776,9 +4790,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -4787,8 +4801,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -5178,9 +5191,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -5189,8 +5202,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -5492,9 +5504,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 330585546}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -5503,8 +5515,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -5774,9 +5785,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -5785,8 +5796,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -6011,9 +6021,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -6022,8 +6032,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -6415,9 +6424,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 330585546}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -6426,8 +6435,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -6456,9 +6464,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -6467,8 +6475,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -6572,9 +6579,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -6583,8 +6590,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -6661,9 +6667,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -6672,8 +6678,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -8457,9 +8462,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -8468,8 +8473,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -8964,6 +8968,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 112950857}
+  - {fileID: 1766031759}
   m_Father: {fileID: 330585546}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -9153,8 +9158,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.2138364, y: 0.067127466, z: 1.6076977}
-  m_Center: {x: 9.099248, y: 1.7011453, z: 1.8408387}
+  m_Size: {x: 0.75, y: 0.067127466, z: 1.6076977}
+  m_Center: {x: 9.95, y: 1.7011453, z: 1.8408387}
 --- !u!4 &1122097308 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ca59914cb041d954a80d9400acbea5a9,
@@ -9602,7 +9607,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1985659818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9878,9 +9883,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -9889,8 +9894,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -9967,9 +9971,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 330585546}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -9978,8 +9982,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -11202,9 +11205,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -11213,8 +11216,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -11339,9 +11341,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 330585546}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -11350,8 +11352,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -12193,9 +12194,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -12204,8 +12205,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -12324,8 +12324,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.2138364, y: 0.067127466, z: 2.3769176}
-  m_Center: {x: 9.099262, y: 1.7011453, z: 1.4378133}
+  m_Size: {x: 0.75, y: 0.067127466, z: 1.6076977}
+  m_Center: {x: 9.95, y: 1.7011453, z: 1.8408387}
 --- !u!65 &1637057762
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12729,9 +12729,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -12740,8 +12740,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -12985,9 +12984,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -12996,8 +12995,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -13049,6 +13047,81 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1766031758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1766031759}
+  - component: {fileID: 1766031761}
+  - component: {fileID: 1766031760}
+  m_Layer: 5
+  m_Name: Hand indicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1766031759
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766031758}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 0.06, y: 0.06, z: 0.06}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1062543091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 40.8, y: -8.8}
+  m_SizeDelta: {x: 1024, y: 1024}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1766031760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766031758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: f80f573bc7c6a854a82a3eb6b90e4aca, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1766031761
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1766031758}
+  m_CullTransparentMesh: 1
 --- !u!1001 &1782295058
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14116,9 +14189,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -14127,8 +14200,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
@@ -14518,6 +14590,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 330585546}
   mouseSensitivity: 3.5
+  minCameraPitch: -80
+  maxCameraPitch: 80
   walkSpeed: 5
   runSpeed: 10
   controller: {fileID: 1988584694}
@@ -15046,9 +15120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2
   useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
@@ -15057,8 +15131,7 @@ MonoBehaviour:
   unwrapSoundVolume: 1
   dropSound: {fileID: 0}
   dropSoundVolume: 1
-  mixerGroup: {fileID: 8804401345285470860, guid: d3037771d3d098a4dad806368730fd4c,
-    type: 2}
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1

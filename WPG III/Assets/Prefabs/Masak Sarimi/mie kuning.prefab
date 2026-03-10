@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6316428988756695136}
   m_Layer: 0
   m_Name: mie kuning
-  m_TagString: Untagged
+  m_TagString: RawNoodle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,10 +149,15 @@ MonoBehaviour:
   playerCamera: {fileID: 0}
   holdDistance: 1
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2.5
+  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 0}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 0}
   isNoodlePack: 0

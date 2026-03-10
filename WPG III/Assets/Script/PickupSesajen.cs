@@ -4,10 +4,13 @@ public class PickupSesajen : MonoBehaviour
 {
     [Header("Pickup Settings")]
     public Transform playerCamera;
-    public float pickupRange = 3f; // Increased to hand's length
+    public float pickupRange = 5f; // Longer range for sesajen pickup
     public float holdDistance = 2f;
-    public float smoothSpeed = 20f; // Increased for faster following
-    public bool useDirectMovement = true; // Toggle for instant vs smooth movement
+    public float smoothSpeed = 20f;
+    public bool useDirectMovement = true;
+
+    [Header("Pickup Assist")]
+    public float pickupAssistRadius = 0.35f;
 
     [Header("Trash Settings")]
     public string trashTag = "Trash"; // beri tag "Trash" pada objek tong sampah
@@ -18,7 +21,6 @@ public class PickupSesajen : MonoBehaviour
     private static PickupSesajen currentlyHeld;
     
     private Quaternion initialRotationOffset;
-    
     private Quaternion targetRotation;
 
     private void Start()
@@ -76,32 +78,57 @@ public class PickupSesajen : MonoBehaviour
     }
 
     private void TryPickup()
+{
+    if (currentlyHeld != null) return;
+    if (playerCamera == null) return;
+
+    Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+    RaycastHit hit;
+
+    // Normal raycast pickup
+    if (Physics.Raycast(ray, out hit, pickupRange))
     {
-        if (currentlyHeld != null) return;
-        if (playerCamera == null && Camera.main != null)
-            playerCamera = Camera.main.transform;
-        if (playerCamera == null) return;
+        PickupSesajen pickup = hit.collider.GetComponentInParent<PickupSesajen>();
 
-        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+        if (pickup == this)
         {
-            if (hit.transform == transform)
-            {
-                isHeld = true;
-                currentlyHeld = this;
-                
-                if (rb != null)
-                {
-                    rb.velocity = Vector3.zero;
-                    rb.angularVelocity = Vector3.zero;
-                    rb.isKinematic = true;
-                    rb.useGravity = false;
-                }
-
-                if (playerCamera != null)
-                    initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
-            }
+            PerformPickup();
+            return;
         }
+    }
+
+    // 🔹 Pickup Assist (helps when looking steeply down)
+    Vector3 assistPoint = playerCamera.position + playerCamera.forward * holdDistance;
+
+    Collider[] nearby = Physics.OverlapSphere(assistPoint, pickupAssistRadius);
+
+    foreach (Collider col in nearby)
+    {
+        PickupSesajen pickup = col.GetComponentInParent<PickupSesajen>();
+
+        if (pickup == this)
+        {
+            PerformPickup();
+            return;
+        }
+    }
+}
+
+    private void PerformPickup()
+    {
+        isHeld = true;
+        currentlyHeld = this;
+        
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+            rb.useGravity = false;
+        }
+
+        if (playerCamera != null)
+            initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
     }
 
     private void Drop()
@@ -122,6 +149,7 @@ public class PickupSesajen : MonoBehaviour
 
     private void TryThrowToTrash()
     {
+        // cek apakah ada tong sampah di dekat player
         Collider[] colliders = Physics.OverlapSphere(transform.position, trashRange);
         foreach (var col in colliders)
         {
@@ -140,6 +168,7 @@ public class PickupSesajen : MonoBehaviour
         Debug.Log("Tidak ada tong sampah di dekatmu!");
     }
 
+    // PUBLIC API for other scripts
     public void ForcePickup()
     {
         if (currentlyHeld != null) currentlyHeld.ForceDrop();

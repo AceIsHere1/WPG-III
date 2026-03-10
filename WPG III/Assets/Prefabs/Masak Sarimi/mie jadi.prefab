@@ -263,12 +263,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
-  holdDistance: 1
+  holdDistance: 1.2
   smoothSpeed: 10
-  pickupRange: 5
+  pickupRange: 2.5
+  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 0}
+  pickupSoundVolume: 1
   unwrapSound: {fileID: 0}
+  unwrapSoundVolume: 1
   dropSound: {fileID: 0}
+  dropSoundVolume: 1
+  mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 0}
   isNoodlePack: 0

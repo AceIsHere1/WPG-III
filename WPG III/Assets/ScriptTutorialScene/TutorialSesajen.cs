@@ -4,74 +4,126 @@ public class TutorialSesajen : MonoBehaviour
 {
     [Header("Pickup Settings")]
     public Transform playerCamera;
-    public float pickupRange = 2f;
+    public float pickupRange = 5f;
     public float holdDistance = 2f;
-    public float smoothSpeed = 10f;
+    public float smoothSpeed = 20f;
+    public bool useDirectMovement = true;
+
+    [Header("Pickup Assist")]
+    public float pickupAssistRadius = 0.35f;
 
     [Header("Trash Settings")]
-    public string trashTag = "Trash"; // beri tag "Trash" pada objek tong sampah
+    public string trashTag = "Trash";
     public float trashRange = 2f;
 
     private Rigidbody rb;
     private bool isHeld = false;
-    private Transform holder;
     private static TutorialSesajen currentlyHeld;
 
-    void Awake()
+    private Quaternion initialRotationOffset;
+    private Quaternion targetRotation;
+
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
 
-        // Assign kamera otomatis (tanpa drag-drop)
-        if (playerCamera == null)
-        {
-            if (Camera.main != null)
-            {
-                playerCamera = Camera.main.transform;
-            }
-            else
-            {
-                Debug.LogWarning("Tidak menemukan Camera.main di scene!");
-            }
-        }
+        if (playerCamera == null && Camera.main != null)
+            playerCamera = Camera.main.transform;
     }
 
-    private void Update()
+    void FixedUpdate()
     {
         if (isHeld && currentlyHeld == this)
         {
             HoldPosition();
-            if (Input.GetMouseButtonDown(1)) Drop(); // klik kanan lepas
-            if (Input.GetKeyDown(KeyCode.E)) TryThrowToTrash(); // tekan E buang ke sampah
+        }
+    }
+
+    void Update()
+    {
+        if (isHeld && currentlyHeld == this)
+        {
+            if (Input.GetMouseButtonDown(1)) Drop();
+            if (Input.GetKeyDown(KeyCode.E)) TryThrowToTrash();
         }
         else
         {
-            if (Input.GetMouseButtonDown(0)) TryPickup(); // klik kiri ambil
+            if (Input.GetMouseButtonDown(0)) TryPickup();
         }
     }
 
     private void HoldPosition()
     {
+        if (playerCamera == null) return;
+
         Vector3 targetPos = playerCamera.position + playerCamera.forward * holdDistance;
-        rb.MovePosition(Vector3.Lerp(rb.position, targetPos, Time.deltaTime * smoothSpeed));
-        rb.MoveRotation(Quaternion.Lerp(rb.rotation, playerCamera.rotation, Time.deltaTime * smoothSpeed));
+
+        if (useDirectMovement)
+        {
+            rb.MovePosition(targetPos);
+
+            targetRotation = playerCamera.rotation * initialRotationOffset;
+            rb.MoveRotation(targetRotation);
+        }
+        else
+        {
+            rb.MovePosition(Vector3.Lerp(rb.position, targetPos, Time.fixedDeltaTime * smoothSpeed));
+
+            targetRotation = playerCamera.rotation * initialRotationOffset;
+
+            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * smoothSpeed));
+        }
     }
 
     private void TryPickup()
     {
         if (currentlyHeld != null) return;
+        if (playerCamera == null) return;
 
-        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        // Normal raycast
+        if (Physics.Raycast(ray, out hit, pickupRange))
         {
-            if (hit.transform == transform)
+            TutorialSesajen pickup = hit.collider.GetComponentInParent<TutorialSesajen>();
+
+            if (pickup == this)
             {
-                isHeld = true;
-                currentlyHeld = this;
-                rb.useGravity = false;
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
+                PerformPickup();
+                return;
             }
         }
+
+        // Pickup assist
+        Vector3 assistPoint = playerCamera.position + playerCamera.forward * holdDistance;
+
+        Collider[] nearby = Physics.OverlapSphere(assistPoint, pickupAssistRadius);
+
+        foreach (Collider col in nearby)
+        {
+            TutorialSesajen pickup = col.GetComponentInParent<TutorialSesajen>();
+
+            if (pickup == this)
+            {
+                PerformPickup();
+                return;
+            }
+        }
+    }
+
+    private void PerformPickup()
+    {
+        isHeld = true;
+        currentlyHeld = this;
+
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        rb.isKinematic = true;
+        rb.useGravity = false;
+
+        if (playerCamera != null)
+            initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
     }
 
     private void Drop()
@@ -80,25 +132,28 @@ public class TutorialSesajen : MonoBehaviour
 
         isHeld = false;
         currentlyHeld = null;
+
+        rb.isKinematic = false;
         rb.useGravity = true;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
     private void TryThrowToTrash()
     {
-        // cek apakah ada tong sampah di dekat player
         Collider[] colliders = Physics.OverlapSphere(transform.position, trashRange);
+
         foreach (var col in colliders)
         {
             if (col.CompareTag(trashTag))
             {
                 Debug.Log("Sesajen dibuang ke sampah!");
 
-                // Hapus hantu yang masih ada di scene
+                // Tutorial-specific behavior
                 var ghostSpawner = FindObjectOfType<TutorialGhostSpawner>();
                 if (ghostSpawner != null)
                     ghostSpawner.DespawnGhost();
 
-                // Beri tahu TutorialManager kalau sesajen sudah dibuang
                 FindObjectOfType<TutorialManager>()?.OnPlayerAction("sesajen_dibuang");
 
                 Destroy(gameObject);
@@ -109,4 +164,13 @@ public class TutorialSesajen : MonoBehaviour
 
         Debug.Log("Tidak ada tong sampah di dekatmu!");
     }
+
+    public bool IsHeld()
+    {
+        return isHeld;
+    }
+    public static TutorialSesajen GetCurrentlyHeld()
+{
+    return currentlyHeld;
+}
 }

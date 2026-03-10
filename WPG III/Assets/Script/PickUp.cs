@@ -6,9 +6,9 @@ public class Pickup : MonoBehaviour
 {
     [Header("Pickup Settings")]
     public Transform playerCamera;
-    public float holdDistance = 3f;
+    public float holdDistance = 2f;
     public float smoothSpeed = 20f; 
-    public float pickupRange = 2f; 
+    public float pickupRange = 2.5f; 
     public bool useDirectMovement = true; 
 
     [Header("Internal")]
@@ -119,27 +119,45 @@ public class Pickup : MonoBehaviour
         if (playerCamera == null) playerCamera = Camera.main != null ? Camera.main.transform : null;
         if (playerCamera == null) return;
 
-        Ray ray = new Ray(playerCamera.position, playerCamera.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+        // Use RaycastAll to detect through shelves/obstacles (same as HandIndicator)
+        // This fixes the issue where shelf colliders block pickup detection
+        RaycastHit[] hits = Physics.RaycastAll(playerCamera.position, playerCamera.forward, pickupRange);
+        
+        // Check all hits to find this specific object
+        foreach (RaycastHit hit in hits)
         {
             if (hit.transform == transform)
             {
-                pickedUp = true;
-                currentlyHeld = this;
+                // Check actual distance to hit point
+                float actualDistance = Vector3.Distance(playerCamera.position, hit.point);
                 
-                if (rb != null)
+                // Only pick up if within range
+                if (actualDistance <= pickupRange)
                 {
-                    rb.velocity = Vector3.zero;
-                    rb.angularVelocity = Vector3.zero;
-                    rb.isKinematic = true;
+                    PerformPickup();
+                    return; // Found and picked up, stop checking
                 }
-
-                initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
-
-                if (pickupSound != null && audioSource != null) 
-                    audioSource.PlayOneShot(pickupSound, pickupSoundVolume);
             }
         }
+    }
+
+    private void PerformPickup()
+    {
+        pickedUp = true;
+        currentlyHeld = this;
+        
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
+
+        if (playerCamera != null)
+            initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
+
+        if (pickupSound != null && audioSource != null) 
+            audioSource.PlayOneShot(pickupSound, pickupSoundVolume);
     }
 
     private void Drop()
@@ -169,6 +187,12 @@ public class Pickup : MonoBehaviour
         Pickup noodlePickup = noodle.GetComponent<Pickup>();
         if (noodlePickup != null)
         {
+            // Force correct pickup settings on spawned noodle
+            noodlePickup.pickupRange = this.pickupRange;
+            noodlePickup.smoothSpeed = this.smoothSpeed;
+            noodlePickup.useDirectMovement = this.useDirectMovement;
+            noodlePickup.holdDistance = this.holdDistance;
+            
             StartCoroutine(DelayedPickup(noodlePickup));
         }
 

@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [Header("Camera Settings")]
     [SerializeField] Transform playerCamera = null;
     [SerializeField] float mouseSensitivity = 3.5f;
+    [SerializeField] float minCameraPitch = -70.0f; // How far down you can look
+    [SerializeField] float maxCameraPitch = 80.0f;  // How far up you can look
 
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 5f;
@@ -47,10 +49,11 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         cameraPitch -= mouseDelta.y * mouseSensitivity;
-        cameraPitch = Mathf.Clamp(cameraPitch, -60.0f, 60.0f);
+        cameraPitch = Mathf.Clamp(cameraPitch, minCameraPitch, maxCameraPitch);
 
         playerCamera.localEulerAngles = Vector3.right * cameraPitch;
         transform.Rotate(Vector3.up * mouseDelta.x * mouseSensitivity);
+
     }
 
     void UpdateMovement()
