@@ -6,7 +6,6 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject controlsPanel;
     [SerializeField] private CanvasGroup dialogueUI;
-
     public static bool isGamePaused = false;
 
     void Start()
@@ -48,11 +47,6 @@ public class PauseManager : MonoBehaviour
         if (pauseMenu != null)
             pauseMenu.SetActive(true);
 
-        // Pastikan controls panel tidak aktif saat pause
-        if (controlsPanel != null)
-            controlsPanel.SetActive(false);
-
-        // sembunyikan dialog
         if (dialogueUI != null)
             dialogueUI.alpha = 0f;
 
@@ -63,8 +57,6 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = true;
 
         AudioListener.pause = true;
-
-        Debug.Log("Game Paused");
     }
 
     public void Resume()
@@ -75,7 +67,6 @@ public class PauseManager : MonoBehaviour
         if (controlsPanel != null)
             controlsPanel.SetActive(false);
 
-        // tampilkan lagi dialog
         if (dialogueUI != null)
             dialogueUI.alpha = 1f;
 
@@ -86,8 +77,6 @@ public class PauseManager : MonoBehaviour
         Cursor.visible = false;
 
         AudioListener.pause = false;
-
-        Debug.Log("Game Resumed");
     }
 
     // =========================
@@ -110,6 +99,7 @@ public class PauseManager : MonoBehaviour
 
         if (pauseMenu != null)
             pauseMenu.SetActive(true);
+
     }
 
     public void Restart()
