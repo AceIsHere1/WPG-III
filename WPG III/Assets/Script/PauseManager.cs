@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
@@ -6,6 +8,7 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject controlsPanel;
     [SerializeField] private CanvasGroup dialogueUI;
+    [SerializeField] private Button controlsButton; // add this
     public static bool isGamePaused = false;
 
     void Start()
@@ -27,14 +30,12 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Jika sedang membuka Controls Panel
             if (controlsPanel != null && controlsPanel.activeSelf)
             {
                 CloseControls();
                 return;
             }
 
-            // Jika game sedang pause
             if (isGamePaused)
                 Resume();
             else
@@ -94,12 +95,19 @@ public class PauseManager : MonoBehaviour
 
     public void CloseControls()
     {
+        EventSystem.current.SetSelectedGameObject(null);
+
         if (controlsPanel != null)
             controlsPanel.SetActive(false);
 
         if (pauseMenu != null)
             pauseMenu.SetActive(true);
 
+        if (controlsButton != null)
+        {
+            controlsButton.OnDeselect(null);
+            controlsButton.OnPointerExit(null);
+        }
     }
 
     public void Restart()

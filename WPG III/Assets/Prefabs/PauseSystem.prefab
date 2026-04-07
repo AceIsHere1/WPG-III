@@ -498,7 +498,6 @@ MonoBehaviour:
   pauseMenu: {fileID: 5251009102607004796}
   controlsPanel: {fileID: 0}
   dialogueUI: {fileID: 0}
-  blurPanel: {fileID: 0}
 --- !u!1 &5251009102607004796
 GameObject:
   m_ObjectHideFlags: 0

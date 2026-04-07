@@ -34,10 +34,8 @@ public class HandIndicator : MonoBehaviour
         
         foreach (RaycastHit hit in hits)
         {
-            // Check actual distance to hit point
             float actualDistance = Vector3.Distance(transform.position, hit.point);
             
-            // Check if this is a regular Pickup component
             Pickup pickupComponent = hit.collider.GetComponent<Pickup>();
             if (pickupComponent != null && actualDistance <= pickupRange)
             {
@@ -45,7 +43,6 @@ public class HandIndicator : MonoBehaviour
                 break;
             }
             
-            // Check if this is a PickupSesajen component (with longer range)
             PickupSesajen sesajenComponent = hit.collider.GetComponent<PickupSesajen>();
             if (sesajenComponent != null && actualDistance <= sesajenPickupRange)
             {
@@ -58,6 +55,23 @@ public class HandIndicator : MonoBehaviour
             {
                 foundPickupInRange = true;
                 break;
+            }
+
+            TutorialNoodleCooking cookingPot = hit.collider.GetComponent<TutorialNoodleCooking>();
+            if (cookingPot != null && actualDistance <= pickupRange)
+            {
+                Pickup held = Pickup.GetCurrentlyHeld();
+                bool holdingNoodle = held != null && 
+                    (held.CompareTag("RawNoodle") || held.gameObject.name.ToLower().Contains("mie kuning"));
+                
+                // Also show hand if pot is cooked and ready to serve
+                bool potReadyToServe = cookingPot.isCooked && !cookingPot.isCooking;
+
+                if (holdingNoodle || potReadyToServe)
+                {
+                    foundPickupInRange = true;
+                    break;
+                }
             }
         }
         
