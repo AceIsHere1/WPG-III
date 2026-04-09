@@ -18,31 +18,37 @@ public class HandIndicator : MonoBehaviour
     }
 
     void CheckForPickable()
-    {
-        // Hide indicator if already holding something
-        if (Pickup.GetCurrentlyHeld() != null || PickupSesajen.GetCurrentlyHeld() != null)
-        {
-            handImage.enabled = false;
-            return;
-        }
+{
+    Pickup held = Pickup.GetCurrentlyHeld();
+    bool holdingNoodle = held != null &&
+        (held.CompareTag("RawNoodle") || held.gameObject.name.ToLower().Contains("mie kuning"));
 
-        // Use the longer range to check all objects (sesajen range is longer)
-        float maxRange = Mathf.Max(pickupRange, sesajenPickupRange);
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, maxRange, raycastLayers);
-        
-        bool foundPickupInRange = false;
-        
-        foreach (RaycastHit hit in hits)
+    // Hide if holding something that isn't a noodle
+    if ((held != null || PickupSesajen.GetCurrentlyHeld() != null) && !holdingNoodle)
+    {
+        handImage.enabled = false;
+        return;
+    }
+
+    float maxRange = Mathf.Max(pickupRange, sesajenPickupRange);
+    RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, maxRange, raycastLayers);
+
+    bool foundPickupInRange = false;
+
+    foreach (RaycastHit hit in hits)
+    {
+        float actualDistance = Vector3.Distance(transform.position, hit.point);
+
+        // Only check regular pickups if not holding anything
+        if (held == null && PickupSesajen.GetCurrentlyHeld() == null)
         {
-            float actualDistance = Vector3.Distance(transform.position, hit.point);
-            
             Pickup pickupComponent = hit.collider.GetComponent<Pickup>();
             if (pickupComponent != null && actualDistance <= pickupRange)
             {
                 foundPickupInRange = true;
                 break;
             }
-            
+
             PickupSesajen sesajenComponent = hit.collider.GetComponent<PickupSesajen>();
             if (sesajenComponent != null && actualDistance <= sesajenPickupRange)
             {
@@ -56,25 +62,32 @@ public class HandIndicator : MonoBehaviour
                 foundPickupInRange = true;
                 break;
             }
+        }
 
-            TutorialNoodleCooking cookingPot = hit.collider.GetComponent<TutorialNoodleCooking>();
-            if (cookingPot != null && actualDistance <= pickupRange)
+        // Cooking pot checks always run regardless of holding state
+        TutorialNoodleCooking tutorialPot = hit.collider.GetComponent<TutorialNoodleCooking>();
+        if (tutorialPot != null && actualDistance <= pickupRange)
+        {
+            bool potReadyToServe = tutorialPot.isCooked && !tutorialPot.isCooking;
+            if (holdingNoodle || potReadyToServe)
             {
-                Pickup held = Pickup.GetCurrentlyHeld();
-                bool holdingNoodle = held != null && 
-                    (held.CompareTag("RawNoodle") || held.gameObject.name.ToLower().Contains("mie kuning"));
-                
-                // Also show hand if pot is cooked and ready to serve
-                bool potReadyToServe = cookingPot.isCooked && !cookingPot.isCooking;
-
-                if (holdingNoodle || potReadyToServe)
-                {
-                    foundPickupInRange = true;
-                    break;
-                }
+                foundPickupInRange = true;
+                break;
             }
         }
-        
-        handImage.enabled = foundPickupInRange;
+
+        NoodleCooking noodleCooking = hit.collider.GetComponent<NoodleCooking>();
+        if (noodleCooking != null && actualDistance <= pickupRange)
+        {
+            bool potReadyToServe = noodleCooking.isCooked && !noodleCooking.isCooking;
+            if (holdingNoodle || potReadyToServe)
+            {
+                foundPickupInRange = true;
+                break;
+            }
+        }
+    }
+
+    handImage.enabled = foundPickupInRange;
     }
 }

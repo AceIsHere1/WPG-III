@@ -14,9 +14,9 @@ public class NoodleCooking : MonoBehaviour
     public float cookingTime = 5f;
     public float interactDistance = 2f;
 
-    private bool isEmptyPot = true;
-    private bool isCooking = false;
-    private bool isCooked = false;
+    public bool isEmptyPot = true;
+    public bool isCooking = false;
+    public bool isCooked = false;
 
     [Header("Sound Settings")]
     public AudioClip boilingSound;
