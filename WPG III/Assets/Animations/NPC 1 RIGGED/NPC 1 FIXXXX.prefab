@@ -1412,6 +1412,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  currentState: 0
 --- !u!114 &8029612651609065923
 MonoBehaviour:
   m_ObjectHideFlags: 0

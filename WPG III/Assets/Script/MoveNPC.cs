@@ -1,15 +1,19 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum NPCState { Walking, Waiting, Returning }
+
 public class MoveNPC : MonoBehaviour
 {
-    [SerializeField] Transform[] destinations;  // daftar tujuan
+    [SerializeField] Transform[] destinations;
     private NavMeshAgent navMeshAgent;
     private Animator animator;
     private NpcDialog npcDialog;
     private int currentIndex = 0;
-    private bool isReturning = false;           // apakah NPC sedang balik?
+    private bool isReturning = false;
+
+    public NPCState currentState = NPCState.Walking; // ← tambah ini
 
     void Start()
     {
@@ -23,7 +27,6 @@ public class MoveNPC : MonoBehaviour
             return;
         }
 
-        // ambil destinasi dari DestinationManager
         destinations = DestinationManager.Instance.destinations;
 
         if (destinations == null || destinations.Length == 0)
@@ -46,39 +49,35 @@ public class MoveNPC : MonoBehaviour
         {
             if (!isReturning)
             {
-                // maju ke depan
                 if (currentIndex < destinations.Length - 1)
                 {
                     currentIndex++;
                     SetDestination();
+                    currentState = NPCState.Walking; // ← masih jalan
                 }
                 else
                 {
-                    // sampai tujuan terakhir - berhenti (nunggu mie)
+                    // Sampai tujuan terakhir - nunggu mie
                     navMeshAgent.isStopped = true;
+                    currentState = NPCState.Waiting; // ← baru boleh terima mie
 
-                    // Tampilkan dialog pesanan
                     if (npcDialog != null)
                         npcDialog.ShowDialog("Pelanggan: Pesan mie seporsi bang!");
                 }
             }
             else
             {
-                // balik ke belakang
                 if (currentIndex > 0)
                 {
                     currentIndex--;
                     SetDestination();
+                    currentState = NPCState.Returning; // ← lagi balik
                 }
                 else
                 {
-                    // sampai tujuan awal - destroy NPC
                     Debug.Log("NPC sampai tujuan, destroy...");
-
                     NPCEvents.RaiseNpcDestroyed();
-
                     Destroy(gameObject);
-
                     GameEvents.RaiseNpcExited();
                 }
             }
@@ -88,18 +87,16 @@ public class MoveNPC : MonoBehaviour
     private void SetDestination()
     {
         if (destinations.Length == 0) return;
-        Vector3 targetVector = destinations[currentIndex].position;
-        navMeshAgent.SetDestination(targetVector);
+        navMeshAgent.SetDestination(destinations[currentIndex].position);
     }
 
-    // dipanggil dari NpcOrder setelah menerima mie
     public void StartReturning()
     {
         if (destinations.Length == 0) return;
-
         isReturning = true;
         navMeshAgent.isStopped = false;
-        currentIndex = destinations.Length - 1; // mulai dari posisi terakhir (warung)
+        currentState = NPCState.Returning; // ← update state
+        currentIndex = destinations.Length - 1;
         SetDestination();
     }
 }

@@ -5,12 +5,11 @@ using UnityEngine.AI;
 public class NpcOrder : MonoBehaviour
 {
     [Header("Order Settings")]
-    public string requiredTag = "CookedNoodle";   // tag mangkok mie jadi
-    public Transform orderPoint;                  // tempat player kasih mie
-    public float giveDistance = 2f;               // jarak player bisa kasih mie
-    private NpcDialog npcDialog;
+    public string requiredTag = "CookedNoodle";
+    public Transform orderPoint;
+    public float giveDistance = 2f;
 
-    [Header("References")]
+    private NpcDialog npcDialog;
     private MoveNPC moveNPC;
     private bool hasReceived = false;
 
@@ -21,7 +20,6 @@ public class NpcOrder : MonoBehaviour
 
         if (moveNPC == null) Debug.LogError("MoveNPC tidak ditemukan di NPC!");
 
-        // Ambil order point dari manager di scene
         if (DestinationManager.Instance != null)
         {
             orderPoint = DestinationManager.Instance.orderPoint;
@@ -31,13 +29,15 @@ public class NpcOrder : MonoBehaviour
     void Update()
     {
         if (hasReceived) return;
+        if (moveNPC == null) return;
 
-        // cek apakah player pegang mangkok mie jadi
+        // NPC harus sudah Waiting dulu, baru bisa terima mie
+        if (moveNPC.currentState != NPCState.Waiting) return;
+
         Pickup held = Pickup.GetCurrentlyHeld();
         if (held != null && held.CompareTag(requiredTag))
         {
-            // cek jarak antara player dengan NPC
-            Transform player = Camera.main.transform; // asumsi kamera = player
+            Transform player = Camera.main.transform;
             float dist = Vector3.Distance(player.position, orderPoint.position);
 
             if (dist <= giveDistance && Input.GetKeyDown(KeyCode.E))
@@ -55,29 +55,24 @@ public class NpcOrder : MonoBehaviour
             return;
         }
 
-        // Drop dari tangan player jika masih dipegang
         Pickup held = bowl.GetComponent<Pickup>();
         if (held != null)
             held.ForceDrop();
 
-        // Safety: hanya Destroy jika object ini adalah instance di scene.
-        // Ini mencegah kita tidak sengaja mencoba menghancurkan prefab asset yang salah assign di inspector.
         if (bowl.scene.IsValid())
         {
             Destroy(bowl);
         }
         else
         {
-            Debug.LogWarning($"NpcOrder: coba Destroy object yang bukan bagian scene (mungkin prefab asset). Lewati Destroy untuk: {bowl.name}");
+            Debug.LogWarning($"NpcOrder: coba Destroy object yang bukan bagian scene. Lewati Destroy untuk: {bowl.name}");
         }
 
         Debug.Log("NPC menerima mie jadi!");
 
-        // Tampilkan dialog terima kasih
         if (npcDialog != null)
             npcDialog.ShowDialog("Pelanggan: Makasih bang!");
 
-        // lanjutkan perjalanan NPC
         hasReceived = true;
         GameEvents.RaiseNpcServed();
         moveNPC.StartReturning();
