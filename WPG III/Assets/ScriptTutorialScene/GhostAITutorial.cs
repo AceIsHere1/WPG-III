@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 public class GhostAITutorial : MonoBehaviour
 {
@@ -16,7 +17,12 @@ public class GhostAITutorial : MonoBehaviour
     public float catchDistance = 1.5f;
 
     [Header("Audio Settings")]
-    public AudioSource chaseMusic; // drag AudioSource di inspector (berisi chase music)
+    public AudioSource chaseMusic;
+
+    [Header("Jumpscare Settings")]
+    public VideoPlayer jumpscareVideo;
+    public string gameOverSceneName = "TutorialScene";
+    private bool hasPlayedJumpscare = false;
 
     private NavMeshAgent agent;
     private bool isChasing = false;
@@ -27,20 +33,21 @@ public class GhostAITutorial : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
+        if (jumpscareVideo == null)
+            jumpscareVideo = GameObject.Find("JumpscareVideoTutorial")?.GetComponent<VideoPlayer>();
+
         if (patrolPoints.Length > 0)
         {
             agent.speed = patrolSpeed;
             agent.SetDestination(patrolPoints[currentPoint].position);
         }
 
-        // set animasi awal ke patrol
         if (animator != null)
         {
             animator.SetBool("isChasing", false);
             animator.SetBool("isPatrolling", true);
         }
 
-        // pastikan musik dalam keadaan off di awal
         if (chaseMusic != null)
             chaseMusic.Stop();
     }
@@ -49,13 +56,12 @@ public class GhostAITutorial : MonoBehaviour
     {
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
-        // deteksi player
         if (distanceToPlayer <= detectionRadius)
         {
             if (!isChasing)
             {
                 isChasing = true;
-                StartChaseMusic(); // mulai musik kejar
+                StartChaseMusic();
                 UpdateAnimationState(true);
             }
         }
@@ -64,12 +70,11 @@ public class GhostAITutorial : MonoBehaviour
             if (isChasing)
             {
                 isChasing = false;
-                StopChaseMusic(); // berhenti musik kejar
+                StopChaseMusic();
                 UpdateAnimationState(false);
             }
         }
 
-        // kejar player
         if (isChasing)
         {
             agent.speed = chaseSpeed;
@@ -80,8 +85,6 @@ public class GhostAITutorial : MonoBehaviour
                 GameOver();
             }
         }
-
-        // mode patroli
         else
         {
             agent.speed = patrolSpeed;
@@ -103,8 +106,34 @@ public class GhostAITutorial : MonoBehaviour
 
     void GameOver()
     {
-        Debug.Log("Player tertangkap! Game Over!");
-        SceneManager.LoadScene("TutorialScene");
+        if (hasPlayedJumpscare) return;
+        hasPlayedJumpscare = true;
+
+        Debug.Log("Player tertangkap! Memulai jumpscare...");
+
+        agent.isStopped = true;
+        StopChaseMusic();
+
+        if (player.GetComponent<CharacterController>() != null)
+            player.GetComponent<CharacterController>().enabled = false;
+        if (player.GetComponent<PlayerController>() != null)
+            player.GetComponent<PlayerController>().enabled = false;
+
+        if (jumpscareVideo != null)
+        {
+            jumpscareVideo.gameObject.SetActive(true);
+            jumpscareVideo.Play();
+            jumpscareVideo.loopPointReached += OnJumpscareFinished;
+        }
+        else
+        {
+            SceneManager.LoadScene(gameOverSceneName);
+        }
+    }
+
+    void OnJumpscareFinished(VideoPlayer vp)
+    {
+        SceneManager.LoadScene(gameOverSceneName);
     }
 
     void StartChaseMusic()
@@ -129,17 +158,14 @@ public class GhostAITutorial : MonoBehaviour
 
     void OnDestroy()
     {
-        // pastikan musik berhenti kalau hantu dihapus
         StopChaseMusic();
     }
 
     void OnDrawGizmosSelected()
     {
-        // radius deteksi
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
-        // jalur waypoint
         if (patrolPoints != null && patrolPoints.Length > 1)
         {
             Gizmos.color = Color.magenta;

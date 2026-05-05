@@ -2426,6 +2426,8 @@ MonoBehaviour:
   detectionRadius: 10
   catchDistance: 2
   chaseMusic: {fileID: 8678997504187441961}
+  jumpscareVideo: {fileID: 0}
+  gameOverSceneName: TutorialScene
 --- !u!1 &9035340170450759459
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ TagManager:
   - Ghost
   - Sesajen
   - NPC
+  - DialogUI
   layers:
   - Default
   - TransparentFX
@@ -25,8 +26,8 @@ TagManager:
   - Player
   - NotWalkable
   - Interactable
-  - 
-  - 
+  - HeldObject
+  - UnheldObject
   - 
   - 
   - 

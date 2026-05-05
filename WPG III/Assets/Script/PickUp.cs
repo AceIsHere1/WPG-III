@@ -7,9 +7,8 @@ public class Pickup : MonoBehaviour
     [Header("Pickup Settings")]
     public Transform playerCamera;
     public float holdDistance = 2f;
-    public float smoothSpeed = 20f; 
-    public float pickupRange = 2.5f; 
-    public bool useDirectMovement = true; 
+    public float smoothSpeed = 20f;
+    public float pickupRange = 2.5f;
 
     [Header("Internal")]
     [SerializeField] private bool pickedUp;
@@ -18,15 +17,15 @@ public class Pickup : MonoBehaviour
     [Header("Sound Settings")]
     public AudioClip pickupSound;
     [Range(0f, 1f)] public float pickupSoundVolume = 1f;
-    
+
     public AudioClip unwrapSound;
     [Range(0f, 1f)] public float unwrapSoundVolume = 1f;
-    
+
     public AudioClip dropSound;
     [Range(0f, 1f)] public float dropSoundVolume = 1f;
-    
+
     public UnityEngine.Audio.AudioMixerGroup mixerGroup;
-    
+
     private AudioSource audioSource;
 
     [Header("Noodle Cooking Settings")]
@@ -34,9 +33,10 @@ public class Pickup : MonoBehaviour
     public bool isNoodlePack = false;
 
     private static Pickup currentlyHeld;
-    private Quaternion initialRotationOffset;
-    
-    private Quaternion targetRotation;
+    public Vector3 heldRotation = new Vector3(-1f, 187f, -88f);
+
+    private int heldLayer;
+    private int unheldLayer;
 
     void Start()
     {
@@ -46,56 +46,28 @@ public class Pickup : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null) audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
-        
-        // Assign mixer group if set
+
         if (mixerGroup != null)
             audioSource.outputAudioMixerGroup = mixerGroup;
+
+        heldLayer = LayerMask.NameToLayer("HeldObject");
+        unheldLayer = LayerMask.NameToLayer("UnheldObject");
     }
 
     void FixedUpdate()
     {
         if (pickedUp && currentlyHeld == this)
         {
-            if (playerCamera != null)
+            if (playerCamera != null && rb != null)
             {
                 Vector3 targetPos = playerCamera.position + playerCamera.forward * holdDistance;
-                
-                if (rb != null)
-                {
-                    rb.isKinematic = true;
-                    
-                    if (useDirectMovement)
-                    {
-                        rb.MovePosition(targetPos);
-                        
-                        targetRotation = playerCamera.rotation * initialRotationOffset;
-                        rb.MoveRotation(targetRotation);
-                    }
-                    else
-                    {
-                        rb.MovePosition(Vector3.Lerp(rb.position, targetPos, Time.fixedDeltaTime * smoothSpeed));
-                        
-                        targetRotation = playerCamera.rotation * initialRotationOffset;
-                        
-                        rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * smoothSpeed));
-                    }
-                }
-                else
-                {
-                    if (useDirectMovement)
-                    {
-                        transform.position = targetPos;
-                        targetRotation = playerCamera.rotation * initialRotationOffset;
-                        transform.rotation = targetRotation;
-                    }
-                    else
-                    {
-                        transform.position = Vector3.Lerp(transform.position, targetPos, Time.fixedDeltaTime * smoothSpeed);
-                        
-                        targetRotation = playerCamera.rotation * initialRotationOffset;
-                        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * smoothSpeed);
-                    }
-                }
+                Vector3 delta = targetPos - rb.position;
+
+                rb.velocity = delta * smoothSpeed;
+                rb.angularVelocity = Vector3.zero;
+
+                Quaternion targetRot = playerCamera.rotation * Quaternion.Euler(heldRotation);
+                rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, Time.fixedDeltaTime * smoothSpeed));
             }
         }
     }
@@ -119,23 +91,18 @@ public class Pickup : MonoBehaviour
         if (playerCamera == null) playerCamera = Camera.main != null ? Camera.main.transform : null;
         if (playerCamera == null) return;
 
-        // Use RaycastAll to detect through shelves/obstacles (same as HandIndicator)
-        // This fixes the issue where shelf colliders block pickup detection
         RaycastHit[] hits = Physics.RaycastAll(playerCamera.position, playerCamera.forward, pickupRange);
-        
-        // Check all hits to find this specific object
+
         foreach (RaycastHit hit in hits)
         {
             if (hit.transform == transform)
             {
-                // Check actual distance to hit point
                 float actualDistance = Vector3.Distance(playerCamera.position, hit.point);
-                
-                // Only pick up if within range
+
                 if (actualDistance <= pickupRange)
                 {
                     PerformPickup();
-                    return; // Found and picked up, stop checking
+                    return;
                 }
             }
         }
@@ -145,18 +112,19 @@ public class Pickup : MonoBehaviour
     {
         pickedUp = true;
         currentlyHeld = this;
-        
+
         if (rb != null)
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true;
+            rb.isKinematic = false;
+            rb.useGravity = false;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        if (playerCamera != null)
-            initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
+        gameObject.layer = heldLayer;
 
-        if (pickupSound != null && audioSource != null) 
+        if (pickupSound != null && audioSource != null)
             audioSource.PlayOneShot(pickupSound, pickupSoundVolume);
     }
 
@@ -165,16 +133,19 @@ public class Pickup : MonoBehaviour
         if (currentlyHeld != this) return;
         pickedUp = false;
         currentlyHeld = null;
-        
+
         if (rb != null)
         {
             rb.isKinematic = false;
             rb.useGravity = true;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+            rb.constraints = RigidbodyConstraints.None;
         }
-        
-        if (dropSound != null && audioSource != null) 
+
+        gameObject.layer = unheldLayer;
+
+        if (dropSound != null && audioSource != null)
             audioSource.PlayOneShot(dropSound, dropSoundVolume);
     }
 
@@ -187,12 +158,11 @@ public class Pickup : MonoBehaviour
         Pickup noodlePickup = noodle.GetComponent<Pickup>();
         if (noodlePickup != null)
         {
-            // Force correct pickup settings on spawned noodle
             noodlePickup.pickupRange = this.pickupRange;
             noodlePickup.smoothSpeed = this.smoothSpeed;
-            noodlePickup.useDirectMovement = this.useDirectMovement;
             noodlePickup.holdDistance = this.holdDistance;
-            
+            noodlePickup.heldRotation = this.heldRotation;
+
             StartCoroutine(DelayedPickup(noodlePickup));
         }
 
@@ -211,45 +181,48 @@ public class Pickup : MonoBehaviour
     public void ForcePickup()
     {
         if (currentlyHeld != null) currentlyHeld.ForceDrop();
-        
-        if (playerCamera == null && Camera.main != null) 
+
+        if (playerCamera == null && Camera.main != null)
             playerCamera = Camera.main.transform;
-        
+
         pickedUp = true;
         currentlyHeld = this;
-        
+
         if (rb != null)
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true;
+            rb.isKinematic = false;
             rb.useGravity = false;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        if (playerCamera != null)
-            initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
+        gameObject.layer = heldLayer;
 
-        if (pickupSound != null && audioSource != null) 
+        if (pickupSound != null && audioSource != null)
             audioSource.PlayOneShot(pickupSound, pickupSoundVolume);
     }
 
     public void ForceDrop()
     {
-        if (currentlyHeld == this) 
-        { 
-            pickedUp = false; 
-            currentlyHeld = null; 
+        if (currentlyHeld == this)
+        {
+            pickedUp = false;
+            currentlyHeld = null;
         }
-        
+
         if (rb != null)
         {
             rb.isKinematic = false;
             rb.useGravity = true;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+            rb.constraints = RigidbodyConstraints.None;
         }
-        
-        if (dropSound != null && audioSource != null) 
+
+        gameObject.layer = unheldLayer;
+
+        if (dropSound != null && audioSource != null)
             audioSource.PlayOneShot(dropSound, dropSoundVolume);
     }
 

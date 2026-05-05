@@ -194,7 +194,7 @@ Transform:
   m_GameObject: {fileID: 7843922312471172628}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5464501, y: 1.5749464, z: 13.400602}
+  m_LocalPosition: {x: 1.5464501, y: 1, z: 13.400602}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -227,7 +227,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &9047090903143139084
 BoxCollider:
@@ -266,7 +266,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2.5
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 0}
   pickupSoundVolume: 1
@@ -277,3 +276,4 @@ MonoBehaviour:
   mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 0}
   isNoodlePack: 0
+  heldRotation: {x: -30, y: 0, z: 0}
