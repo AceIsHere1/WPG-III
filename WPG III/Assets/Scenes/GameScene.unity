@@ -431,7 +431,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -444,6 +443,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &35768402
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4379,7 +4379,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -4392,6 +4391,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &259815082
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4888,7 +4888,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -4901,6 +4900,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &283053058
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6695,7 +6695,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -6708,6 +6707,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &390730188
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7081,7 +7081,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -7094,6 +7093,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &412684241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8308,7 +8308,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -8321,6 +8320,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &491169502
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9010,6 +9010,79 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 508111021}
   m_Mesh: {fileID: -1550514412580984892, guid: 53ae490e90864c6439a2f16ff4b83a45, type: 3}
+--- !u!1001 &508121225
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.5817614
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22367062
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 32.094696
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: af83be5d564acda4ca69652ed855fc59, type: 2}
+    - target: {fileID: 919132149155446097, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_Name
+      value: Pohon 2 (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7c74dd8b0b742a0498c434b24374b9d8, type: 3}
 --- !u!1 &519252585
 GameObject:
   m_ObjectHideFlags: 0
@@ -9122,7 +9195,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -9135,6 +9207,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &519360449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10253,7 +10326,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -10266,6 +10338,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &555302576
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10983,7 +11056,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -10996,6 +11068,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &590075093
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11665,7 +11738,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -11678,6 +11750,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &622486846
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12117,7 +12190,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -12130,6 +12202,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!1001 &642945704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12351,7 +12424,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -12364,6 +12436,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &661011773
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13654,7 +13727,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -13667,6 +13739,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &771160303
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13848,7 +13921,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -13861,6 +13933,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &786045912
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16007,6 +16080,79 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913580558}
   m_Mesh: {fileID: -1550514412580984892, guid: 53ae490e90864c6439a2f16ff4b83a45, type: 3}
+--- !u!1001 &919368180
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.358429
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.1699328
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 25.148724
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6e965708d5311b043b5591ee280c5151, type: 2}
+    - target: {fileID: 919132149155446097, guid: 5031b5622f564b4419c04c5bc055f831,
+        type: 3}
+      propertyPath: m_Name
+      value: Bush 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5031b5622f564b4419c04c5bc055f831, type: 3}
 --- !u!1 &931749319 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9013638940889411661, guid: bcc6ba484b6857e44b3d921030c1b56f,
@@ -17000,7 +17146,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -17013,6 +17158,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &986809996
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20277,6 +20423,79 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ad062693b9d7c845b2d7a56fe633458, type: 3}
+--- !u!1001 &1204071259
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.330562
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.22367062
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 31.63817
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7918335002988649766, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4d6b87600a0cda647823a0e7df5c0bf9, type: 2}
+    - target: {fileID: 919132149155446097, guid: 7c74dd8b0b742a0498c434b24374b9d8,
+        type: 3}
+      propertyPath: m_Name
+      value: Pohon 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7c74dd8b0b742a0498c434b24374b9d8, type: 3}
 --- !u!1001 &1214199734
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21211,7 +21430,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -21224,6 +21442,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1321424084
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21402,7 +21621,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -21415,6 +21633,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1326336733
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23163,7 +23382,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -23176,6 +23394,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1452347932
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23300,7 +23519,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -23313,6 +23531,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!1 &1466492199
 GameObject:
   m_ObjectHideFlags: 0
@@ -25093,7 +25312,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -25106,6 +25324,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1611556060
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27345,7 +27564,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -27358,6 +27576,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1721451439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28101,7 +28320,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -28114,6 +28332,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1758800105
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30928,7 +31147,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -30941,6 +31159,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1965087501
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32099,7 +32318,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -32112,6 +32330,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &2042231249
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34562,3 +34781,6 @@ SceneRoots:
   - {fileID: 454870524}
   - {fileID: 311401033}
   - {fileID: 1214199734}
+  - {fileID: 1204071259}
+  - {fileID: 508121225}
+  - {fileID: 919368180}
