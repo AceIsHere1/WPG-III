@@ -5,7 +5,7 @@ public class ObjectiveManager : MonoBehaviour
 {
     public TextMeshProUGUI objectiveText;
     private int servedCustomers = 0;
-    private int totalCustomers = 10;
+    private int totalCustomers = 5;
 
     void Start()
     {

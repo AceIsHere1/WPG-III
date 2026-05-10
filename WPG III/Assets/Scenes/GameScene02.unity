@@ -431,7 +431,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -444,6 +443,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &35768402
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4379,7 +4379,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -4392,6 +4391,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &259815082
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4888,7 +4888,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -4901,6 +4900,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &283053058
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5663,6 +5663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handImage: {fileID: 36431413}
+  interactPrompt: {fileID: 0}
   pickupRange: 2
   sesajenPickupRange: 4
   raycastLayers:
@@ -6695,7 +6696,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -6708,6 +6708,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &390730188
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7081,7 +7082,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -7094,6 +7094,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &412684241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8308,7 +8309,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -8321,6 +8321,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &491169502
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9122,7 +9123,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -9135,6 +9135,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &519360449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10253,7 +10254,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -10266,6 +10266,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &555302576
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10983,7 +10984,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -10996,6 +10996,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &590075093
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11665,7 +11666,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -11678,6 +11678,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &622486846
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12117,7 +12118,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -12130,6 +12130,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!1001 &642945704
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12351,7 +12352,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -12364,6 +12364,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &661011773
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13654,7 +13655,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -13667,6 +13667,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &771160303
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13848,7 +13849,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -13861,6 +13861,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &786045912
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17000,7 +17001,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -17013,6 +17013,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &986809996
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19669,7 +19670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1993a83af271f8344a78c6a9d04cf2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcToWin: 10
+  npcToWin: 5
 --- !u!1 &1162605803
 GameObject:
   m_ObjectHideFlags: 0
@@ -21211,7 +21212,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -21224,6 +21224,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1321424084
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21402,7 +21403,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -21415,6 +21415,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1326336733
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23163,7 +23164,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -23176,6 +23176,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1452347932
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23300,7 +23301,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -23313,6 +23313,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!1 &1466492199
 GameObject:
   m_ObjectHideFlags: 0
@@ -25093,7 +25094,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -25106,6 +25106,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1611556060
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27345,7 +27346,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -27358,6 +27358,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1721451439
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28101,7 +28102,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -28114,6 +28114,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1758800105
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30928,7 +30929,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -30941,6 +30941,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &1965087501
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32099,7 +32100,6 @@ MonoBehaviour:
   holdDistance: 1.2
   smoothSpeed: 10
   pickupRange: 2
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 8300000, guid: 0f0a167cdbef29a40a66cb3c08056a2f, type: 3}
   pickupSoundVolume: 1
@@ -32112,6 +32112,7 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 422589352761605124, guid: ffc2b126d4f05b94d891e9b07e44dce3,
     type: 3}
   isNoodlePack: 1
+  heldRotation: {x: -1, y: 187, z: -88}
 --- !u!65 &2042231249
 BoxCollider:
   m_ObjectHideFlags: 0
