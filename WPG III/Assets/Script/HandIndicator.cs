@@ -13,6 +13,13 @@ public class HandIndicator : MonoBehaviour
     [Tooltip("Leave empty to check all layers, or set to ignore furniture/walls")]
     public LayerMask raycastLayers = -1;
 
+    private int heldLayer;
+
+    void Start()
+    {
+        heldLayer = LayerMask.NameToLayer("HeldObject");
+    }
+
     void Update()
     {
         CheckForPickable();
@@ -22,12 +29,15 @@ public class HandIndicator : MonoBehaviour
     {
         Pickup held = Pickup.GetCurrentlyHeld();
         PickupSesajen heldSesajen = PickupSesajen.GetCurrentlyHeld();
+        TutorialSesajen heldTutorialSesajen = TutorialSesajen.GetCurrentlyHeld();
 
         bool holdingNoodle = held != null &&
             (held.CompareTag("RawNoodle") || held.gameObject.name.ToLower().Contains("mie kuning"));
 
+        bool holdingSesajen = heldSesajen != null || heldTutorialSesajen != null;
+
         // Hide if holding sesajen
-        if (heldSesajen != null)
+        if (holdingSesajen)
         {
             handImage.enabled = false;
             SetInteractPrompt(false);
@@ -42,8 +52,11 @@ public class HandIndicator : MonoBehaviour
             return;
         }
 
+        // Exclude HeldObject layer from raycast
+        LayerMask filteredLayers = raycastLayers & ~(1 << heldLayer);
+
         float maxRange = Mathf.Max(pickupRange, sesajenPickupRange);
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, maxRange, raycastLayers);
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, maxRange, filteredLayers);
 
         bool foundPickupInRange = false;
         bool foundInteractInRange = false;
@@ -53,7 +66,7 @@ public class HandIndicator : MonoBehaviour
             float actualDistance = Vector3.Distance(transform.position, hit.point);
 
             // Only check pickable objects when not holding anything
-            if (held == null && heldSesajen == null)
+            if (held == null && !holdingSesajen)
             {
                 Pickup pickupComponent = hit.collider.GetComponent<Pickup>();
                 if (pickupComponent != null && actualDistance <= pickupRange)
@@ -75,6 +88,15 @@ public class HandIndicator : MonoBehaviour
                     foundPickupInRange = true;
                     break;
                 }
+            }
+
+            // Trash bin check - show hand and interact text when holding sesajen nearby
+            TrashBin trashBin = hit.collider.GetComponent<TrashBin>();
+            if (trashBin != null && actualDistance <= pickupRange && holdingSesajen)
+            {
+                foundPickupInRange = true;
+                foundInteractInRange = true;
+                break;
             }
 
             // Cooking pot checks

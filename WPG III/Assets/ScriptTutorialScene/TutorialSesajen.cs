@@ -7,7 +7,6 @@ public class TutorialSesajen : MonoBehaviour
     public float pickupRange = 5f;
     public float holdDistance = 2f;
     public float smoothSpeed = 20f;
-    public bool useDirectMovement = true;
 
     [Header("Pickup Assist")]
     public float pickupAssistRadius = 0.35f;
@@ -20,8 +19,10 @@ public class TutorialSesajen : MonoBehaviour
     private bool isHeld = false;
     private static TutorialSesajen currentlyHeld;
 
-    private Quaternion initialRotationOffset;
-    private Quaternion targetRotation;
+    private Vector3 heldRotation = new Vector3(0f, 0f, 0f); // change per prefab in Start
+
+    private int heldLayer;
+    private int unheldLayer;
 
     void Start()
     {
@@ -29,13 +30,28 @@ public class TutorialSesajen : MonoBehaviour
 
         if (playerCamera == null && Camera.main != null)
             playerCamera = Camera.main.transform;
+
+        heldLayer = LayerMask.NameToLayer("HeldObject");
+        unheldLayer = LayerMask.NameToLayer("UnheldObject");
+
+        heldRotation = new Vector3(0f, 0f, 0f); // change per prefab
     }
 
     void FixedUpdate()
     {
         if (isHeld && currentlyHeld == this)
         {
-            HoldPosition();
+            if (playerCamera != null && rb != null)
+            {
+                Vector3 targetPos = playerCamera.position + playerCamera.forward * holdDistance;
+                Vector3 delta = targetPos - rb.position;
+
+                rb.velocity = delta * smoothSpeed;
+                rb.angularVelocity = Vector3.zero;
+
+                Quaternion targetRot = playerCamera.rotation * Quaternion.Euler(heldRotation);
+                rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRot, Time.fixedDeltaTime * smoothSpeed));
+            }
         }
     }
 
@@ -45,33 +61,20 @@ public class TutorialSesajen : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1)) Drop();
             if (Input.GetKeyDown(KeyCode.E)) TryThrowToTrash();
+
+            // Debug rotation nudging - remove once you find the right angle
+            if (Input.GetKey(KeyCode.Keypad8)) heldRotation.x += 1f;
+            if (Input.GetKey(KeyCode.Keypad2)) heldRotation.x -= 1f;
+            if (Input.GetKey(KeyCode.Keypad4)) heldRotation.y += 1f;
+            if (Input.GetKey(KeyCode.Keypad6)) heldRotation.y -= 1f;
+            if (Input.GetKey(KeyCode.Keypad7)) heldRotation.z += 1f;
+            if (Input.GetKey(KeyCode.Keypad9)) heldRotation.z -= 1f;
+            if (Input.GetKeyDown(KeyCode.Keypad5))
+                Debug.Log("heldRotation: " + heldRotation);
         }
         else
         {
             if (Input.GetMouseButtonDown(0)) TryPickup();
-        }
-    }
-
-    private void HoldPosition()
-    {
-        if (playerCamera == null) return;
-
-        Vector3 targetPos = playerCamera.position + playerCamera.forward * holdDistance;
-
-        if (useDirectMovement)
-        {
-            rb.MovePosition(targetPos);
-
-            targetRotation = playerCamera.rotation * initialRotationOffset;
-            rb.MoveRotation(targetRotation);
-        }
-        else
-        {
-            rb.MovePosition(Vector3.Lerp(rb.position, targetPos, Time.fixedDeltaTime * smoothSpeed));
-
-            targetRotation = playerCamera.rotation * initialRotationOffset;
-
-            rb.MoveRotation(Quaternion.Slerp(rb.rotation, targetRotation, Time.fixedDeltaTime * smoothSpeed));
         }
     }
 
@@ -83,11 +86,9 @@ public class TutorialSesajen : MonoBehaviour
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
-        // Normal raycast
         if (Physics.Raycast(ray, out hit, pickupRange))
         {
             TutorialSesajen pickup = hit.collider.GetComponentInParent<TutorialSesajen>();
-
             if (pickup == this)
             {
                 PerformPickup();
@@ -97,13 +98,11 @@ public class TutorialSesajen : MonoBehaviour
 
         // Pickup assist
         Vector3 assistPoint = playerCamera.position + playerCamera.forward * holdDistance;
-
         Collider[] nearby = Physics.OverlapSphere(assistPoint, pickupAssistRadius);
 
         foreach (Collider col in nearby)
         {
             TutorialSesajen pickup = col.GetComponentInParent<TutorialSesajen>();
-
             if (pickup == this)
             {
                 PerformPickup();
@@ -117,13 +116,16 @@ public class TutorialSesajen : MonoBehaviour
         isHeld = true;
         currentlyHeld = this;
 
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        rb.isKinematic = true;
-        rb.useGravity = false;
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = false;
+            rb.useGravity = false;
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
 
-        if (playerCamera != null)
-            initialRotationOffset = Quaternion.Inverse(playerCamera.rotation) * transform.rotation;
+        SetLayerRecursively(gameObject, heldLayer);
     }
 
     private void Drop()
@@ -133,10 +135,16 @@ public class TutorialSesajen : MonoBehaviour
         isHeld = false;
         currentlyHeld = null;
 
-        rb.isKinematic = false;
-        rb.useGravity = true;
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.useGravity = true;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.constraints = RigidbodyConstraints.None;
+        }
+
+        SetLayerRecursively(gameObject, unheldLayer);
     }
 
     private void TryThrowToTrash()
@@ -149,7 +157,6 @@ public class TutorialSesajen : MonoBehaviour
             {
                 Debug.Log("Sesajen dibuang ke sampah!");
 
-                // Tutorial-specific behavior
                 var ghostSpawner = FindObjectOfType<TutorialGhostSpawner>();
                 if (ghostSpawner != null)
                     ghostSpawner.DespawnGhost();
@@ -165,12 +172,20 @@ public class TutorialSesajen : MonoBehaviour
         Debug.Log("Tidak ada tong sampah di dekatmu!");
     }
 
+    private void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+            SetLayerRecursively(child.gameObject, layer);
+    }
+
     public bool IsHeld()
     {
         return isHeld;
     }
+
     public static TutorialSesajen GetCurrentlyHeld()
-{
-    return currentlyHeld;
-}
+    {
+        return currentlyHeld;
+    }
 }

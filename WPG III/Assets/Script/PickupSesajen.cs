@@ -19,7 +19,7 @@ public class PickupSesajen : MonoBehaviour
     private bool isHeld = false;
     private static PickupSesajen currentlyHeld;
 
-    private Vector3 heldRotation = new Vector3(0f, 0f, 0f); // set per prefab in Start
+    private Vector3 heldRotation = new Vector3(0f, 0f, 0f); // change per prefab in Start
 
     private int heldLayer;
     private int unheldLayer;
@@ -60,6 +60,16 @@ public class PickupSesajen : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1)) Drop();
             if (Input.GetKeyDown(KeyCode.E)) TryThrowToTrash();
+
+            // Debug rotation nudging - remove once you find the right angle
+            if (Input.GetKey(KeyCode.Keypad8)) heldRotation.x += 1f;
+            if (Input.GetKey(KeyCode.Keypad2)) heldRotation.x -= 1f;
+            if (Input.GetKey(KeyCode.Keypad4)) heldRotation.y += 1f;
+            if (Input.GetKey(KeyCode.Keypad6)) heldRotation.y -= 1f;
+            if (Input.GetKey(KeyCode.Keypad7)) heldRotation.z += 1f;
+            if (Input.GetKey(KeyCode.Keypad9)) heldRotation.z -= 1f;
+            if (Input.GetKeyDown(KeyCode.Keypad5))
+                Debug.Log("heldRotation: " + heldRotation);
         }
         else
         {
@@ -68,37 +78,48 @@ public class PickupSesajen : MonoBehaviour
     }
 
     private void TryPickup()
+{
+    if (currentlyHeld != null) return;
+    if (playerCamera == null) return;
+
+    Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+    RaycastHit hit;
+
+    Debug.Log("Trying pickup raycast...");
+
+    if (Physics.Raycast(ray, out hit, pickupRange))
     {
-        if (currentlyHeld != null) return;
-        if (playerCamera == null) return;
+        Debug.Log("Hit: " + hit.collider.gameObject.name + " on layer: " + hit.collider.gameObject.layer);
+        PickupSesajen pickup = hit.collider.GetComponentInParent<PickupSesajen>();
+        Debug.Log("PickupSesajen found: " + (pickup != null ? pickup.gameObject.name : "null"));
+        Debug.Log("pickup == this: " + (pickup == this));
 
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, pickupRange))
+        if (pickup == this)
         {
-            PickupSesajen pickup = hit.collider.GetComponentInParent<PickupSesajen>();
-            if (pickup == this)
-            {
-                PerformPickup();
-                return;
-            }
-        }
-
-        // Pickup assist
-        Vector3 assistPoint = playerCamera.position + playerCamera.forward * holdDistance;
-        Collider[] nearby = Physics.OverlapSphere(assistPoint, pickupAssistRadius);
-
-        foreach (Collider col in nearby)
-        {
-            PickupSesajen pickup = col.GetComponentInParent<PickupSesajen>();
-            if (pickup == this)
-            {
-                PerformPickup();
-                return;
-            }
+            PerformPickup();
+            return;
         }
     }
+    else
+    {
+        Debug.Log("Raycast hit nothing");
+    }
+
+    Vector3 assistPoint = playerCamera.position + playerCamera.forward * holdDistance;
+    Collider[] nearby = Physics.OverlapSphere(assistPoint, pickupAssistRadius);
+    Debug.Log("Assist colliders found: " + nearby.Length);
+
+    foreach (Collider col in nearby)
+    {
+        Debug.Log("Assist hit: " + col.gameObject.name);
+        PickupSesajen pickup = col.GetComponentInParent<PickupSesajen>();
+        if (pickup == this)
+        {
+            PerformPickup();
+            return;
+        }
+    }
+}
 
     private void PerformPickup()
     {
@@ -114,7 +135,7 @@ public class PickupSesajen : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        gameObject.layer = heldLayer;
+        SetLayerRecursively(gameObject, heldLayer);
     }
 
     private void Drop()
@@ -133,7 +154,7 @@ public class PickupSesajen : MonoBehaviour
             rb.constraints = RigidbodyConstraints.None;
         }
 
-        gameObject.layer = unheldLayer;
+        SetLayerRecursively(gameObject, unheldLayer);
     }
 
     private void TryThrowToTrash()
@@ -173,7 +194,7 @@ public class PickupSesajen : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        gameObject.layer = heldLayer;
+        SetLayerRecursively(gameObject, heldLayer);
     }
 
     public void ForceDrop()
@@ -193,7 +214,14 @@ public class PickupSesajen : MonoBehaviour
             rb.constraints = RigidbodyConstraints.None;
         }
 
-        gameObject.layer = unheldLayer;
+        SetLayerRecursively(gameObject, unheldLayer);
+    }
+
+    private void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+            SetLayerRecursively(child.gameObject, layer);
     }
 
     public static PickupSesajen GetCurrentlyHeld()
