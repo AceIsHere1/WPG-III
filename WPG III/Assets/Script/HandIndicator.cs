@@ -36,15 +36,7 @@ public class HandIndicator : MonoBehaviour
 
         bool holdingSesajen = heldSesajen != null || heldTutorialSesajen != null;
 
-        // Hide if holding sesajen
-        if (holdingSesajen)
-        {
-            handImage.enabled = false;
-            SetInteractPrompt(false);
-            return;
-        }
-
-        // Hide if holding something that isn't a noodle
+        // Hide if holding something that isn't a noodle and isn't sesajen
         if (held != null && !holdingNoodle)
         {
             handImage.enabled = false;
@@ -56,7 +48,7 @@ public class HandIndicator : MonoBehaviour
         LayerMask filteredLayers = raycastLayers & ~(1 << heldLayer);
 
         float maxRange = Mathf.Max(pickupRange, sesajenPickupRange);
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, maxRange, filteredLayers);
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, transform.forward, maxRange, filteredLayers, QueryTriggerInteraction.Collide);
 
         bool foundPickupInRange = false;
         bool foundInteractInRange = false;
@@ -90,9 +82,9 @@ public class HandIndicator : MonoBehaviour
                 }
             }
 
-            // Trash bin check - show hand and interact text when holding sesajen nearby
+            // Trash bin check - always runs regardless of holding state
             TrashBin trashBin = hit.collider.GetComponent<TrashBin>();
-            if (trashBin != null && actualDistance <= pickupRange && holdingSesajen)
+            if (trashBin != null && holdingSesajen)
             {
                 foundPickupInRange = true;
                 foundInteractInRange = true;
