@@ -771,19 +771,19 @@ MonoBehaviour:
   comicDisplay: {fileID: 617798203}
   fadeSpeed: 2
   daftarHalaman:
-  - gambarHalaman: {fileID: 21300000, guid: a4f00b548086f8941a40719ab355dbdc, type: 3}
+  - gambarHalaman: {fileID: 21300000, guid: 38a8976519ece844baff6e1e95b0a81e, type: 3}
     daftarPenutup:
     - {fileID: 548435625}
     - {fileID: 1984295026}
     - {fileID: 1845432606}
     - {fileID: 1285790980}
-  - gambarHalaman: {fileID: 21300000, guid: 97a116f2fa92c4a4b8a84eaaf7241f6b, type: 3}
+  - gambarHalaman: {fileID: 21300000, guid: 2d9824e996301a141868abd0c4ed408f, type: 3}
     daftarPenutup:
+    - {fileID: 1938281079}
     - {fileID: 1422523657}
     - {fileID: 1941588199}
-    - {fileID: 1938281079}
     - {fileID: 1441796816}
-  - gambarHalaman: {fileID: 21300000, guid: 6d4113efa63bf7e4bbab6d6fa23af5ec, type: 3}
+  - gambarHalaman: {fileID: 21300000, guid: 3e6ae3b6f154f7341b7ce2b490521ff1, type: 3}
     daftarPenutup:
     - {fileID: 1060626764}
     - {fileID: 1829337873}
