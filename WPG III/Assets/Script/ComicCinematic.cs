@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement; // 1. TAMBAHKAN INI DI PALING ATAS
 
 // Class ini membuat kita bisa mengelompokkan Gambar Komik dan Kotak Penutupnya di Inspector
 [System.Serializable]
@@ -44,7 +45,6 @@ public class ComicCinematic : MonoBehaviour
         }
     }
 
-    // --- BAGIAN INI YANG DIUBAH ---
     void SiapkanHalaman(int index)
     {
         // Pasang gambar komik utama
@@ -73,7 +73,6 @@ public class ComicCinematic : MonoBehaviour
         // Reset hitungan penutup ke 0 setiap kali ganti halaman
         indexPenutup = 0;
     }
-    // ------------------------------
 
     void ProsesLanjut()
     {
@@ -94,8 +93,10 @@ public class ComicCinematic : MonoBehaviour
         // SKENARIO 3: Halaman terakhir sudah selesai
         else
         {
-            Debug.Log("Komik Selesai! Saatnya munculkan tombol Main Menu.");
-            // Taruh kodemu untuk memunculkan UI ending di sini
+            Debug.Log("Komik Selesai! Pindah ke scene Ending...");
+
+            // 2. KODE UNTUK PINDAH SCENE KE EndingScene
+            SceneManager.LoadScene("EndingScene");
         }
     }
 
