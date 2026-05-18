@@ -17,6 +17,11 @@ public class PlayerInteract : MonoBehaviour
                     npc.Interact();
                     break; // ambil NPC terdekat saja
                 }
+                else if (c.TryGetComponent<GeneratorController>(out var generator))
+                {
+                    generator.Refill();
+                    break; // Ambil generator terdekat dan hentikan pencarian
+                }
             }
         }
     }

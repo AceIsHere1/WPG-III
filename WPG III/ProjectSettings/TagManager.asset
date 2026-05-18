@@ -15,6 +15,7 @@ TagManager:
   - Sesajen
   - NPC
   - DialogUI
+  - Generator
   layers:
   - Default
   - TransparentFX
