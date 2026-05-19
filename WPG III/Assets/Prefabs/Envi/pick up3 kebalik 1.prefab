@@ -132,5 +132,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  moveRight: 0
-  despawnDistance: 100
+  despawnDistance: 200

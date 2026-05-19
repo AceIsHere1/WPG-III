@@ -22,20 +22,7 @@ public class CarSpawner : MonoBehaviour
         GameObject prefab = carPrefabs[Random.Range(0, carPrefabs.Length)];
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
 
-        // Spawn mobil dengan rotasi sesuai spawn point
-        GameObject car = Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
-        CarMovement movement = car.GetComponent<CarMovement>();
-
-        // Tentukan arah gerak berdasarkan nama spawn point
-        if (spawnPoint.name.ToLower().Contains("right"))
-        {
-            movement.moveRight = false; // dari kanan ke kiri
-            car.transform.rotation = Quaternion.Euler(0f, 180f, 0f); // pastikan hadap kiri
-        }
-        else if (spawnPoint.name.ToLower().Contains("left"))
-        {
-            movement.moveRight = true; // dari kiri ke kanan
-            car.transform.rotation = Quaternion.Euler(0f, 0f, 0f); // pastikan hadap kanan
-        }
+        // Spawn mobil dengan rotasi PERSIS mengikuti rotasi Spawn Point
+        Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
     }
 }
