@@ -437,6 +437,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bded9ef88e6374b479b560b3d7a7681f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  materialBiasa: {fileID: 0}
   materialXRay: {fileID: 2100000, guid: 48e964cfd91bab846b9f9ec49fac0ee2, type: 2}
-  waktuTunggu: 120
+  waktuTunggu: 10

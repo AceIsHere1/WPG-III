@@ -3,9 +3,6 @@ using UnityEngine;
 public class XRayHintTimer : MonoBehaviour
 {
     [Header("Pengaturan Material")]
-    [Tooltip("Masukkan material asli/awal dari objek ini")]
-    public Material materialBiasa;
-
     [Tooltip("Masukkan material XRay buatanmu yang warna merah tadi")]
     public Material materialXRay;
 
@@ -14,33 +11,23 @@ public class XRayHintTimer : MonoBehaviour
     public float waktuTunggu = 120f;
 
     private float timer = 0f;
-    private MeshRenderer meshRenderer;
     private bool sudahXRay = false;
+    private Renderer[] semuaBagian;
 
     void Start()
     {
-        // Ambil komponen MeshRenderer dari objek tempat script ini dipasang
-        meshRenderer = GetComponent<MeshRenderer>();
-
-        // Pastikan saat mulai, material yang dipakai adalah material biasa
-        if (meshRenderer != null && materialBiasa != null)
-        {
-            meshRenderer.material = materialBiasa;
-        }
-        else
-        {
-            Debug.LogWarning("Material Biasa belum dimasukkan di Inspector!");
-        }
+        // Cukup cari dan data semua Mesh Renderer yang ada di anak-anak objek sesajen
+        semuaBagian = GetComponentsInChildren<Renderer>();
     }
 
     void Update()
     {
-        // Kalau belum X-Ray, jalankan timer
+        // Jalankan timer kalau belum berubah jadi X-Ray
         if (!sudahXRay)
         {
-            timer += Time.deltaTime; // Waktu terus berjalan
+            timer += Time.deltaTime; // Waktu berjalan...
 
-            // Kalau waktu sudah mencapai batas (misal 120 detik)
+            // Kalau waktu tunggu habis, langsung aktifkan efeknya
             if (timer >= waktuTunggu)
             {
                 AktifkanXRay();
@@ -50,12 +37,19 @@ public class XRayHintTimer : MonoBehaviour
 
     void AktifkanXRay()
     {
-        if (meshRenderer != null && materialXRay != null)
+        if (materialXRay != null && semuaBagian != null)
         {
-            // Ganti materialnya jadi X-Ray (tembus pandang)
-            meshRenderer.material = materialXRay;
+            // Langsung timpa material semua bagian sesajen (nampan, bunga, tiang) jadi material X-Ray
+            foreach (Renderer bagian in semuaBagian)
+            {
+                if (bagian != null)
+                {
+                    bagian.material = materialXRay;
+                }
+            }
+
             sudahXRay = true;
-            Debug.Log("Hint X-Ray dinyalakan untuk: " + gameObject.name);
+            Debug.Log("Waktu habis! Sesajen " + gameObject.name + " sekarang berubah ke Material X-Ray.");
         }
     }
 }
