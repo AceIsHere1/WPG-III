@@ -248,7 +248,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d903c92a47d0f5f4a8b17366f4f59e09,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6813379979179134594}
+      addedObject: {fileID: 6640797969028560769}
   m_SourcePrefab: {fileID: 100100000, guid: d903c92a47d0f5f4a8b17366f4f59e09, type: 3}
 --- !u!4 &8496457533111126387 stripped
 Transform:
@@ -425,7 +425,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &-6813379979179134594
+--- !u!114 &6640797969028560769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -439,4 +439,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialBiasa: {fileID: 0}
   materialXRay: {fileID: 2100000, guid: 48e964cfd91bab846b9f9ec49fac0ee2, type: 2}
-  waktuTunggu: 10
+  waktuTunggu: 120
