@@ -6,6 +6,10 @@ public class HandIndicator : MonoBehaviour
     [Header("References")]
     public Image handImage;
     public GameObject interactPrompt;
+    
+    [Tooltip("UI Prompt untuk instruksi Klik Kiri (mengambil item)")]
+    public GameObject leftClickPrompt; // UI BARU
+
     public float pickupRange = 2.5f;
     public float sesajenPickupRange = 4f;
 
@@ -41,6 +45,7 @@ public class HandIndicator : MonoBehaviour
         {
             handImage.enabled = false;
             SetInteractPrompt(false);
+            SetLeftClickPrompt(false); // Sembunyikan UI klik kiri
             return;
         }
 
@@ -52,6 +57,7 @@ public class HandIndicator : MonoBehaviour
 
         bool foundPickupInRange = false;
         bool foundInteractInRange = false;
+        bool foundLeftClickInRange = false; // LOGIKA BARU
 
         foreach (RaycastHit hit in hits)
         {
@@ -64,6 +70,7 @@ public class HandIndicator : MonoBehaviour
                 if (pickupComponent != null && actualDistance <= pickupRange)
                 {
                     foundPickupInRange = true;
+                    foundLeftClickInRange = true; // Munculkan klik kiri
                     break;
                 }
 
@@ -71,6 +78,7 @@ public class HandIndicator : MonoBehaviour
                 if (sesajenComponent != null && actualDistance <= sesajenPickupRange)
                 {
                     foundPickupInRange = true;
+                    foundLeftClickInRange = true; // Munculkan klik kiri
                     break;
                 }
 
@@ -78,6 +86,7 @@ public class HandIndicator : MonoBehaviour
                 if (tutorialSesajen != null && actualDistance <= sesajenPickupRange)
                 {
                     foundPickupInRange = true;
+                    foundLeftClickInRange = true; // Munculkan klik kiri
                     break;
                 }
             }
@@ -119,11 +128,19 @@ public class HandIndicator : MonoBehaviour
 
         handImage.enabled = foundPickupInRange;
         SetInteractPrompt(foundInteractInRange);
+        SetLeftClickPrompt(foundLeftClickInRange); // Terapkan logika ke UI
     }
 
     private void SetInteractPrompt(bool visible)
     {
         if (interactPrompt != null)
             interactPrompt.SetActive(visible);
+    }
+
+    // METHOD BARU UNTUK UI KLIK KIRI
+    private void SetLeftClickPrompt(bool visible)
+    {
+        if (leftClickPrompt != null)
+            leftClickPrompt.SetActive(visible);
     }
 }
