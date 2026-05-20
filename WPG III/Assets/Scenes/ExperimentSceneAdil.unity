@@ -17811,7 +17811,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 100
-  depletionRate: 1
+  depletionRate: 50
   genderuwo: {fileID: 252023713}
   powerTextUI: {fileID: 1197175689}
 --- !u!1 &1044839455
@@ -30625,6 +30625,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4160414015287661364, guid: dd49095410357e34f852a482e203bfe1,
         type: 3}
+      propertyPath: agentSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -4160414015287661364, guid: dd49095410357e34f852a482e203bfe1,
+        type: 3}
       propertyPath: playerTarget
       value: 
       objectReference: {fileID: 1988584692}
@@ -30632,6 +30637,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Direction
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3329400586511189676, guid: dd49095410357e34f852a482e203bfe1,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3706663612367540005, guid: dd49095410357e34f852a482e203bfe1,
         type: 3}
@@ -31915,6 +31925,7 @@ MonoBehaviour:
   runSpeed: 10
   controller: {fileID: 1988584694}
   lockCursor: 1
+  gravity: -15
   footstepsSound: {fileID: 1988584696}
   sprintSound: {fileID: 1988584697}
 --- !u!143 &1988584694
