@@ -11,6 +11,10 @@ public class GeneratorController : MonoBehaviour
     public GameObject genderuwo;
     public TextMeshProUGUI powerTextUI; // Masukkan PowerTextUI ke sini
 
+    [Header("Pengaturan Lampu Lingkungan")]
+    [Tooltip("Masukkan semua objek lampu yang ingin dimatikan ke sini")]
+    public GameObject[] environmentLights; // Array untuk menyimpan banyak lampu sekaligus
+
     private bool isGenderuwoActive = false;
 
     void Start()
@@ -23,6 +27,9 @@ public class GeneratorController : MonoBehaviour
         {
             genderuwo.SetActive(false); // Matikan wujud genderuwo di awal
         }
+
+        // Pastikan semua lampu menyala saat game baru dimulai
+        SetLightsState(true);
     }
 
     void Update()
@@ -44,6 +51,9 @@ public class GeneratorController : MonoBehaviour
                 power = 0;
                 if (powerTextUI != null) powerTextUI.text = "Daya: 0% (BAHAYA!)";
                 SetGenderuwoState(true);
+
+                // Panggil fungsi untuk mematikan lampu
+                SetLightsState(false);
             }
         }
     }
@@ -53,6 +63,10 @@ public class GeneratorController : MonoBehaviour
     {
         power = 100f;
         SetGenderuwoState(false);
+
+        // Panggil fungsi untuk menyalakan lampu kembali
+        SetLightsState(true);
+
         Debug.Log("Generator berhasil diisi!");
     }
 
@@ -65,6 +79,20 @@ public class GeneratorController : MonoBehaviour
             if (genderuwo != null)
             {
                 genderuwo.SetActive(isGenderuwoActive);
+            }
+        }
+    }
+
+    // --- FUNGSI BARU UNTUK LAMPU ---
+    void SetLightsState(bool isOn)
+    {
+        // Mengecek satu per satu objek lampu yang ada di dalam daftar array
+        foreach (GameObject lightObj in environmentLights)
+        {
+            if (lightObj != null)
+            {
+                // SetActive(true) untuk nyala, SetActive(false) untuk mati
+                lightObj.SetActive(isOn);
             }
         }
     }
