@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CharacterController controller;
     [SerializeField] bool lockCursor = true;
 
+    [Header("Gravity Settings")]
+    [SerializeField] private float gravity = -15f; // Pulls the player down
+    private float velocityY = 0f; // Stores current downward speed
+
     public AudioSource footstepsSound, sprintSound;
 
     float cameraPitch = 0.0f;
@@ -53,19 +57,33 @@ public class PlayerController : MonoBehaviour
 
         playerCamera.localEulerAngles = Vector3.right * cameraPitch;
         transform.Rotate(Vector3.up * mouseDelta.x * mouseSensitivity);
-
     }
 
     void UpdateMovement()
     {
+        // 1. Reset gravity if standing on the ground so it doesn't build up infinitely
+        if (controller.isGrounded && velocityY < 0)
+        {
+            velocityY = -5f; // A constant downward snap to stick to sloped bridges
+        }
+
+        // 2. Calculate horizontal movement (X and Z axes)
         Vector2 inputDir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         inputDir.Normalize();
 
         float currentSpeed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
-        Vector3 velocity = (transform.forward * inputDir.y + transform.right * inputDir.x) * currentSpeed;
+        Vector3 moveDir = (transform.forward * inputDir.y + transform.right * inputDir.x) * currentSpeed;
 
-        controller.Move(velocity * Time.deltaTime);
+        // 3. Apply gravity to the vertical movement (Y axis)
+        velocityY += gravity * Time.deltaTime;
+        
+        // 4. Combine horizontal movement and vertical gravity into one final velocity
+        Vector3 finalVelocity = moveDir + (Vector3.up * velocityY);
 
+        // 5. Move the controller
+        controller.Move(finalVelocity * Time.deltaTime);
+
+        // Sound logic
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
             if (Input.GetKey(KeyCode.LeftShift))
