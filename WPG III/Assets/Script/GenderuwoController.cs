@@ -7,15 +7,28 @@ public class GenderuwoController : MonoBehaviour
     [Header("Targets")]
     public Transform playerTarget;
 
-    [Header("Settings")]
-    public float agentSpeed = 3.5f;
+    [Header("Monster Movement Settings")]
+    public float agentSpeed = 4.5f;          // Kecepatan maksimal (Top Speed)
+    public float agentAcceleration = 40f;    // Seberapa cepat mencapai Top Speed (Default Unity cuma 8)
+    public float agentAngularSpeed = 720f;   // Kecepatan belok/berputar (Default Unity cuma 120)
+    public bool disableAutoBraking = true;   // Matikan rem otomatis agar tidak melambat saat dekat player
 
     private NavMeshAgent agent;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        // Menerapkan pengaturan ke NavMeshAgent
         agent.speed = agentSpeed;
+        agent.acceleration = agentAcceleration;
+        agent.angularSpeed = agentAngularSpeed;
+
+        // Mematikan rem otomatis membuat monster terasa lebih buas dan tidak ragu-ragu
+        if (disableAutoBraking)
+        {
+            agent.autoBraking = false;
+        }
     }
 
     void Update()

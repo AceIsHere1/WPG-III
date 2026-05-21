@@ -5705,6 +5705,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handImage: {fileID: 36431413}
   interactPrompt: {fileID: 0}
+  leftClickPrompt: {fileID: 0}
   pickupRange: 2
   sesajenPickupRange: 4
   raycastLayers:
@@ -17709,7 +17710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 100
-  depletionRate: 50
+  depletionRate: 5
   genderuwo: {fileID: 252023713}
   powerTextUI: {fileID: 1197175689}
   environmentLights:
@@ -30497,17 +30498,17 @@ PrefabInstance:
     - target: {fileID: 3706663612367540005, guid: dd49095410357e34f852a482e203bfe1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.218357
+      value: 30.7
       objectReference: {fileID: 0}
     - target: {fileID: 3706663612367540005, guid: dd49095410357e34f852a482e203bfe1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.67
+      value: -58.9
       objectReference: {fileID: 0}
     - target: {fileID: 3706663612367540005, guid: dd49095410357e34f852a482e203bfe1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -31.06
+      value: -31.1
       objectReference: {fileID: 0}
     - target: {fileID: 3706663612367540005, guid: dd49095410357e34f852a482e203bfe1,
         type: 3}
@@ -30552,7 +30553,7 @@ PrefabInstance:
     - target: {fileID: 4051944741518497183, guid: dd49095410357e34f852a482e203bfe1,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4051944741518497183, guid: dd49095410357e34f852a482e203bfe1,
         type: 3}
