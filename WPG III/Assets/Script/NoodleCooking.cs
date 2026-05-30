@@ -59,17 +59,21 @@ public class NoodleCooking : MonoBehaviour
         float dist = Vector3.Distance(cam.position, transform.position);
         if (dist > interactDistance) return;
 
-        // 2. Buat garis Raycast lurus dari tengah kamera pemain
+        // 2. Buat garis dari tengah kamera pemain
         Ray ray = new Ray(cam.position, cam.forward);
         RaycastHit hit;
 
-        // (DEBUG) Gambar garis merah di Jendela Scene (selama 2 detik) untuk melihat arah tatapan
+        // 3. Tentukan ketebalan "laser" (Radius bola SphereCast)
+        // Semakin besar angkanya, semakin gampang interaksinya (tidak perlu bidik pas-pasan)
+        float sphereRadius = 0.5f;
+
+        // (DEBUG) Gambar garis merah di Jendela Scene untuk patokan arah tengah kamera
         Debug.DrawRay(cam.position, cam.forward * interactDistance, Color.red, 2f);
 
-        // 3. Tembakkan garis tersebut sejauh jarak interaksi
-        if (Physics.Raycast(ray, out hit, interactDistance))
+        // 4. Tembakkan SphereCast sejauh jarak interaksi
+        if (Physics.SphereCast(ray, sphereRadius, out hit, interactDistance))
         {
-            // 4. Cari komponen NoodleCooking di objek yang ketabrak (atau di induk objek tersebut)
+            // Cari komponen NoodleCooking di objek yang ketabrak
             NoodleCooking targetPot = hit.collider.GetComponentInParent<NoodleCooking>();
 
             // Jika script-nya ketemu dan benar-benar milik panci yang ini, lakukan aksi
@@ -95,14 +99,14 @@ public class NoodleCooking : MonoBehaviour
             }
             else
             {
-                // (DEBUG) Kasih tahu di console kalau pemain malah nabrak objek lain
-                Debug.Log("Raycast kena objek: " + hit.collider.gameObject.name + ", bukan Panci ini.");
+                // (DEBUG) Kasih tahu kalau SphereCast malah nabrak objek lain
+                Debug.Log("SphereCast kena objek: " + hit.collider.gameObject.name + ", bukan Panci ini.");
             }
         }
         else
         {
-            // (DEBUG) Kasih tahu kalau pancinya nggak punya collider atau jarak terlalu jauh
-            Debug.Log("Raycast tidak nabrak apa-apa! Pastikan Panci punya Box Collider.");
+            // (DEBUG)
+            Debug.Log("SphereCast tidak nabrak apa-apa! Pastikan Panci punya Box Collider.");
         }
     }
 
