@@ -25,25 +25,24 @@ public class NoodleCooking : MonoBehaviour
     public AudioClip noodleReadySound;
     [Range(0f, 1f)] public float noodleReadySoundVolume = 1f;
 
-    public UnityEngine.Audio.AudioMixerGroup mixerGroup; // ADD THIS LINE
+    public UnityEngine.Audio.AudioMixerGroup mixerGroup;
 
     private AudioSource audioSource;
 
     void Awake()
-{
-    audioSource = GetComponent<AudioSource>();
-    if (audioSource == null)
-        audioSource = gameObject.AddComponent<AudioSource>();
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
 
-    audioSource.playOnAwake = false;
-    audioSource.loop = false;
-    
-    // ADD THIS LINE:
-    if (mixerGroup != null)
-        audioSource.outputAudioMixerGroup = mixerGroup;
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
 
-    SetVisualState(empty: true, boiling: false, cooked: false);
-}
+        if (mixerGroup != null)
+            audioSource.outputAudioMixerGroup = mixerGroup;
+
+        SetVisualState(empty: true, boiling: false, cooked: false);
+    }
 
     void Update()
     {
@@ -54,54 +53,82 @@ public class NoodleCooking : MonoBehaviour
     private void TryInteract()
     {
         Transform cam = Camera.main != null ? Camera.main.transform : null;
-        if (cam != null)
-        {
-            float dist = Vector3.Distance(cam.position, transform.position);
-            if (dist > interactDistance) return;
-        }
+        if (cam == null) return;
 
-        Pickup held = Pickup.GetCurrentlyHeld();
+        // 1. Cek apakah pemain berada di dekat panci
+        float dist = Vector3.Distance(cam.position, transform.position);
+        if (dist > interactDistance) return;
 
-        if (isEmptyPot && !isCooking && !isCooked)
+        // 2. Buat garis Raycast lurus dari tengah kamera pemain
+        Ray ray = new Ray(cam.position, cam.forward);
+        RaycastHit hit;
+
+        // (DEBUG) Gambar garis merah di Jendela Scene (selama 2 detik) untuk melihat arah tatapan
+        Debug.DrawRay(cam.position, cam.forward * interactDistance, Color.red, 2f);
+
+        // 3. Tembakkan garis tersebut sejauh jarak interaksi
+        if (Physics.Raycast(ray, out hit, interactDistance))
         {
-            // Mulai merebus
-            if (held != null && (held.CompareTag("RawNoodle") || held.gameObject.name.ToLower().Contains("mie kuning")))
+            // 4. Cari komponen NoodleCooking di objek yang ketabrak (atau di induk objek tersebut)
+            NoodleCooking targetPot = hit.collider.GetComponentInParent<NoodleCooking>();
+
+            // Jika script-nya ketemu dan benar-benar milik panci yang ini, lakukan aksi
+            if (targetPot != null && targetPot == this)
             {
-                held.ForceDrop();
-                Destroy(held.gameObject);
-                StartCoroutine(CookNoodles());
+                Pickup held = Pickup.GetCurrentlyHeld();
+
+                if (isEmptyPot && !isCooking && !isCooked)
+                {
+                    // Mulai merebus
+                    if (held != null && (held.CompareTag("RawNoodle") || held.gameObject.name.ToLower().Contains("mie kuning")))
+                    {
+                        held.ForceDrop();
+                        Destroy(held.gameObject);
+                        StartCoroutine(CookNoodles());
+                    }
+                }
+                else if (isCooked && !isCooking)
+                {
+                    // Sajikan hasil rebusan
+                    ServeToPlayer();
+                }
+            }
+            else
+            {
+                // (DEBUG) Kasih tahu di console kalau pemain malah nabrak objek lain
+                Debug.Log("Raycast kena objek: " + hit.collider.gameObject.name + ", bukan Panci ini.");
             }
         }
-        else if (isCooked && !isCooking)
+        else
         {
-            // Sajikan hasil rebusan
-            ServeToPlayer();
+            // (DEBUG) Kasih tahu kalau pancinya nggak punya collider atau jarak terlalu jauh
+            Debug.Log("Raycast tidak nabrak apa-apa! Pastikan Panci punya Box Collider.");
         }
     }
 
     private IEnumerator CookNoodles()
-{
-    if (isCooking) yield break;
-    isCooking = true;
-    isEmptyPot = false;
-    isCooked = false;
+    {
+        if (isCooking) yield break;
+        isCooking = true;
+        isEmptyPot = false;
+        isCooked = false;
 
-    SetVisualState(empty: false, boiling: true, cooked: false);
+        SetVisualState(empty: false, boiling: true, cooked: false);
 
-    // Mainkan suara rebusan dengan volume
-    if (boilingSound != null)
-        audioSource.PlayOneShot(boilingSound, boilingSoundVolume);
+        // Mainkan suara rebusan dengan volume
+        if (boilingSound != null)
+            audioSource.PlayOneShot(boilingSound, boilingSoundVolume);
 
-    yield return new WaitForSeconds(cookingTime);
+        yield return new WaitForSeconds(cookingTime);
 
-    SetVisualState(empty: false, boiling: false, cooked: true);
+        SetVisualState(empty: false, boiling: false, cooked: true);
 
-    // Mainkan suara mi matang dengan volume
-    if (noodleReadySound != null)
-        audioSource.PlayOneShot(noodleReadySound, noodleReadySoundVolume);
+        // Mainkan suara mi matang dengan volume
+        if (noodleReadySound != null)
+            audioSource.PlayOneShot(noodleReadySound, noodleReadySoundVolume);
 
-    isCooked = true;
-    isCooking = false;
+        isCooked = true;
+        isCooking = false;
     }
 
     private void ServeToPlayer()
