@@ -13125,7 +13125,11 @@ MonoBehaviour:
   emptyPotVisual: {fileID: 1920271666}
   boilingPotVisual: {fileID: 1671155901}
   cookedPotVisual: {fileID: 871312075}
-  bowlPrefab: {fileID: 7843922312471172628, guid: 458488d0a92ede843aa729e680307fc3,
+  bowlPrefabUngu: {fileID: 7843922312471172628, guid: 458488d0a92ede843aa729e680307fc3,
+    type: 3}
+  bowlPrefabKeriting: {fileID: 7843922312471172628, guid: e95e319726981464eb2d7d1150d4418a,
+    type: 3}
+  bowlPrefabBiasa: {fileID: 7843922312471172628, guid: d129fd4b56da47a42bb846af525ba418,
     type: 3}
   spawnPoint: {fileID: 1161617104}
   cookingTime: 5
@@ -35298,6 +35302,18 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: c03fb44d7fae6284d8683bbc795f1503, type: 3}
     - target: {fileID: 6705516329241460668, guid: a197d2ccf67edf84ebf3fa3ca6473412,
         type: 3}
+      propertyPath: bowlPrefabUngu
+      value: 
+      objectReference: {fileID: 7843922312471172628, guid: 458488d0a92ede843aa729e680307fc3,
+        type: 3}
+    - target: {fileID: 6705516329241460668, guid: a197d2ccf67edf84ebf3fa3ca6473412,
+        type: 3}
+      propertyPath: bowlPrefabBiasa
+      value: 
+      objectReference: {fileID: 7843922312471172628, guid: d129fd4b56da47a42bb846af525ba418,
+        type: 3}
+    - target: {fileID: 6705516329241460668, guid: a197d2ccf67edf84ebf3fa3ca6473412,
+        type: 3}
       propertyPath: noodleReadySound
       value: 
       objectReference: {fileID: 8300000, guid: cc4c04c8db5b38b4c939d96e3bd85895, type: 3}
@@ -35306,6 +35322,12 @@ PrefabInstance:
       propertyPath: boilingSoundVolume
       value: 0.75
       objectReference: {fileID: 0}
+    - target: {fileID: 6705516329241460668, guid: a197d2ccf67edf84ebf3fa3ca6473412,
+        type: 3}
+      propertyPath: bowlPrefabKeriting
+      value: 
+      objectReference: {fileID: 7843922312471172628, guid: e95e319726981464eb2d7d1150d4418a,
+        type: 3}
     - target: {fileID: 6705516329241460668, guid: a197d2ccf67edf84ebf3fa3ca6473412,
         type: 3}
       propertyPath: noodleReadySoundVolume

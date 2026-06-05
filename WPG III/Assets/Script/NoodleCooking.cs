@@ -4,11 +4,17 @@ using UnityEngine;
 public class NoodleCooking : MonoBehaviour
 {
     [Header("Prefab Settings")]
-    public GameObject emptyPotVisual;     // prefab panci kosong
-    public GameObject boilingPotVisual;   // prefab panci berisi mi saat direbus
-    public GameObject cookedPotVisual;    // prefab panci berisi mi matang
-    public GameObject bowlPrefab;         // prefab mangkok jadi
-    public Transform spawnPoint;          // titik spawn mangkok opsional
+    public GameObject emptyPotVisual;
+    public GameObject boilingPotVisual;
+    public GameObject cookedPotVisual;
+
+    // --- DIUBAH: SEKARANG ADA 3 SLOT MANGKUK MATANG ---
+    [Header("Bowl Prefabs (Mie Matang)")]
+    public GameObject bowlPrefabUngu;
+    public GameObject bowlPrefabKeriting;
+    public GameObject bowlPrefabBiasa;
+
+    public Transform spawnPoint;
 
     [Header("Cooking Settings")]
     public float cookingTime = 5f;
@@ -18,7 +24,6 @@ public class NoodleCooking : MonoBehaviour
     public bool isCooking = false;
     public bool isCooked = false;
 
-    // --- VARIABEL UNTUK MENGINGAT JENIS MIE ---
     private VarianMie mieYangSedangDimasak = VarianMie.BelumAdaIsi;
 
     [Header("Sound Settings")]
@@ -77,29 +82,16 @@ public class NoodleCooking : MonoBehaviour
 
                 if (isEmptyPot && !isCooking && !isCooked)
                 {
-                    // --- BAGIAN YANG DIUBAH: BACA KTP MIE MENTAH ---
                     if (held != null)
                     {
-                        // Ambil komponen MieMentahData dari objek yang dipegang player
                         MieMentahData dataMentah = held.GetComponent<MieMentahData>();
 
-                        // Pastikan objeknya punya script itu dan isinya bukan "BelumAdaIsi"
                         if (dataMentah != null && dataMentah.jenisMieMentah != VarianMie.BelumAdaIsi)
                         {
-                            // 1. Panci mengingat jenis mie mentah yang dimasukkan
                             mieYangSedangDimasak = dataMentah.jenisMieMentah;
-
-                            // 2. Hancurkan balok mie mentahnya (masuk ke panci)
                             held.ForceDrop();
                             Destroy(held.gameObject);
-
-                            // 3. Mulai merebus
                             StartCoroutine(CookNoodles());
-                        }
-                        else
-                        {
-                            // Player pegang barang lain (bukan balok mie)
-                            Debug.Log("Barang yang dipegang bukan mie mentah atau belum diset jenisnya!");
                         }
                     }
                 }
@@ -136,8 +128,6 @@ public class NoodleCooking : MonoBehaviour
 
     private void ServeToPlayer()
     {
-        if (bowlPrefab == null) return;
-
         Transform cam = Camera.main != null ? Camera.main.transform : null;
         Vector3 spawnPos;
         Quaternion spawnRot = Quaternion.identity;
@@ -157,29 +147,52 @@ public class NoodleCooking : MonoBehaviour
             spawnPos = transform.position + Vector3.up * 1f;
         }
 
-        GameObject bowl = Instantiate(bowlPrefab, spawnPos, spawnRot);
+        // --- DIUBAH: PILIH PREFAB MANGKUK SESUAI JENIS MIE ---
+        GameObject prefabYangAkanDiSpawn = null;
 
-        // --- BAGIAN INI TETAP SAMA: SUNTIKKAN DATA KE MANGKOK ---
+        switch (mieYangSedangDimasak)
+        {
+            case VarianMie.MieUnguSambalMatah:
+                prefabYangAkanDiSpawn = bowlPrefabUngu;
+                break;
+            case VarianMie.MieGorengKeriting:
+                prefabYangAkanDiSpawn = bowlPrefabKeriting;
+                break;
+            case VarianMie.MieGorengBiasa:
+                prefabYangAkanDiSpawn = bowlPrefabBiasa;
+                break;
+        }
+
+        // Jaga-jaga kalau lupa masukin prefab di Inspector
+        if (prefabYangAkanDiSpawn == null)
+        {
+            Debug.LogError("Prefab mangkuk belum dimasukkan ke slot Inspector Panci!");
+            return;
+        }
+
+        // Spawn mangkuk yang sudah dipilih
+        GameObject bowl = Instantiate(prefabYangAkanDiSpawn, spawnPos, spawnRot);
+
+        // --- SUNTIKKAN KTP KE MANGKOK BIAR NPC BISA BACA ---
         MangkokData dataMangkok = bowl.GetComponent<MangkokData>();
         if (dataMangkok != null)
         {
-            dataMangkok.isiMieSaatIni = mieYangSedangDimasak; // Pindahkan catatan panci ke mangkuk
+            dataMangkok.isiMieSaatIni = mieYangSedangDimasak;
         }
         else
         {
-            Debug.LogWarning("Prefab Mangkuk tidak punya script MangkokData!");
+            Debug.LogWarning("Prefab Mangkuk tidak punya script MangkokData! NPC bakal nolak terus nih.");
         }
 
         Pickup bowlPickup = bowl.GetComponent<Pickup>();
         if (bowlPickup != null) bowlPickup.ForcePickup();
 
-        // Reset panci kembali kosong
         SetVisualState(empty: true, boiling: false, cooked: false);
 
         isEmptyPot = true;
         isCooked = false;
         isCooking = false;
-        mieYangSedangDimasak = VarianMie.BelumAdaIsi; // Reset catatan panci
+        mieYangSedangDimasak = VarianMie.BelumAdaIsi;
     }
 
     private void SetVisualState(bool empty, bool boiling, bool cooked)

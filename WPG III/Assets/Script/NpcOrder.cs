@@ -70,6 +70,21 @@ public class NpcOrder : MonoBehaviour
         Pickup held = bowl.GetComponent<Pickup>();
         if (held != null) held.ForceDrop();
 
+        // --- PASANG CCTV / DEBUG LOG DI SINI ---
+        Debug.Log("=== CEK PESANAN NPC ===");
+        Debug.Log("1. NPC Minta Varian: " + pesananNPC);
+
+        if (isiMangkok != null)
+        {
+            Debug.Log("2. Mangkuk dari Player Berisi: " + isiMangkok.isiMieSaatIni);
+        }
+        else
+        {
+            Debug.LogError("FATAL: Komponen 'MangkokData' TIDAK KETEMU di objek mangkuk yang dikasih!");
+        }
+        Debug.Log("=======================");
+        // ---------------------------------------
+
         // LOGIKA PENGECEKAN PESANAN BENAR ATAU SALAH
         if (isiMangkok != null && isiMangkok.isiMieSaatIni == pesananNPC)
         {

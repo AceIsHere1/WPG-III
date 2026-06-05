@@ -178,8 +178,9 @@ GameObject:
   - component: {fileID: 3939038329602706634}
   - component: {fileID: 9047090903143139084}
   - component: {fileID: 5259911136888637638}
+  - component: {fileID: 820053647222241495}
   m_Layer: 0
-  m_Name: mie jadi
+  m_Name: mie jadi_keriting
   m_TagString: CookedNoodle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,3 +278,16 @@ MonoBehaviour:
   rawNoodlePrefab: {fileID: 0}
   isNoodlePack: 0
   heldRotation: {x: -30, y: 0, z: 0}
+--- !u!114 &820053647222241495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7843922312471172628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c891999cbf52f44dbd1eb17ff26a90e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isiMieSaatIni: 1
