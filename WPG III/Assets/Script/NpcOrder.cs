@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +9,9 @@ public class NpcOrder : MonoBehaviour
     public Transform orderPoint;
     public float giveDistance = 2f;
 
+    [Header("Varian Pesanan")]
+    public VarianMie pesananNPC; // Sekarang nilai ini akan diacak otomatis saat mulai
+
     private NpcDialog npcDialog;
     private MoveNPC moveNPC;
     private bool hasReceived = false;
@@ -17,6 +20,15 @@ public class NpcOrder : MonoBehaviour
     {
         moveNPC = GetComponent<MoveNPC>();
         npcDialog = GetComponent<NpcDialog>();
+
+        // --- BAGIAN YANG DITAMBAHKAN: MENGACAK PESANAN NPC ---
+        // Menghitung jumlah total varian di dalam enum
+        int jumlahVarian = System.Enum.GetValues(typeof(VarianMie)).Length;
+
+        // Mengacak dari index 0 sampai sebelum index terakhir (BelumAdaIsi)
+        // Random.Range untuk integer batas atasnya bersifat eksklusif (tidak ikut teracak)
+        pesananNPC = (VarianMie)Random.Range(0, jumlahVarian - 1);
+        // -----------------------------------------------------
 
         if (moveNPC == null) Debug.LogError("MoveNPC tidak ditemukan di NPC!");
 
@@ -31,10 +43,12 @@ public class NpcOrder : MonoBehaviour
         if (hasReceived) return;
         if (moveNPC == null) return;
 
-        // NPC harus sudah Waiting dulu, baru bisa terima mie
+        // Cek apakah NPC sudah di depan warung
         if (moveNPC.currentState != NPCState.Waiting) return;
 
         Pickup held = Pickup.GetCurrentlyHeld();
+
+        // Cek apakah player bawa objek mie
         if (held != null && held.CompareTag(requiredTag))
         {
             Transform player = Camera.main.transform;
@@ -42,39 +56,37 @@ public class NpcOrder : MonoBehaviour
 
             if (dist <= giveDistance && Input.GetKeyDown(KeyCode.E))
             {
-                ReceiveFood(held.gameObject);
+                // Ambil data isi mangkuk
+                MangkokData isiMangkok = held.GetComponent<MangkokData>();
+                ReceiveFood(held.gameObject, isiMangkok);
             }
         }
     }
 
-    private void ReceiveFood(GameObject bowl)
+    private void ReceiveFood(GameObject bowl, MangkokData isiMangkok)
     {
-        if (bowl == null)
-        {
-            Debug.LogWarning("ReceiveFood dipanggil dengan bowl == null");
-            return;
-        }
+        if (bowl == null) return;
 
         Pickup held = bowl.GetComponent<Pickup>();
-        if (held != null)
-            held.ForceDrop();
+        if (held != null) held.ForceDrop();
 
-        if (bowl.scene.IsValid())
+        // LOGIKA PENGECEKAN PESANAN BENAR ATAU SALAH
+        if (isiMangkok != null && isiMangkok.isiMieSaatIni == pesananNPC)
         {
-            Destroy(bowl);
+            Debug.Log("Pesanan BENAR!");
+            if (npcDialog != null) npcDialog.ShowDialog("Pelanggan: Terimakasih bang! Pas mantap!");
+            GameEvents.RaiseNpcServed();
         }
         else
         {
-            Debug.LogWarning($"NpcOrder: coba Destroy object yang bukan bagian scene. Lewati Destroy untuk: {bowl.name}");
+            Debug.Log("Pesanan SALAH!");
+            if (npcDialog != null) npcDialog.ShowDialog("Pelanggan: Loh pesenan saya bukan ini! Saya gamau!");
+            // Nanti kamu bisa tambah event kurangi duit di sini
         }
 
-        Debug.Log("NPC menerima mie jadi!");
-
-        if (npcDialog != null)
-            npcDialog.ShowDialog("Pelanggan: Makasih bang!");
+        if (bowl.scene.IsValid()) Destroy(bowl);
 
         hasReceived = true;
-        GameEvents.RaiseNpcServed();
-        moveNPC.StartReturning();
+        moveNPC.StartReturning(); // NPC disuruh pulang
     }
 }

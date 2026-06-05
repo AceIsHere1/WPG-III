@@ -18,6 +18,9 @@ public class NoodleCooking : MonoBehaviour
     public bool isCooking = false;
     public bool isCooked = false;
 
+    // --- VARIABEL UNTUK MENGINGAT JENIS MIE ---
+    private VarianMie mieYangSedangDimasak = VarianMie.BelumAdaIsi;
+
     [Header("Sound Settings")]
     public AudioClip boilingSound;
     [Range(0f, 1f)] public float boilingSoundVolume = 1f;
@@ -55,58 +58,56 @@ public class NoodleCooking : MonoBehaviour
         Transform cam = Camera.main != null ? Camera.main.transform : null;
         if (cam == null) return;
 
-        // 1. Cek apakah pemain berada di dekat panci
         float dist = Vector3.Distance(cam.position, transform.position);
         if (dist > interactDistance) return;
 
-        // 2. Buat garis dari tengah kamera pemain
         Ray ray = new Ray(cam.position, cam.forward);
         RaycastHit hit;
-
-        // 3. Tentukan ketebalan "laser" (Radius bola SphereCast)
-        // Semakin besar angkanya, semakin gampang interaksinya (tidak perlu bidik pas-pasan)
         float sphereRadius = 0.5f;
 
-        // (DEBUG) Gambar garis merah di Jendela Scene untuk patokan arah tengah kamera
         Debug.DrawRay(cam.position, cam.forward * interactDistance, Color.red, 2f);
 
-        // 4. Tembakkan SphereCast sejauh jarak interaksi
         if (Physics.SphereCast(ray, sphereRadius, out hit, interactDistance))
         {
-            // Cari komponen NoodleCooking di objek yang ketabrak
             NoodleCooking targetPot = hit.collider.GetComponentInParent<NoodleCooking>();
 
-            // Jika script-nya ketemu dan benar-benar milik panci yang ini, lakukan aksi
             if (targetPot != null && targetPot == this)
             {
                 Pickup held = Pickup.GetCurrentlyHeld();
 
                 if (isEmptyPot && !isCooking && !isCooked)
                 {
-                    // Mulai merebus
-                    if (held != null && (held.CompareTag("RawNoodle") || held.gameObject.name.ToLower().Contains("mie kuning")))
+                    // --- BAGIAN YANG DIUBAH: BACA KTP MIE MENTAH ---
+                    if (held != null)
                     {
-                        held.ForceDrop();
-                        Destroy(held.gameObject);
-                        StartCoroutine(CookNoodles());
+                        // Ambil komponen MieMentahData dari objek yang dipegang player
+                        MieMentahData dataMentah = held.GetComponent<MieMentahData>();
+
+                        // Pastikan objeknya punya script itu dan isinya bukan "BelumAdaIsi"
+                        if (dataMentah != null && dataMentah.jenisMieMentah != VarianMie.BelumAdaIsi)
+                        {
+                            // 1. Panci mengingat jenis mie mentah yang dimasukkan
+                            mieYangSedangDimasak = dataMentah.jenisMieMentah;
+
+                            // 2. Hancurkan balok mie mentahnya (masuk ke panci)
+                            held.ForceDrop();
+                            Destroy(held.gameObject);
+
+                            // 3. Mulai merebus
+                            StartCoroutine(CookNoodles());
+                        }
+                        else
+                        {
+                            // Player pegang barang lain (bukan balok mie)
+                            Debug.Log("Barang yang dipegang bukan mie mentah atau belum diset jenisnya!");
+                        }
                     }
                 }
                 else if (isCooked && !isCooking)
                 {
-                    // Sajikan hasil rebusan
                     ServeToPlayer();
                 }
             }
-            else
-            {
-                // (DEBUG) Kasih tahu kalau SphereCast malah nabrak objek lain
-                Debug.Log("SphereCast kena objek: " + hit.collider.gameObject.name + ", bukan Panci ini.");
-            }
-        }
-        else
-        {
-            // (DEBUG)
-            Debug.Log("SphereCast tidak nabrak apa-apa! Pastikan Panci punya Box Collider.");
         }
     }
 
@@ -119,7 +120,6 @@ public class NoodleCooking : MonoBehaviour
 
         SetVisualState(empty: false, boiling: true, cooked: false);
 
-        // Mainkan suara rebusan dengan volume
         if (boilingSound != null)
             audioSource.PlayOneShot(boilingSound, boilingSoundVolume);
 
@@ -127,7 +127,6 @@ public class NoodleCooking : MonoBehaviour
 
         SetVisualState(empty: false, boiling: false, cooked: true);
 
-        // Mainkan suara mi matang dengan volume
         if (noodleReadySound != null)
             audioSource.PlayOneShot(noodleReadySound, noodleReadySoundVolume);
 
@@ -159,15 +158,28 @@ public class NoodleCooking : MonoBehaviour
         }
 
         GameObject bowl = Instantiate(bowlPrefab, spawnPos, spawnRot);
+
+        // --- BAGIAN INI TETAP SAMA: SUNTIKKAN DATA KE MANGKOK ---
+        MangkokData dataMangkok = bowl.GetComponent<MangkokData>();
+        if (dataMangkok != null)
+        {
+            dataMangkok.isiMieSaatIni = mieYangSedangDimasak; // Pindahkan catatan panci ke mangkuk
+        }
+        else
+        {
+            Debug.LogWarning("Prefab Mangkuk tidak punya script MangkokData!");
+        }
+
         Pickup bowlPickup = bowl.GetComponent<Pickup>();
         if (bowlPickup != null) bowlPickup.ForcePickup();
 
-        // Reset kembali ke panci kosong
+        // Reset panci kembali kosong
         SetVisualState(empty: true, boiling: false, cooked: false);
 
         isEmptyPot = true;
         isCooked = false;
         isCooking = false;
+        mieYangSedangDimasak = VarianMie.BelumAdaIsi; // Reset catatan panci
     }
 
     private void SetVisualState(bool empty, bool boiling, bool cooked)

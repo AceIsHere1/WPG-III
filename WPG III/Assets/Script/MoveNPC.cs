@@ -27,7 +27,10 @@ public class MoveNPC : MonoBehaviour
             return;
         }
 
-        destinations = DestinationManager.Instance.destinations;
+        if (DestinationManager.Instance != null)
+        {
+            destinations = DestinationManager.Instance.destinations;
+        }
 
         if (destinations == null || destinations.Length == 0)
         {
@@ -61,8 +64,33 @@ public class MoveNPC : MonoBehaviour
                     navMeshAgent.isStopped = true;
                     currentState = NPCState.Waiting; // ← baru boleh terima mie
 
+                    // --- BAGIAN YANG DIUBAH MULAI DI SINI ---
+                    string teksPesanan = "Pelanggan: Pesan mie seporsi bang!"; // Dialog default jaga-jaga
+                    NpcOrder dataPesanan = GetComponent<NpcOrder>();
+
+                    if (dataPesanan != null)
+                    {
+                        // Menyesuaikan dialog dengan enum VarianMie
+                        switch (dataPesanan.pesananNPC)
+                        {
+                            case VarianMie.MieUnguSambalMatah:
+                                teksPesanan = "Pelanggan: Bang, pesen Mie Ungu Sambal Matah satu!";
+                                break;
+                            case VarianMie.MieGorengKeriting:
+                                teksPesanan = "Pelanggan: Bang, pesen Mie Goreng Keriting ya!";
+                                break;
+                            case VarianMie.MieGorengBiasa:
+                                teksPesanan = "Pelanggan: Bang, Mie Goreng Biasa aja satu dong!";
+                                break;
+                            case VarianMie.BelumAdaIsi:
+                                teksPesanan = "Pelanggan: Bang, pesen mangkok kosong! (Tolong ini error bang)";
+                                break;
+                        }
+                    }
+
                     if (npcDialog != null)
-                        npcDialog.ShowDialog("Pelanggan: Pesan mie seporsi bang!");
+                        npcDialog.ShowDialog(teksPesanan);
+                    // --- BAGIAN YANG DIUBAH SELESAI DI SINI ---
                 }
             }
             else

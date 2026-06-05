@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 650557350068033381}
   - component: {fileID: 6939740989274366217}
   - component: {fileID: 6316428988756695136}
+  - component: {fileID: 7006709582215115168}
   m_Layer: 0
-  m_Name: mie kuning
+  m_Name: mie kuning goreng biasa
   m_TagString: RawNoodle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -150,7 +151,6 @@ MonoBehaviour:
   holdDistance: 1
   smoothSpeed: 10
   pickupRange: 2.5
-  useDirectMovement: 1
   pickedUp: 0
   pickupSound: {fileID: 0}
   pickupSoundVolume: 1
@@ -161,3 +161,17 @@ MonoBehaviour:
   mixerGroup: {fileID: 0}
   rawNoodlePrefab: {fileID: 0}
   isNoodlePack: 0
+  heldRotation: {x: -1, y: 187, z: -88}
+--- !u!114 &7006709582215115168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 422589352761605124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c66611276fee64da6c9d0765ec8971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jenisMieMentah: 2
