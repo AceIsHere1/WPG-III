@@ -3,9 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class GameOverCrashUI : MonoBehaviour
 {
-    [Header("Nama Scene Gameplay")]
-    [Tooltip("Isi dengan nama scene utama untuk restart, misalnya 'GameScene'")]
-    public string gameSceneName = "GameScene";
 
     void Start()
     {
@@ -21,7 +18,12 @@ public class GameOverCrashUI : MonoBehaviour
         Cursor.visible = false;
 
         // Pindah ke scene gameplay
-        SceneManager.LoadScene(gameSceneName);
+        // BACA MEMORI: Ambil nama level dari laci "LevelTerakhir". 
+        // Jika laci kosong (misal baru pertama main), defaultnya pindah ke "GameScene".
+        string levelTujuan = PlayerPrefs.GetString("LevelTerakhir", "GameScene");
+
+        // Pindah ke scene hasil catatan memori
+        SceneManager.LoadScene(levelTujuan);
     }
 
     public void ReturnToMainMenu()

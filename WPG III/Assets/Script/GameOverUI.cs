@@ -16,8 +16,13 @@ public class GameOverUI : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // Ganti dengan nama scene gameplay kamu
-        SceneManager.LoadScene("GameScene");
+        // Pindah ke scene gameplay
+        // BACA MEMORI: Ambil nama level dari laci "LevelTerakhir". 
+        // Jika laci kosong (misal baru pertama main), defaultnya pindah ke "GameScene".
+        string levelTujuan = PlayerPrefs.GetString("LevelTerakhir", "GameScene");
+
+        // Pindah ke scene hasil catatan memori
+        SceneManager.LoadScene(levelTujuan);
     }
 
     public void ReturnToMainMenu()
