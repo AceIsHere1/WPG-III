@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video; // Wajib ditambahkan untuk memanggil VideoPlayer
 
 public class GenderuwoController : MonoBehaviour
 {
@@ -8,54 +9,87 @@ public class GenderuwoController : MonoBehaviour
     public Transform playerTarget;
 
     [Header("Monster Movement Settings")]
-    public float agentSpeed = 4.5f;          // Kecepatan maksimal (Top Speed)
-    public float agentAcceleration = 40f;    // Seberapa cepat mencapai Top Speed (Default Unity cuma 8)
-    public float agentAngularSpeed = 720f;   // Kecepatan belok/berputar (Default Unity cuma 120)
-    public bool disableAutoBraking = true;   // Matikan rem otomatis agar tidak melambat saat dekat player
+    public float agentSpeed = 4.5f;
+    public float agentAcceleration = 40f;
+    public float agentAngularSpeed = 720f;
+    public bool disableAutoBraking = true;
+
+    [Header("Jumpscare Settings")]
+    [Tooltip("Masukkan komponen VideoPlayer yang berisi video jumpscare")]
+    public VideoPlayer jumpscareVideo;
+    public string gameOverSceneName = "GameOverCrash";
 
     private NavMeshAgent agent;
+    private bool hasCaughtPlayer = false; // Mencegah jumpscare keputar berkali-kali
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
 
-        // Menerapkan pengaturan ke NavMeshAgent
         agent.speed = agentSpeed;
         agent.acceleration = agentAcceleration;
         agent.angularSpeed = agentAngularSpeed;
 
-        // Mematikan rem otomatis membuat monster terasa lebih buas dan tidak ragu-ragu
         if (disableAutoBraking)
         {
             agent.autoBraking = false;
+        }
+
+        // Pastikan video jumpscare dimatikan di awal game
+        if (jumpscareVideo != null)
+        {
+            jumpscareVideo.gameObject.SetActive(false);
         }
     }
 
     void Update()
     {
-        // Genderuwo tetap mengejar Player menggunakan NavMesh
+        // Berhenti mengejar jika sudah menangkap player
+        if (hasCaughtPlayer) return;
+
         if (playerTarget != null)
         {
             agent.SetDestination(playerTarget.position);
         }
     }
 
-    // --- BAGIAN YANG MENIRU CARMOVEMENT ---
     private void OnTriggerEnter(Collider other)
     {
-        // Jika Genderuwo menabrak objek dengan tag "Player"
-        if (other.CompareTag("Player"))
+        // Jika menabrak Player dan belum pernah menangkapnya
+        if (other.CompareTag("Player") && !hasCaughtPlayer)
         {
-            Debug.Log("Player tertangkap Genderuwo! Game Over!");
+            hasCaughtPlayer = true; // Kunci status agar tidak ter-trigger ganda
+            Debug.Log("Player tertangkap! Memulai jumpscare...");
 
-            // Opsional: Matikan kontrol player sebelum pindah scene
+            // 1. Hentikan NavMeshAgent seketika
+            if (agent != null) agent.isStopped = true;
+
+            // 2. Matikan kontrol player agar tidak bisa kabur saat jumpscare
             if (other.GetComponent<CharacterController>() != null)
             {
                 other.GetComponent<CharacterController>().enabled = false;
             }
 
-            // Pindah ke scene Game Over
-            SceneManager.LoadScene("GameOverCrash");
+            // 3. Mainkan Jumpscare
+            if (jumpscareVideo != null)
+            {
+                jumpscareVideo.gameObject.SetActive(true);
+                jumpscareVideo.Play();
+
+                // Menyuruh Unity memanggil fungsi OnJumpscareFinished saat video selesai diputar
+                jumpscareVideo.loopPointReached += OnJumpscareFinished;
+            }
+            else
+            {
+                // Kalau kamu lupa masukin video di Inspector, langsung pindah scene aja
+                SceneManager.LoadScene(gameOverSceneName);
+            }
         }
+    }
+
+    // Fungsi ini otomatis terpanggil saat video jumpscare selesai
+    void OnJumpscareFinished(VideoPlayer vp)
+    {
+        SceneManager.LoadScene(gameOverSceneName);
     }
 }
